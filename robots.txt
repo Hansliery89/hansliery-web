@@ -1,0 +1,6 @@
+# robots.txt — Hansliery Sánchez · Compliance & Risk Advisory
+User-agent: *
+Allow: /
+
+# Active esta línea cuando tenga el dominio definitivo (reemplace SU-DOMINIO.com):
+# Sitemap: https://SU-DOMINIO.com/sitemap.xml

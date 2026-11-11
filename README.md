@@ -1,0 +1,84 @@
+# Hansliery Sánchez · Compliance & Risk Advisory
+
+Sitio web profesional de una sola página: consultoría PLAFT, compliance, gestión de riesgos, debida diligencia, capacitación y automatización.
+
+**Estrategia. Prevención. Confianza.**
+
+---
+
+## Contenido del proyecto
+
+```
+hansliery-web/
+├── index.html          ← Sitio completo (HTML + CSS + JavaScript integrados)
+├── favicon.svg         ← Icono del sitio (marca HS)
+├── robots.txt          ← Indicaciones para buscadores
+├── sitemap.xml         ← Mapa del sitio (requiere dominio, ver abajo)
+├── README.md           ← Este archivo
+└── assets/
+    └── og-image.png    ← Imagen 1200×630 para vista previa en redes sociales
+```
+
+No requiere instalación, compilación ni frameworks. Solo depende de Google Fonts (Sora + Manrope). Si las fuentes no cargan, el sitio usa tipografías del sistema y sigue funcionando.
+
+## Cómo verlo
+
+Haga doble clic en `index.html`. Se abre en cualquier navegador moderno (Chrome, Edge, Firefox, Safari).
+
+## Cómo publicarlo
+
+Cualquier hosting estático sirve. Suba **la carpeta completa** (no solo `index.html`).
+
+| Opción | Pasos |
+|---|---|
+| **Netlify** (más simple) | Entre a app.netlify.com/drop y arrastre la carpeta. Obtiene una URL al instante y luego puede conectar su dominio. |
+| **GitHub Pages** | Cree un repositorio, suba los archivos y active *Settings → Pages → Deploy from branch (main / root)*. |
+| **Vercel / Cloudflare Pages** | Importe la carpeta o el repositorio; no hace falta comando de build. |
+| **Hosting tradicional (cPanel)** | Suba los archivos a `public_html` por el administrador de archivos o FTP. |
+
+## Al tener dominio propio (checklist SEO)
+
+Reemplace `SU-DOMINIO.com` por su dominio real en:
+
+1. `index.html` → descomente `<link rel="canonical">` y `<meta property="og:url">`.
+2. `index.html` → cambie `og:image` y `twitter:image` a URL absoluta, p. ej. `https://SU-DOMINIO.com/assets/og-image.png`.
+3. `index.html` → en el bloque JSON-LD, agregue `"url": "https://SU-DOMINIO.com/"` a `Person` y `ProfessionalService`.
+4. `sitemap.xml` → la etiqueta `<loc>` y la fecha `<lastmod>`.
+5. `robots.txt` → descomente la línea `Sitemap:`.
+6. Registre el sitio en Google Search Console y envíe el sitemap.
+
+## Personalización rápida
+
+Todo está en `index.html`, organizado por secciones comentadas.
+
+- **Colores:** variables en `:root` al inicio del `<style>` (`--night`, `--petrol`, `--teal`, `--electric`, `--gold`, `--ice`).
+- **Textos:** cada sección está marcada con un comentario (`A. HEADER`, `B. HERO`, `C. PERFIL`…).
+- **Indicadores de capacitación:** atributos `data-count` en la sección Perfil (el texto dentro de la etiqueta es el valor que se muestra sin JavaScript; mantenga ambos iguales).
+- **Nuevos canales de contacto:** en el `<script>`, objeto `CONTACT_CONFIG`. Complete `phone`, `whatsapp` (solo dígitos con código de país) o `linkedin` (URL completa) y aparecerán automáticamente en Contacto. Si están vacíos, no se muestra nada.
+
+## Cómo funciona el formulario
+
+El sitio **no tiene servidor** y no almacena ni transmite datos. Al pulsar «Preparar correo»:
+
+1. Se validan los campos (nombre, correo, servicio y una descripción de al menos 20 caracteres).
+2. Se limpia el contenido (caracteres de control, etiquetas HTML, longitudes máximas).
+3. Se abre la aplicación de correo del visitante con asunto y mensaje ya redactados.
+4. Si el visitante no tiene una aplicación de correo configurada, puede usar «Copiar mensaje» y enviarlo manualmente.
+
+Para recibir los mensajes directamente sin depender del cliente de correo, puede integrarse más adelante un servicio como Formspree, Netlify Forms o una función propia. En ese caso, actualice también la directiva `connect-src` / `form-action` de la política de seguridad (`<meta http-equiv="Content-Security-Policy">`).
+
+## Accesibilidad y rendimiento
+
+- HTML semántico con un único `h1` y jerarquía de encabezados ordenada.
+- Enlace «Saltar al contenido», estados de foco visibles y menú móvil operable con teclado (Escape cierra, foco atrapado).
+- Respeta `prefers-reduced-motion`: sin escritura animada, partículas estáticas, contadores con su valor final.
+- La red de partículas se pausa cuando el hero no está visible o la pestaña está oculta.
+- Efectos de cursor e inclinación 3D solo en dispositivos con puntero preciso.
+- Sin imágenes externas: toda la iconografía es SVG integrado.
+
+## Aviso
+
+Los indicadores de experiencia formativa (2,300+ participantes, 214 horas, 93.38 % de evaluación promedio) representan experiencia formativa y no resultados comerciales ni garantías de desempeño. Los paneles del hero y la matriz de riesgo son visualizaciones ilustrativas, no datos reales.
+
+---
+© 2026 Hansliery Sánchez · Compliance & Risk Advisory
