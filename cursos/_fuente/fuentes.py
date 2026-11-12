@@ -59,3 +59,5 @@ SIB_DD = {"text": "Superintendencia de Bancos. Circular SIB núm. 012-17, Segund
 DEC_407 = {"text": "Poder Ejecutivo. Decreto núm. 407-17, reglamento sobre congelamiento preventivo de bienes vinculados al terrorismo, su financiamiento y la proliferación de armas de destrucción masiva."}
 LEY_4426 = {"text": "Ley núm. 44-26 que modifica 27 artículos de la Ley Orgánica 74-25 (Código Penal), promulgada el 27 de julio de 2026. Análisis de Pellerano & Herrera.",
             "url": "https://phlaw.com/es/ley-44-26-principales-modificaciones-al-nuevo-codigo-penal-de-la-republica-dominicana/"}
+LEY_7425_TXT = {"text": "Ley Orgánica núm. 74-25 que instituye el Código Penal de la República Dominicana, texto íntegro (arts. 237 a 242 sobre la estafa; arts. 348 a 351 sobre las falsedades).",
+                "url": "https://www.sclawyer.com.do/base-de-datos/ley-74-25-nuevo-codigo-penal-"}

@@ -105,7 +105,7 @@ COURSES = [
   "Aplicar lo aprendido a casos de seis sectores de sujetos obligados.",
   "Evitar los errores de llenado más frecuentes en goAML.",
 ],
-"sources": [LEY, REG, GAFI40, UAF_ROS, GOAML, TIGA03, UAF_SEG, UAF_COOP, UAF_CAMB, UAF_VAL, UAF_CAS, UAF_DGII, LEY_7425, ESTAFA_7425, CONCLAFIT_2025_01, SIS_NORMA, LEY_4426],
+"sources": [LEY, REG, GAFI40, UAF_ROS, GOAML, TIGA03, UAF_SEG, UAF_COOP, UAF_CAMB, UAF_VAL, UAF_CAS, UAF_DGII, LEY_7425, ESTAFA_7425, CONCLAFIT_2025_01, SIS_NORMA, LEY_4426, LEY_7425_TXT],
 "notice": "Este curso aplica el nuevo Código Penal (Ley 74-25), vigente desde agosto de 2026: la estafa es ahora delito precedente del lavado de activos.",
 "modules": [
 {"title": "Tres reportes, tres lógicas", "html": """
@@ -170,7 +170,7 @@ COURSES = [
 <tr><td>El cliente es PEP</td><td>Se aplica debida diligencia ampliada; no se reporta por la condición.</td></tr>
 <tr><td>Noticia negativa antigua, sin operación actual</td><td>No es un ROS. Si se confirma el vínculo con actividad ilícita, puede enviarse un RAS.</td></tr>
 <tr><td>Estafa (simple o agravada)</td><td><strong>Criterio actualizado:</strong> desde agosto de 2026 es delito precedente. Si hay una operación sospechosa vinculada, procede ROS (ver la nota aclaratoria).</td></tr>
-<tr><td>Falsificación de un documento privado (por ejemplo, una carta laboral)</td><td>Según el criterio de la UAF, se denuncia por la vía penal. La falsificación de documentos <strong>públicos</strong> (cédula, pasaporte, actas) sí se considera delito precedente. Verifica la pena que asigna el nuevo Código Penal a cada figura.</td></tr>
+<tr><td>Falsificación de un documento privado (por ejemplo, una carta laboral)</td><td><strong>Criterio actualizado:</strong> con el Código Penal vigente, la falsedad se sanciona con 1 a 2 años (art. 348) y no figura en la lista del art. 2, num. 11 de la Ley 155-17; por sí sola no es delito precedente y se denuncia por la vía penal. Excepciones: la falsedad documental agravada (art. 351: habitual o para facilitar una infracción grave o muy grave, 10 a 20 años) y los casos en que el documento falso se usa para cometer otro delito precedente, como una estafa. La falsificación de documentos <strong>públicos</strong> (cédula, pasaporte, actas) sí es delito precedente, porque la ley la menciona expresamente.[[1,17]]</td></tr>
 </tbody></table></div>
 <div class="callout warn" id="nota-codigo-penal"><b>Nota aclaratoria para los participantes · Nuevo Código Penal</b>
 <p>Desde agosto de 2026 está vigente el nuevo Código Penal de la República Dominicana (Ley Orgánica 74-25, con las modificaciones de la Ley 44-26). Este curso aplica el código vigente.[[13,16]]</p>
@@ -179,6 +179,7 @@ COURSES = [
 <li>Como la Ley 155-17 considera infracción precedente toda infracción grave con pena no menor de tres años (art. 2, num. 11), <strong>toda estafa es hoy delito precedente del lavado de activos</strong>.[[1]]</li>
 <li>Por tanto, una operación realizada o intentada que genere sospecha de estar vinculada a una estafa <strong>debe reportarse mediante ROS</strong>, además de orientar a las víctimas a denunciar.</li>
 </ul>
+<p><strong>Falsificación de documentos privados:</strong> la falsedad simple del art. 348 se castiga con 1 a 2 años, por lo que, aislada, sigue sin ser delito precedente. Pero si una carta laboral o un estado de cuenta falsos se usan para obtener un préstamo o un pago, la conducta puede constituir una estafa, y esta sí lo es. Analiza siempre para qué se usó el documento.[[17]]</p>
 <p>La Guía de Calidad de la UAF (enero 2024) indicaba lo contrario para la estafa simple porque se basaba en el Código Penal de 1884, que la castigaba con menos de tres años. Ese criterio quedó superado por el nuevo código. Si encuentras material anterior con esa indicación, aplica la norma vigente.[[4]]</p>
 </div>
 """},

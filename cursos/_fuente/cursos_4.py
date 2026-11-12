@@ -148,7 +148,7 @@ COURSES = [
   "Reconocer a las «mulas» de dinero y sus señales.",
   "Coordinar la respuesta entre prevención de fraude y cumplimiento.",
 ],
-"sources": [GAFI_CEF, LEY_5307, LEY_7425, ESTAFA_7425, UAF_ROS, LEY, LEY_4426],
+"sources": [GAFI_CEF, LEY_5307, LEY_7425, ESTAFA_7425, UAF_ROS, LEY, LEY_4426, LEY_7425_TXT],
 "notice": "Este curso aplica el nuevo Código Penal (Ley 74-25), vigente desde agosto de 2026: la estafa es ahora delito precedente del lavado de activos.",
 "modules": [
 {"title": "Un delito global y veloz", "html": """
@@ -168,7 +168,8 @@ COURSES = [
 <li><strong>Nuevo Código Penal (Ley Orgánica 74-25, con las modificaciones de la Ley 44-26):</strong> vigente desde agosto de 2026. La estafa simple (art. 237) se sanciona con tres a cinco años de prisión; la estafa agravada, la colectiva y la piramidal (arts. 238 a 242), con cinco a diez años.[[3,4,7]]</li>
 </ul>
 <div class="callout warn" id="nota-codigo-penal"><b>Nota aclaratoria para los participantes · Nuevo Código Penal</b>
-<p>La Ley 155-17 considera infracción precedente toda infracción grave con pena no menor de tres años (art. 2, num. 11).[[6]] Con el código vigente, <strong>toda estafa —también la cometida por medios digitales— es delito precedente del lavado de activos</strong>.[[3,4]]</p>
+<p>La Ley 155-17 considera infracción precedente toda infracción grave con pena no menor de tres años (art. 2, num. 11).[[6]] Con el código vigente, <strong>toda estafa es delito precedente del lavado de activos</strong>.[[3,4,8]] Además, la misma lista del art. 2, num. 11 menciona expresamente los <strong>crímenes y delitos de alta tecnología</strong>, como la estafa por medios electrónicos de la Ley 53-07.[[2,6]]</p>
+<p>Distinto es el caso de la falsificación de un documento privado: el art. 348 del código vigente la sanciona con 1 a 2 años, por lo que, aislada, no es delito precedente; sí lo es cuando el documento falso sirve para cometer una estafa.[[8]]</p>
 <p>En consecuencia, cuando una operación realizada o intentada genere sospecha de estar vinculada a una estafa, corresponde remitir un <strong>ROS</strong> a la UAF, sin perjuicio de orientar a las víctimas a denunciar. El criterio anterior de la Guía de Calidad de la UAF (2024), según el cual la estafa simple no era precedente, se basaba en el Código Penal de 1884 y ya no aplica.[[5]]</p>
 </div>
 """},
