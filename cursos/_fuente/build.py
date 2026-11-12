@@ -155,6 +155,7 @@ def course_page(c, prev_c, next_c):
       <p class="eyebrow"><span class="tag">{esc(c['tag'])}</span> Curso {c['num']:02d}</p>
       <h1>{esc(c['title'])}</h1>
       <p class="summary">{esc(c['summary'])}</p>
+      {f'<a class="notice" href="#nota-codigo-penal"><b>Nota aclaratoria</b><span>{esc(c["notice"])}</span><em>Leer la nota →</em></a>' if c.get('notice') else ''}
       <ul class="meta">
         <li><b>Nivel</b>{esc(c['level'])}</li>
         <li><b>Duración</b>≈ {c['minutes']} min</li>

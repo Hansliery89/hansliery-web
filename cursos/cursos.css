@@ -261,3 +261,9 @@ p { margin: 0; }
   .js .module, .js .objectives, .js .q { opacity: 1; transform: none; }
 }
 .prose .note-small { font-size: .86rem; color: var(--muted-2); }
+.notice { display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem .8rem; margin-top: 1.2rem; max-width: 760px; padding: .85rem 1.1rem; border-radius: 14px; text-decoration: none; color: var(--ice); background: rgba(214, 168, 79, .1); border: 1px solid rgba(214, 168, 79, .45); }
+.notice b { font-family: var(--font-head); font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-soft); }
+.notice span { flex: 1 1 320px; font-size: .94rem; }
+.notice em { font-style: normal; font-weight: 700; font-size: .84rem; color: var(--gold-soft); }
+.notice:hover { border-color: var(--gold); }
+#nota-codigo-penal { scroll-margin-top: calc(var(--top-h) + 20px); }

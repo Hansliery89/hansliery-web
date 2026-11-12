@@ -29,9 +29,9 @@ DGII_CRIPTO = {"text": "Dirección General de Impuestos Internos (DGII). Consult
 LEY_311 = {"text": "Congreso Nacional. Ley núm. 311-14 sobre Declaración Jurada de Patrimonio (art. 2, funcionarios obligados a declarar)."}
 LEY_5307 = {"text": "Congreso Nacional. Ley núm. 53-07 sobre Crímenes y Delitos de Alta Tecnología, del 23 de abril de 2007 (copia publicada por la DGII).",
             "url": "https://dgii.gov.do/legislacion/leyesTributarias/Documents/Otras%20Leyes%20de%20Inter%C3%A9s/53-07.pdf"}
-LEY_7425 = {"text": "Ley núm. 74-25 que instituye el Código Penal de la República Dominicana (vigente desde el 3 de agosto de 2026). Resumen ejecutivo de Pellerano & Herrera.",
+LEY_7425 = {"text": "Ley Orgánica núm. 74-25 que instituye el Código Penal de la República Dominicana (vigente desde agosto de 2026; arts. 237 a 242 sobre la estafa). Resumen ejecutivo de Pellerano & Herrera.",
             "url": "https://phlaw.com/wp-content/uploads/2025/08/Ley-74-25-que-modifica-el-Co%CC%81digo-Penal-Dominicano-.pdf"}
-ESTAFA_7425 = {"text": "El Caribe. «Los delitos financieros en el nuevo Código Penal dominicano» (análisis de la pena de la estafa en la Ley 74-25).",
+ESTAFA_7425 = {"text": "El Caribe. «Los delitos financieros en el nuevo Código Penal dominicano» (art. 237: estafa simple, 3 a 5 años; arts. 238 a 242: estafa agravada, colectiva y piramidal, 5 a 10 años).",
                "url": "https://www.elcaribe.com.do/opiniones/los-delitos-financieros-en-el-nuevo-codigo-penal-dominicano/"}
 LEY_17213 = {"text": "Congreso Nacional. Ley núm. 172-13 que tiene por objeto la protección integral de los datos personales asentados en archivos, registros públicos, bancos de datos u otros medios."}
 GAFI_PEP = {"text": "GAFI (2013). Guía del GAFI: Personas Expuestas Políticamente (Recomendaciones 12 y 22). Disponible en www.fatf-gafi.org."}
@@ -57,3 +57,5 @@ SIS_NORMA = {"text": "Superintendencia de Seguros de la República Dominicana. N
 IDECOOP_NORMA = {"text": "Instituto de Desarrollo y Crédito Cooperativo (IDECOOP). Norma 001-17 sobre prevención de lavado de activos para las cooperativas."}
 SIB_DD = {"text": "Superintendencia de Bancos. Circular SIB núm. 012-17, Segunda versión del Instructivo sobre Debida Diligencia."}
 DEC_407 = {"text": "Poder Ejecutivo. Decreto núm. 407-17, reglamento sobre congelamiento preventivo de bienes vinculados al terrorismo, su financiamiento y la proliferación de armas de destrucción masiva."}
+LEY_4426 = {"text": "Ley núm. 44-26 que modifica 27 artículos de la Ley Orgánica 74-25 (Código Penal), promulgada el 27 de julio de 2026. Análisis de Pellerano & Herrera.",
+            "url": "https://phlaw.com/es/ley-44-26-principales-modificaciones-al-nuevo-codigo-penal-de-la-republica-dominicana/"}

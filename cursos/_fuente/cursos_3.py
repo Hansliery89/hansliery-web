@@ -105,7 +105,8 @@ COURSES = [
   "Aplicar lo aprendido a casos de seis sectores de sujetos obligados.",
   "Evitar los errores de llenado más frecuentes en goAML.",
 ],
-"sources": [LEY, REG, GAFI40, UAF_ROS, GOAML, TIGA03, UAF_SEG, UAF_COOP, UAF_CAMB, UAF_VAL, UAF_CAS, UAF_DGII, LEY_7425, ESTAFA_7425, CONCLAFIT_2025_01, SIS_NORMA],
+"sources": [LEY, REG, GAFI40, UAF_ROS, GOAML, TIGA03, UAF_SEG, UAF_COOP, UAF_CAMB, UAF_VAL, UAF_CAS, UAF_DGII, LEY_7425, ESTAFA_7425, CONCLAFIT_2025_01, SIS_NORMA, LEY_4426],
+"notice": "Este curso aplica el nuevo Código Penal (Ley 74-25), vigente desde agosto de 2026: la estafa es ahora delito precedente del lavado de activos.",
 "modules": [
 {"title": "Tres reportes, tres lógicas", "html": """
 <p>La reportería es el punto donde el trabajo del sujeto obligado se convierte en inteligencia financiera. Cada reporte responde a una lógica distinta:</p>
@@ -168,11 +169,17 @@ COURSES = [
 <tr><td>El cliente es ilocalizable</td><td>No amerita reporte por sí solo.[[5]]</td></tr>
 <tr><td>El cliente es PEP</td><td>Se aplica debida diligencia ampliada; no se reporta por la condición.</td></tr>
 <tr><td>Noticia negativa antigua, sin operación actual</td><td>No es un ROS. Si se confirma el vínculo con actividad ilícita, puede enviarse un RAS.</td></tr>
-<tr><td>Falsificación de un documento privado (por ejemplo, una carta laboral)</td><td>Se denuncia por la vía penal. La falsificación de documentos <strong>públicos</strong> (cédula, pasaporte, actas) sí se considera delito precedente.</td></tr>
+<tr><td>Estafa (simple o agravada)</td><td><strong>Criterio actualizado:</strong> desde agosto de 2026 es delito precedente. Si hay una operación sospechosa vinculada, procede ROS (ver la nota aclaratoria).</td></tr>
+<tr><td>Falsificación de un documento privado (por ejemplo, una carta laboral)</td><td>Según el criterio de la UAF, se denuncia por la vía penal. La falsificación de documentos <strong>públicos</strong> (cédula, pasaporte, actas) sí se considera delito precedente. Verifica la pena que asigna el nuevo Código Penal a cada figura.</td></tr>
 </tbody></table></div>
-<div class="callout warn"><b>Actualización importante sobre la estafa</b>
-<p>La Guía de Calidad de la UAF (2024) indicaba que la estafa simple no era delito precedente, porque el Código Penal de 1884 la castigaba con menos de tres años, mientras que la agravada (contra el Estado, con montos significativos o mediante esquemas piramidales) sí podía serlo.[[4]]</p>
-<p>Desde el <strong>3 de agosto de 2026</strong> rige el nuevo Código Penal (Ley 74-25), que, según los análisis publicados, sanciona la estafa con tres a cinco años de prisión. Con ello alcanzaría el umbral de «pena no menor de tres años» del art. 2, num. 11 de la Ley 155-17.[[1,13,14]] Mientras la UAF actualiza su guía, no descartes un ROS solo por tratarse de una estafa: consulta el criterio vigente con la UAF o tu supervisor.</p>
+<div class="callout warn" id="nota-codigo-penal"><b>Nota aclaratoria para los participantes · Nuevo Código Penal</b>
+<p>Desde agosto de 2026 está vigente el nuevo Código Penal de la República Dominicana (Ley Orgánica 74-25, con las modificaciones de la Ley 44-26). Este curso aplica el código vigente.[[13,16]]</p>
+<ul>
+<li>La <strong>estafa simple</strong> (art. 237) se sanciona con <strong>tres a cinco años</strong> de prisión; la estafa agravada, la colectiva y la piramidal (arts. 238 a 242), con cinco a diez años.[[14]]</li>
+<li>Como la Ley 155-17 considera infracción precedente toda infracción grave con pena no menor de tres años (art. 2, num. 11), <strong>toda estafa es hoy delito precedente del lavado de activos</strong>.[[1]]</li>
+<li>Por tanto, una operación realizada o intentada que genere sospecha de estar vinculada a una estafa <strong>debe reportarse mediante ROS</strong>, además de orientar a las víctimas a denunciar.</li>
+</ul>
+<p>La Guía de Calidad de la UAF (enero 2024) indicaba lo contrario para la estafa simple porque se basaba en el Código Penal de 1884, que la castigaba con menos de tres años. Ese criterio quedó superado por el nuevo código. Si encuentras material anterior con esa indicación, aplica la norma vigente.[[4]]</p>
 </div>
 """},
 {"title": "El Reporte de Actividad Sospechosa (RAS)", "html": """
@@ -231,7 +238,7 @@ COURSES = [
 {"q": "Un potencial cliente se niega a entregar información para su identificación. ¿Qué exige la ley?", "options": ["Un RAS", "Un ROS", "Nada si no abrió cuenta", "Un RTE"], "answer": 1, "explain": "El art. 62 ordena realizar un ROS cuando el potencial cliente se niega a aportar información para su identificación [[1,5]]."},
 {"q": "El auditor externo pide la lista de ROS enviados para su revisión. Según la UAF y el art. 63:", "options": ["Se le entrega sin restricción", "La prohibición de revelar alcanza también a auditores internos y externos", "Solo si firma un acuerdo", "Se le entrega una copia parcial"], "answer": 1, "explain": "La UAF incluye a los auditores internos y externos dentro de «terceros» a quienes no se debe revelar la existencia de un ROS [[1,4]]."},
 {"q": "En una remesa internacional, ¿qué error de goAML provoca rechazos con frecuencia?", "options": ["Incluir el monto en moneda extranjera", "Dejar vacíos los países de origen y destino o poner ambos como República Dominicana", "Adjuntar documentos", "Detallar la razón de la sospecha"], "answer": 1, "explain": "Es uno de los errores identificados por la UAF en reportes de transacciones internacionales [[4,9]]."},
-{"q": "Tras la entrada en vigor del nuevo Código Penal (Ley 74-25), ¿qué conviene hacer ante una posible estafa simple?", "options": ["Descartarla siempre porque no es delito precedente", "No descartar el ROS solo por ser estafa y verificar el criterio vigente de la UAF, ya que la nueva pena alcanzaría el umbral de tres años", "Enviar un RTE", "Esperar a una sentencia"], "answer": 1, "explain": "La guía de 2024 se basaba en el Código Penal de 1884; con la Ley 74-25 la pena de la estafa sería de 3 a 5 años, lo que alcanzaría el umbral del art. 2, num. 11 [[1,4,13,14]]."},
+{"q": "Una cliente recibe decenas de pagos por ventas en redes sociales que nunca entrega, y el análisis confirma el patrón. Con el Código Penal vigente, ¿qué corresponde?", "options": ["Nada: la estafa simple no es delito precedente", "Remitir un ROS, porque la estafa (art. 237, 3 a 5 años) es hoy delito precedente, y orientar a las víctimas a denunciar", "Enviar solo un RTE", "Esperar una sentencia condenatoria"], "answer": 1, "explain": "Con la Ley 74-25 la estafa simple se sanciona con 3 a 5 años, por lo que alcanza el umbral de infracción precedente del art. 2, num. 11 de la Ley 155-17; el criterio contrario de la guía de 2024 se basaba en el código de 1884 [[1,4,13,14]]."},
 ],
 },
 ]

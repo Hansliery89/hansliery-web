@@ -148,7 +148,8 @@ COURSES = [
   "Reconocer a las «mulas» de dinero y sus señales.",
   "Coordinar la respuesta entre prevención de fraude y cumplimiento.",
 ],
-"sources": [GAFI_CEF, LEY_5307, LEY_7425, ESTAFA_7425, UAF_ROS, LEY],
+"sources": [GAFI_CEF, LEY_5307, LEY_7425, ESTAFA_7425, UAF_ROS, LEY, LEY_4426],
+"notice": "Este curso aplica el nuevo Código Penal (Ley 74-25), vigente desde agosto de 2026: la estafa es ahora delito precedente del lavado de activos.",
 "modules": [
 {"title": "Un delito global y veloz", "html": """
 <p>El GAFI, INTERPOL y el Grupo Egmont describen el fraude habilitado por la tecnología como una amenaza transnacional en crecimiento: los delincuentes aprovechan la digitalización para operar a mayor escala y velocidad, y mueven los fondos rápidamente entre jurisdicciones.[[1]]</p>
@@ -164,9 +165,12 @@ COURSES = [
 {"title": "Marco penal dominicano", "html": """
 <ul>
 <li><strong>Ley 53-07 sobre Crímenes y Delitos de Alta Tecnología:</strong> tipifica, entre otros, la obtención ilícita de fondos (art. 14), la estafa cometida por medios electrónicos (art. 15) y el robo de identidad (art. 17).[[2]]</li>
-<li><strong>Nuevo Código Penal (Ley 74-25):</strong> vigente desde el 3 de agosto de 2026, actualiza los delitos contra el patrimonio. Según los análisis publicados, la estafa pasa a sancionarse con tres a cinco años y la agravada con cinco a diez.[[3,4]]</li>
+<li><strong>Nuevo Código Penal (Ley Orgánica 74-25, con las modificaciones de la Ley 44-26):</strong> vigente desde agosto de 2026. La estafa simple (art. 237) se sanciona con tres a cinco años de prisión; la estafa agravada, la colectiva y la piramidal (arts. 238 a 242), con cinco a diez años.[[3,4,7]]</li>
 </ul>
-<div class="callout key"><b>Conexión con el lavado</b>La Ley 155-17 considera infracción precedente toda infracción grave con pena no menor de tres años.[[6]] Con las nuevas penas, los fraudes que antes podían quedar fuera de ese umbral podrían ahora considerarse precedentes. Consulta el criterio vigente de la UAF.</div>
+<div class="callout warn" id="nota-codigo-penal"><b>Nota aclaratoria para los participantes · Nuevo Código Penal</b>
+<p>La Ley 155-17 considera infracción precedente toda infracción grave con pena no menor de tres años (art. 2, num. 11).[[6]] Con el código vigente, <strong>toda estafa —también la cometida por medios digitales— es delito precedente del lavado de activos</strong>.[[3,4]]</p>
+<p>En consecuencia, cuando una operación realizada o intentada genere sospecha de estar vinculada a una estafa, corresponde remitir un <strong>ROS</strong> a la UAF, sin perjuicio de orientar a las víctimas a denunciar. El criterio anterior de la Guía de Calidad de la UAF (2024), según el cual la estafa simple no era precedente, se basaba en el Código Penal de 1884 y ya no aplica.[[5]]</p>
+</div>
 """},
 {"title": "Las «mulas» de dinero", "html": """
 <p>Una <strong>mula</strong> es una persona que recibe en su cuenta fondos de origen ilícito y los transfiere o retira por cuenta de otros, a veces sin saber que participa en un delito. Son una pieza clave para sacar el dinero del fraude.[[1]]</p>
@@ -183,10 +187,10 @@ COURSES = [
 <li><strong>Coordinar fraude y cumplimiento:</strong> los indicadores de fraude alimentan el monitoreo antilavado y viceversa.[[1]]</li>
 <li><strong>Actuar rápido:</strong> la velocidad del fraude exige procesos ágiles de bloqueo y escalamiento, según las políticas de la entidad.</li>
 <li><strong>Orientar a las víctimas:</strong> la UAF recuerda los canales de denuncia de la Policía Nacional (incluida su plataforma en línea), la Procuraduría General de la República y la línea 311.[[5]]</li>
-<li><strong>Reportar cuando corresponda:</strong> si el análisis apunta a un delito precedente o a una red que mueve fondos ilícitos, se remite el ROS dentro del plazo legal.[[5,6]]</li>
+<li><strong>Reportar:</strong> como la estafa es delito precedente con el código vigente, la operación sospechosa vinculada a un fraude se reporta mediante ROS dentro de los 5 días hábiles.[[3,6]]</li>
 </ol>
 <div class="case"><b>Caso</b><p>Varios clientes denuncian que pagaron artículos anunciados en redes sociales a la cuenta de la Sra. T. y nunca los recibieron. La cuenta recibió en un mes decenas de transferencias similares, retiradas en cajeros el mismo día.</p>
-<p class="verdict yes"><b>Decisión:</b> escalar a fraude para las medidas inmediatas, orientar a los afectados a denunciar y analizar la remisión de un ROS por el patrón de captación y retiro de fondos.</p></div>
+<p class="verdict yes"><b>Decisión:</b> escalar a fraude para las medidas inmediatas, orientar a los afectados a denunciar y remitir el ROS: el patrón apunta a una estafa, que es delito precedente con el código vigente.</p></div>
 """},
 ],
 "quiz": [
@@ -194,7 +198,7 @@ COURSES = [
 {"q": "¿Qué ley dominicana tipifica la estafa cometida por medios electrónicos?", "options": ["Ley 172-13", "Ley 53-07 sobre Crímenes y Delitos de Alta Tecnología", "Ley 183-02", "Ley 311-14"], "answer": 1, "explain": "El art. 15 de la Ley 53-07 sanciona la estafa realizada por medios electrónicos [[2]]."},
 {"q": "¿Qué es una «mula» de dinero?", "options": ["Un sistema de pago", "Una persona que recibe y mueve fondos ilícitos por cuenta de otros", "Una billetera digital", "Un tipo de reporte"], "answer": 1, "explain": "Las mulas permiten sacar y dispersar el dinero del fraude [[1]]."},
 {"q": "¿Cuál es una señal típica de una cuenta usada como mula?", "options": ["Pago puntual de la nómina", "Muchas transferencias de desconocidos retiradas o reenviadas casi de inmediato", "Ahorro mensual constante", "Uso de tarjeta en supermercados"], "answer": 1, "explain": "La recepción masiva y el retiro inmediato son indicadores frecuentes."},
-{"q": "Con el nuevo Código Penal, ¿por qué podría cambiar el tratamiento de la estafa en materia de lavado?", "options": ["Porque se despenalizó", "Porque su pena pasaría a 3-5 años y alcanzaría el umbral de infracción precedente", "Porque ahora la investiga la UAF", "No cambia nada"], "answer": 1, "explain": "La Ley 155-17 considera precedente toda infracción grave con pena no menor de tres años [[3,4,6]]."},
+{"q": "Con el Código Penal vigente (Ley 74-25), ¿cómo se trata la estafa en materia de lavado de activos?", "options": ["Sigue sin ser delito precedente", "Es delito precedente, porque su pena (3 a 5 años) alcanza el umbral de la Ley 155-17", "Solo es precedente si la comete un funcionario", "Solo la investiga la UAF"], "answer": 1, "explain": "La estafa simple (art. 237) se castiga con 3 a 5 años; la Ley 155-17 considera precedente toda infracción grave con pena no menor de tres años [[3,4,6]]."},
 {"q": "Una víctima de fraude acude a la entidad. ¿Qué orientación es correcta?", "options": ["Decirle que no hay nada que hacer", "Orientarla a denunciar ante la Policía Nacional, la Procuraduría o la línea 311, sin revelar análisis internos", "Mostrarle los ROS enviados", "Contactar al presunto estafador"], "answer": 1, "explain": "La UAF recuerda esos canales de denuncia; la reserva sobre los reportes se mantiene [[5,6]]."},
 ],
 },
