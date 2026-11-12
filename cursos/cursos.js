@@ -173,7 +173,7 @@
 
   function confetti() {
     var box = document.createElement('div'); box.className = 'confetti'; box.setAttribute('aria-hidden', 'true');
-    var colors = ['#00C9B7', '#38BDF8', '#D6A84F', '#F1D18F', '#F2F6FA'];
+    var colors = ['#2563EB', '#38BDF8', '#D4AF37', '#123B66', '#0A192F'];
     for (var i = 0; i < 70; i++) {
       var p = document.createElement('i');
       p.style.left = (Math.random() * 100) + 'vw';
