@@ -45,6 +45,10 @@ Dentro del texto, `[[3]]` crea una cita a la fuente número 3 del curso. El gene
 
 No requiere instalación, compilación ni frameworks. Solo depende de Google Fonts (Sora + Manrope). Si las fuentes no cargan, el sitio usa tipografías del sistema y sigue funcionando.
 
+## Costos
+
+La sección `#costos` muestra precios de referencia en RD$ (más ITBIS 18 %) y en US$ para clientes del exterior. Para cambiar un precio, edite los atributos `data-dop` y `data-usd` de cada `.pc-amt` (el texto visible se recalcula al cargar) y, en la calculadora, el `value` de cada opción de `#pcc-svc`. Las tasas de retención (ISR 15 % a personas físicas, Ley 30-26; ITBIS 100 % o 30 % según Norma 02-05) están en el bloque `pricing` del `<script>`. Revise los precios cada seis meses.
+
 ## Cómo verlo
 
 Haga doble clic en `index.html`. Se abre en cualquier navegador moderno (Chrome, Edge, Firefox, Safari).

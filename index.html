@@ -355,7 +355,9 @@
   .mobile-menu-foot .btn { width: 100%; }
   .mobile-menu-foot a.mail { color: var(--muted); font-size: .9rem; word-break: break-all; text-align: center; }
 
-  @media (max-width: 1100px) {
+  .nav-link { white-space: nowrap; }
+  @media (max-width: 1300px) { .nav { gap: 1.2rem; } .nav-list { gap: 1.05rem; } .nav-link { font-size: .84rem; } }
+  @media (max-width: 1180px) {
     .nav { display: none; }
     .menu-toggle { display: block; }
   }
@@ -969,6 +971,96 @@
   }
   @media (prefers-reduced-motion: reduce) { .sv-panel.is-in { animation: none; } .mx-bar i { transition: none; } }
 
+
+  /* =================================================================
+     COSTOS / PRICING
+     ================================================================= */
+  .pricing { background: linear-gradient(180deg, var(--night), var(--night-2)); }
+  .pc-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 1.6rem; margin-bottom: 2.2rem; }
+  .pc-switch { display: inline-flex; padding: 4px; border-radius: 999px; background: rgba(18, 59, 89, .5); border: 1px solid var(--line-strong); }
+  .pc-switch button { font: inherit; font-size: .84rem; font-weight: 700; color: var(--muted); background: transparent; border: 0; border-radius: 999px; padding: .55rem 1.1rem; cursor: pointer; transition: background .25s, color .25s; }
+  .pc-switch button[aria-checked="true"] { background: linear-gradient(120deg, var(--teal), var(--electric)); color: var(--night); }
+  .pc-switch button:focus-visible { outline: 2px solid var(--teal); outline-offset: 2px; }
+  .pc-note { font-size: .84rem; color: var(--muted); max-width: 60ch; }
+  .pc-h3 { font-family: var(--font-head); font-size: clamp(1.1rem, 2vw, 1.35rem); margin: 0 0 1.2rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: .4rem 1rem; }
+  .pc-h3 small, .pc-calc h3 small, .pc-ecf h3 small { font-family: var(--font-body); font-size: .78rem; font-weight: 500; color: var(--muted); }
+  .pc-plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.3rem; margin-bottom: 3rem; align-items: stretch; }
+  .pc-plan { position: relative; display: flex; flex-direction: column; padding: 1.8rem 1.6rem 1.5rem; }
+  .pc-plan.is-hot { border-color: rgba(0, 201, 183, .55); box-shadow: 0 30px 70px -40px rgba(0, 201, 183, .6); background: linear-gradient(160deg, rgba(0, 201, 183, .12), rgba(7, 20, 38, .7)); }
+  .pc-tag { position: absolute; top: -12px; right: 1.4rem; font-size: .68rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 5px 11px; border-radius: 999px; background: var(--gold); color: var(--night); }
+  .pc-plan h4 { font-family: var(--font-head); font-size: 1.2rem; }
+  .pc-desc { font-size: .86rem; color: var(--muted); margin: .4rem 0 1.1rem; min-height: 2.8em; }
+  .pc-price { display: flex; flex-wrap: wrap; align-items: baseline; gap: .35rem; }
+  .pc-amt { font-family: var(--font-head); font-weight: 800; font-size: 1.9rem; letter-spacing: -.02em; color: var(--ice); }
+  .pc-suf { font-size: .85rem; color: var(--muted); }
+  .pc-from { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted-2); font-weight: 700; }
+  .pc-tax { font-size: .76rem; color: var(--gold-soft); margin-top: .2rem; min-height: 1.2em; }
+  .pc-feat { display: grid; gap: .55rem; margin: 1.2rem 0 1.5rem; }
+  .pc-feat li { position: relative; padding-left: 1.4rem; font-size: .88rem; line-height: 1.45; }
+  .pc-feat li::before { content: ""; position: absolute; left: 0; top: .45em; width: 8px; height: 8px; border-radius: 2px; transform: rotate(45deg); background: var(--teal); }
+  .pc-btn { margin-top: auto; width: 100%; justify-content: center; }
+  .pc-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.3rem; margin-bottom: 1.3rem; align-items: start; }
+  .pc-group { padding: 1.4rem 1.5rem; border-radius: var(--radius); border: 1px solid var(--line); background: rgba(10, 28, 51, .6); }
+  .pc-group h4 { font-family: var(--font-head); font-size: .95rem; display: flex; gap: .7rem; align-items: center; margin-bottom: .8rem; }
+  .pc-group h4 span { font-size: .72rem; color: var(--night); background: var(--teal); border-radius: 6px; padding: 2px 7px; }
+  .pc-list li { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: .75rem 0; border-top: 1px solid var(--line); }
+  .pc-list li:first-child { border-top: 0; }
+  .pc-list b { display: block; font-size: .9rem; font-weight: 700; }
+  .pc-list small { font-size: .78rem; color: var(--muted); }
+  .pc-list p { text-align: right; white-space: nowrap; display: flex; flex-direction: column; align-items: flex-end; }
+  .pc-list .pc-amt { font-size: 1.15rem; }
+  .pc-quote, .pc-free { font-family: var(--font-head); font-weight: 700; font-size: .95rem; color: var(--gold-soft); }
+  .pc-free { color: var(--teal); }
+  .pc-extra { display: grid; grid-template-columns: 1fr 1fr 1.3fr; gap: 1.3rem; margin-bottom: 3rem; }
+  .pc-mini { padding: 1.3rem 1.4rem; display: flex; flex-direction: column; gap: .35rem; }
+  .pc-mini b { font-family: var(--font-head); font-size: .95rem; }
+  .pc-mini small { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+  .pc-mini .pc-amt { font-size: 1.5rem; }
+  .pc-pct { font-family: var(--font-head); font-weight: 800; font-size: 1.5rem; color: var(--teal); }
+  .pc-saas { border-color: rgba(214, 168, 79, .3); }
+  .pc-saas .btn-link { margin-top: .3rem; font-size: .8rem; }
+  .pc-fiscal { display: grid; grid-template-columns: 1.1fr 1fr; gap: 1.3rem; margin-bottom: 1.6rem; }
+  .pc-calc, .pc-ecf { padding: 1.6rem; }
+  .pc-calc.is-muted { opacity: .55; }
+  .pc-calc h3, .pc-ecf h3 { font-family: var(--font-head); font-size: 1.1rem; margin-bottom: 1rem; display: flex; flex-wrap: wrap; gap: .3rem .8rem; align-items: baseline; }
+  .pc-field { display: block; margin-bottom: .8rem; }
+  .pc-field span { display: block; font-size: .76rem; color: var(--muted); margin-bottom: .35rem; }
+  .pc-field select { width: 100%; font-size: .86rem; }
+  .pc-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+  .pc-out { margin: .6rem 0 0; border-radius: 12px; border: 1px solid var(--line); overflow: hidden; }
+  .pc-out div { display: flex; justify-content: space-between; padding: .55rem .9rem; font-size: .88rem; border-top: 1px solid var(--line); }
+  .pc-out div:first-child { border-top: 0; }
+  .pc-out dt { color: var(--muted); }
+  .pc-out dd { font-family: var(--font-head); font-weight: 700; margin: 0; }
+  .pc-out .pc-tot { background: rgba(0, 201, 183, .08); }
+  .pc-out .pc-tot dt { color: var(--ice); font-weight: 700; }
+  .pc-out .pc-ret dd { color: var(--gold-soft); }
+  .pc-small { font-size: .76rem; color: var(--muted-2); line-height: 1.55; margin-top: .8rem; }
+  .pc-ecf p { font-size: .86rem; color: var(--muted); line-height: 1.6; }
+  .pc-ecf-list { display: grid; gap: .6rem; margin-bottom: 1rem; }
+  .pc-ecf-list li { display: grid; grid-template-columns: 48px 1fr; gap: .8rem; align-items: start; font-size: .86rem; }
+  .pc-ecf-list b { font-family: var(--font-head); text-align: center; padding: .25rem 0; border-radius: 8px; background: rgba(56, 189, 248, .12); border: 1px solid rgba(56, 189, 248, .3); color: #CFEAFB; font-size: .82rem; }
+  .pc-terms { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding: 1.3rem 1.4rem; border-radius: var(--radius); border: 1px solid var(--line); background: rgba(10, 28, 51, .5); }
+  .pc-terms b { display: block; font-family: var(--font-head); font-size: .8rem; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: .3rem; }
+  .pc-terms span { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+  .pc-disclaimer { margin-top: 1.2rem; font-size: .76rem; color: var(--muted-2); line-height: 1.6; max-width: 110ch; }
+  @media (max-width: 1100px) {
+    .pc-plans { grid-template-columns: 1fr; max-width: 560px; }
+    .pc-cols, .pc-fiscal { grid-template-columns: 1fr; }
+    .pc-extra { grid-template-columns: 1fr 1fr; }
+    .pc-saas { grid-column: 1 / -1; }
+    .pc-terms { grid-template-columns: 1fr 1fr; }
+    .pc-desc { min-height: 0; }
+  }
+  @media (max-width: 600px) {
+    .pc-extra, .pc-terms, .pc-row { grid-template-columns: 1fr; }
+    .pc-switch { width: 100%; }
+    .pc-switch button { flex: 1; padding: .55rem .5rem; font-size: .76rem; }
+    .pc-list li { flex-direction: column; align-items: flex-start; gap: .3rem; }
+    .pc-list p { align-items: flex-start; text-align: left; flex-direction: row; gap: .4rem; align-items: baseline; }
+    .pc-group { padding: 1.2rem 1.1rem; }
+  }
+
   /* =================================================================
      10. CAPACITACIONES
      ================================================================= */
@@ -1401,6 +1493,7 @@
           <li><a class="nav-link" href="#servicios">Servicios</a></li>
           <li><a class="nav-link" href="#capacitaciones">Capacitaciones</a></li>
           <li><a class="nav-link" href="#metodologia">Metodología</a></li>
+          <li><a class="nav-link" href="#costos">Costos</a></li>
           <li><a class="nav-link" href="#contacto">Contacto</a></li>
         </ul>
         <a class="btn btn-primary btn-sm" href="#contacto">Conversemos <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -1422,6 +1515,7 @@
         <li><a class="m-link" href="#servicios">Servicios</a></li>
         <li><a class="m-link" href="#capacitaciones">Capacitaciones</a></li>
         <li><a class="m-link" href="#metodologia">Metodología</a></li>
+        <li><a class="m-link" href="#costos">Costos</a></li>
         <li><a class="m-link" href="#contacto">Contacto</a></li>
       </ol>
     </nav>
@@ -2139,6 +2233,100 @@
     <!-- ============================================================
          H. LLAMADO A LA ACCIÓN
          ============================================================ -->
+    <!-- ==============================================================
+         COSTOS / PRICING
+         ============================================================== -->
+    <section class="section pricing bg-hex" id="costos" aria-labelledby="costos-title">
+      <div class="orb" style="width:380px;height:380px;background:#00C9B7;opacity:.08;top:6%;left:-140px" aria-hidden="true"></div>
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow" data-reveal>Costos</p>
+          <h2 class="h2" id="costos-title" data-reveal style="--d:.08s">Inversión <span class="grad">clara</span> y proporcional a su riesgo.</h2>
+          <p class="lead" data-reveal style="--d:.14s">Precios de referencia para planificar su presupuesto. Cada propuesta final se ajusta al tamaño, la actividad y la complejidad de la entidad.</p>
+        </header>
+
+        <div class="pc-bar" data-reveal>
+          <div class="pc-switch" role="radiogroup" aria-label="Mercado y moneda">
+            <button type="button" role="radio" aria-checked="true" data-cur="dop">República Dominicana · RD$</button>
+            <button type="button" role="radio" aria-checked="false" data-cur="usd">Internacional · US$</button>
+          </div>
+          <p class="pc-note" id="pc-note" aria-live="polite"></p>
+        </div>
+
+        <h3 class="pc-h3" data-reveal>Acompañamiento continuo <small>Contrato mínimo de 3 meses · 10 % de descuento con pago anual anticipado</small></h3>
+        <div class="pc-plans" data-reveal><article class="card pc-plan">
+            
+            <h4>Esencial</h4><p class="pc-desc">Para sujetos obligados no financieros pequeños o que inician su programa.</p>
+            <p class="pc-price"><span class="pc-amt" data-dop="18000" data-usd="390">RD$18,000</span><span class=pc-suf>/mes</span></p>
+            <p class="pc-tax" data-tax></p>
+            <ul class="pc-feat"><li>Hasta 6 horas de asesoría al mes</li><li>Consultas por correo y videollamada</li><li>Boletín de cambios normativos aplicables</li><li>Revisión de casos y alertas puntuales</li><li>Informe trimestral de avance</li></ul>
+            <a class="btn btn-ghost pc-btn" href="#contacto" data-service="Otro / Aún no lo tengo definido" data-plan="Plan Esencial">Solicitar el plan Esencial</a>
+          </article><article class="card pc-plan is-hot">
+            <span class="pc-tag">Más elegido</span>
+            <h4>Profesional</h4><p class="pc-desc">Para entidades medianas con programa en marcha que necesitan sostenerlo.</p>
+            <p class="pc-price"><span class="pc-amt" data-dop="38000" data-usd="850">RD$38,000</span><span class=pc-suf>/mes</span></p>
+            <p class="pc-tax" data-tax></p>
+            <ul class="pc-feat"><li>Hasta 14 horas de asesoría al mes</li><li>Todo lo del plan Esencial</li><li>Seguimiento mensual del plan de acción</li><li>Revisión semestral de la matriz de riesgo</li><li>Informe mensual para la gerencia</li><li>1 taller de 4 horas al año incluido</li></ul>
+            <a class="btn btn-primary pc-btn" href="#contacto" data-service="Otro / Aún no lo tengo definido" data-plan="Plan Profesional">Solicitar el plan Profesional</a>
+          </article><article class="card pc-plan">
+            
+            <h4>Corporativo</h4><p class="pc-desc">Para entidades financieras, grupos o carteras de mayor complejidad.</p>
+            <p class="pc-price"><span class="pc-amt" data-dop="75000" data-usd="1750">RD$75,000</span><span class=pc-suf>/mes</span></p>
+            <p class="pc-tax" data-tax></p>
+            <ul class="pc-feat"><li>Hasta 30 horas de asesoría al mes</li><li>Todo lo del plan Profesional</li><li>Participación en el comité de cumplimiento</li><li>Revisión de expedientes por muestreo</li><li>Indicadores y tablero trimestral</li><li>Atención prioritaria</li></ul>
+            <a class="btn btn-ghost pc-btn" href="#contacto" data-service="Otro / Aún no lo tengo definido" data-plan="Plan Corporativo">Solicitar el plan Corporativo</a>
+          </article></div>
+
+        <h3 class="pc-h3" data-reveal>Proyectos a precio cerrado <small>Precios «desde» para entidades pequeñas; se cotizan según alcance</small></h3>
+        <div class="pc-cols" data-reveal><div class="pc-group"><h4><span>01</span>Consultoría y fortalecimiento PLAFT</h4><ul class="pc-list"><li><div><b>Diagnóstico del programa de cumplimiento</b><small>Informe, matriz de brechas y plan de acción</small></div><p><span class="pc-from">Desde</span><span class="pc-amt" data-dop="65000" data-usd="1500">RD$65,000</span></p></li><li><div><b>Manual y procedimientos de prevención</b><small>Elaboración o actualización completa</small></div><p><span class="pc-from">Desde</span><span class="pc-amt" data-dop="85000" data-usd="2000">RD$85,000</span></p></li><li><div><b>Acompañamiento ante inspección u observaciones</b><small>Respuesta al supervisor y plan de corrección</small></div><p><span class="pc-from">Desde</span><span class="pc-amt" data-dop="60000" data-usd="1400">RD$60,000</span></p></li></ul></div><div class="pc-group"><h4><span>02</span>Gestión de riesgos y debida diligencia</h4><ul class="pc-list"><li><div><b>Matriz de riesgo parametrizada</b><small>Excel, metodología documentada y calibración</small></div><p><span class="pc-from">Desde</span><span class="pc-amt" data-dop="95000" data-usd="2200">RD$95,000</span></p></li><li><div><b>Autoevaluación de riesgos LA/FT/FPADM</b><small>Identificación, medición e informe</small></div><p><span class="pc-from">Desde</span><span class="pc-amt" data-dop="110000" data-usd="2500">RD$110,000</span></p></li><li><div><b>Kit de debida diligencia</b><small>Formularios KYC/KYB, beneficiario final, PEP y screening</small></div><p><span class="pc-from">Desde</span><span class="pc-amt" data-dop="45000" data-usd="1000">RD$45,000</span></p></li></ul></div><div class="pc-group"><h4><span>03</span>Controles internos y gobierno</h4><ul class="pc-list"><li><div><b>Matriz de controles y responsabilidades</b><small>Controles, responsables y evidencias</small></div><p><span class="pc-from">Desde</span><span class="pc-amt" data-dop="90000" data-usd="2100">RD$90,000</span></p></li><li><div><b>Tablero de indicadores e informe gerencial</b><small>KPI, KRI y plantilla de reporte</small></div><p><span class="pc-from">Desde</span><span class="pc-amt" data-dop="55000" data-usd="1300">RD$55,000</span></p></li></ul></div><div class="pc-group"><h4><span>04</span>Capacitación profesional</h4><ul class="pc-list"><li><div><b>Taller in-company de 4 horas</b><small>Hasta 25 participantes, presencial o virtual</small></div><p><span class="pc-amt" data-dop="38000" data-usd="900">RD$38,000</span></p></li><li><div><b>Taller in-company de 8 horas</b><small>Hasta 25 participantes, con evaluación</small></div><p><span class="pc-amt" data-dop="65000" data-usd="1500">RD$65,000</span></p></li><li><div><b>Sesión ejecutiva para consejo y alta gerencia</b><small>2 horas</small></div><p><span class="pc-amt" data-dop="30000" data-usd="700">RD$30,000</span></p></li><li><div><b>Participante adicional</b><small>Sobre el cupo de 25</small></div><p><span class="pc-amt" data-dop="1200" data-usd="25">RD$1,200</span></p></li><li><div><b>Programa anual de capacitación</b><small>Plan, ejecución, evaluaciones y evidencias</small></div><p><span class="pc-quote">A cotizar</span></p></li><li><div><b>Cursos en línea del sitio</b><small>13 cursos con evaluación y fuentes</small></div><p><span class="pc-free">Gratis</span></p></li></ul></div></div>
+
+        <div class="pc-extra" data-reveal>
+          <div class="card pc-mini"><b>Hora de consultoría</b><p><span class="pc-amt" data-dop="3500" data-usd="65">RD$3,500</span><span class=pc-suf>/hora</span></p><small>Consultas puntuales fuera de un plan. Mínimo 2 horas.</small></div>
+          <div class="card pc-mini"><b>Paquete de implementación</b><p class="pc-pct">−10 %</p><small>Al contratar juntos diagnóstico, matriz de riesgo y manual.</small></div>
+          <div class="card pc-mini pc-saas"><b>Compliance Guard <span class="grad-gold">Pro</span></b><p class="pc-quote">En desarrollo</p><small>Los planes y precios se publicarán al lanzamiento. Inscríbase para recibir la tarifa de fundador.</small><a class="btn-link" href="#contacto" data-service="Compliance Guard Pro (información)">Quiero la tarifa de fundador <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+        </div>
+
+        <div class="pc-fiscal" data-reveal>
+          <div class="card pc-calc" id="pc-calc">
+            <h3>Calcule su factura <small>Mercado dominicano</small></h3>
+            <label class="pc-field"><span>Servicio</span><select id="pcc-svc" class="control"><option value="65000">Diagnóstico del programa de cumplimiento — RD$65,000</option><option value="85000">Manual y procedimientos de prevención — RD$85,000</option><option value="60000">Acompañamiento ante inspección u observaciones — RD$60,000</option><option value="95000">Matriz de riesgo parametrizada — RD$95,000</option><option value="110000">Autoevaluación de riesgos LA/FT/FPADM — RD$110,000</option><option value="45000">Kit de debida diligencia — RD$45,000</option><option value="90000">Matriz de controles y responsabilidades — RD$90,000</option><option value="55000">Tablero de indicadores e informe gerencial — RD$55,000</option><option value="18000">Plan Esencial (1 mes) — RD$18,000</option><option value="38000">Plan Profesional (1 mes) — RD$38,000</option><option value="75000">Plan Corporativo (1 mes) — RD$75,000</option><option value="38000">Taller in-company de 4 horas — RD$38,000</option><option value="65000">Taller in-company de 8 horas — RD$65,000</option><option value="30000">Sesión ejecutiva para consejo y alta gerencia — RD$30,000</option><option value="3500">Hora de consultoría — RD$3,500</option></select></label>
+            <div class="pc-row">
+              <label class="pc-field"><span>Quién factura</span><select id="pcc-em" class="control"><option value="pf">Persona física</option><option value="pj">Sociedad (SRL)</option></select></label>
+              <label class="pc-field"><span>Cliente</span><select id="pcc-cl" class="control"><option value="pj">Empresa con RNC</option><option value="cf">Persona sin RNC</option></select></label>
+            </div>
+            <dl class="pc-out" aria-live="polite">
+              <div><dt>Subtotal</dt><dd id="pcc-sub">—</dd></div>
+              <div><dt>ITBIS (18 %)</dt><dd id="pcc-itbis">—</dd></div>
+              <div class="pc-tot"><dt>Total de la factura</dt><dd id="pcc-tot">—</dd></div>
+              <div class="pc-ret"><dt>Retención de ISR</dt><dd id="pcc-isr">—</dd></div>
+              <div class="pc-ret"><dt>Retención de ITBIS</dt><dd id="pcc-rit">—</dd></div>
+              <div class="pc-tot"><dt>Neto a transferir</dt><dd id="pcc-net">—</dd></div>
+            </dl>
+            <p class="pc-small" id="pcc-note"></p>
+          </div>
+
+          <div class="card pc-ecf">
+            <h3>Facturación electrónica <small>Ley 32-23 · DGII</small></h3>
+            <ul class="pc-ecf-list">
+              <li><b>E31</b><span>Factura de crédito fiscal electrónica, para empresas que sustentan costos y crédito de ITBIS.</span></li>
+              <li><b>E32</b><span>Factura de consumo electrónica, para personas sin RNC.</span></li>
+              <li><b>E34</b><span>Nota de crédito electrónica, para ajustes o descuentos posteriores.</span></li>
+            </ul>
+            <p>Cada comprobante se firma digitalmente, se valida ante la DGII y se envía al correo del cliente con su representación impresa y código de verificación. Para emitir la factura se solicitan RNC o cédula, razón social y correo de recepción.</p>
+            <p class="pc-small">Las retenciones las aplica el cliente cuando es agente de retención. Los servicios a clientes del exterior se facturan en US$; el tratamiento del ITBIS se confirma en cada propuesta, pues la DGII no considera exportados todos los servicios prestados desde el país a no residentes.</p>
+          </div>
+        </div>
+
+        <div class="pc-terms" data-reveal>
+          <div><b>Forma de pago</b><span>Proyectos: 50 % al inicio y 50 % a la entrega. Planes: mensualidad anticipada. Transferencia bancaria.</span></div>
+          <div><b>Incluye</b><span>Sesiones virtuales y entregables en formato editable. Visitas presenciales en el Gran Santo Domingo según el alcance.</span></div>
+          <div><b>No incluye</b><span>Viáticos fuera del Gran Santo Domingo, herramientas de terceros ni comisiones bancarias internacionales.</span></div>
+          <div><b>Vigencia</b><span>Precios de referencia revisables cada seis meses. La propuesta firmada fija el precio del contrato.</span></div>
+        </div>
+        <p class="pc-disclaimer" data-reveal>Los servicios fortalecen el programa de cumplimiento; no sustituyen la responsabilidad de la entidad ni garantizan el resultado de una inspección. Como referencia, una infracción grave de un sujeto obligado no financiero —por ejemplo, no contar con manual, auditoría o capacitación— se sanciona con multas de RD$1,392,404 a RD$2,784,805 (Ley 155-17, art. 75; Resolución CONCLAFIT-2024-01).</p>
+      </div>
+    </section>
+
     <section class="cta" aria-labelledby="cta-title">
       <div class="container">
         <div class="cta-box" data-reveal="scale">
@@ -2278,6 +2466,7 @@
             <li><a href="#servicios">Servicios</a></li>
             <li><a href="#capacitaciones">Capacitaciones</a></li>
             <li><a href="#metodologia">Metodología</a></li>
+            <li><a href="#costos">Costos</a></li>
             <li><a href="#contacto">Contacto</a></li>
           </ul>
         </nav>
@@ -2705,6 +2894,68 @@
       sel.addEventListener('change', load);
       sl.concat(ef).forEach(function (s) { s.addEventListener('input', calc); });
       load();
+    });
+
+
+    /* ---------------------------------------------------------------
+       10c. Costos: moneda, calculadora de factura y planes
+       --------------------------------------------------------------- */
+    safe('pricing', function () {
+      var sec = document.getElementById('costos');
+      if (!sec) return;
+      var fmt = function (n, cur) {
+        return (cur === 'usd' ? 'US$' : 'RD$') + Math.round(n).toLocaleString('en-US');
+      };
+      var fmt2 = function (n) { return 'RD$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); };
+      var note = $('#pc-note');
+      var setCur = function (cur) {
+        $$('.pc-switch [data-cur]', sec).forEach(function (b) { b.setAttribute('aria-checked', b.getAttribute('data-cur') === cur ? 'true' : 'false'); });
+        $$('.pc-amt', sec).forEach(function (el) { el.textContent = fmt(+el.getAttribute('data-' + cur), cur); });
+        $$('[data-tax]', sec).forEach(function (el) { el.textContent = cur === 'dop' ? '+ ITBIS (18 %)' : 'ITBIS según evaluación'; });
+        note.textContent = cur === 'dop'
+          ? 'Precios en pesos dominicanos. No incluyen el ITBIS (18 %), que se detalla en la factura electrónica.'
+          : 'Precios en dólares para clientes fuera de la República Dominicana, con servicio virtual. Impuestos según la propuesta.';
+        var calc = $('#pc-calc'); if (calc) calc.classList.toggle('is-muted', cur !== 'dop');
+      };
+      $$('.pc-switch [data-cur]', sec).forEach(function (b, i, all) {
+        b.addEventListener('click', function () { setCur(b.getAttribute('data-cur')); });
+        b.addEventListener('keydown', function (e) {
+          if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); var n = all[(i + 1) % all.length]; n.focus(); setCur(n.getAttribute('data-cur')); }
+        });
+      });
+      setCur('dop');
+
+      var svc = $('#pcc-svc'), em = $('#pcc-em'), cl = $('#pcc-cl');
+      var calc = function () {
+        var sub = +svc.value, itbis = sub * 0.18, tot = sub + itbis, isr = 0, rit = 0, txt;
+        if (cl.value === 'pj') {
+          if (em.value === 'pf') {
+            isr = sub * 0.15; rit = itbis;
+            txt = 'Persona física que factura a una empresa: la empresa retiene el 15 % del ISR sobre el subtotal (art. 309 del Código Tributario, modificado por la Ley 30-26, como pago a cuenta) y el 100 % del ITBIS facturado, y los entrega a la DGII.';
+          } else {
+            rit = itbis * 0.30;
+            txt = 'Sociedad que factura a otra sociedad: puede corresponder la retención del 30 % del ITBIS por servicios profesionales liberales (Norma General 02-05). No hay retención de ISR.';
+          }
+        } else {
+          txt = 'Cliente sin RNC: se emite factura de consumo electrónica (E32) y no hay retenciones.';
+        }
+        $('#pcc-sub').textContent = fmt2(sub);
+        $('#pcc-itbis').textContent = fmt2(itbis);
+        $('#pcc-tot').textContent = fmt2(tot);
+        $('#pcc-isr').textContent = isr ? '− ' + fmt2(isr) : 'No aplica';
+        $('#pcc-rit').textContent = rit ? '− ' + fmt2(rit) : 'No aplica';
+        $('#pcc-net').textContent = fmt2(tot - isr - rit);
+        $('#pcc-note').textContent = txt + ' Cálculo orientativo; confirme con su contador.';
+      };
+      [svc, em, cl].forEach(function (s) { s.addEventListener('change', calc); });
+      calc();
+
+      $$('[data-plan]', sec).forEach(function (a) {
+        a.addEventListener('click', function () {
+          var msg = $('#f-msg');
+          if (msg && !msg.value.trim()) { msg.value = 'Me interesa el ' + a.getAttribute('data-plan') + ' de acompañamiento continuo. '; msg.dispatchEvent(new Event('input')); }
+        });
+      });
     });
 
     /* ---------------------------------------------------------------
