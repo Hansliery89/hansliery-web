@@ -65,8 +65,17 @@
         "name": "Hansliery Sánchez",
         "url": "https://hansliery89.github.io/hansliery-web/",
         "email": "mailto:sanchezfiguereohansliery@gmail.com",
-        "description": "Profesional de informática con experiencia en prevención de lavado de activos, tecnología de la información, capacitación y gestión de procesos.",
-        "knowsAbout": ["Prevención de lavado de activos", "PLAFT", "Compliance", "Gestión de riesgos", "Debida diligencia", "Beneficiario final", "Personas Expuestas Políticamente", "Controles internos", "Automatización de procesos", "Ley 155-17"],
+        "image": "https://hansliery89.github.io/hansliery-web/assets/hansliery-sanchez.jpg",
+        "description": "Profesional de sistemas con experiencia en prevención de lavado de activos, tecnología de la información, capacitación y gestión de procesos. Certificado Money Laundering Risk Manager (MLRM).",
+        "jobTitle": "Analista de Prevención de Lavado de Activos",
+        "sameAs": ["https://www.linkedin.com/in/hansliery-sanchez-figuereo-mlrm-b49ba254/"],
+        "alumniOf": { "@type": "CollegeOrUniversity", "name": "Universidad Autónoma de Santo Domingo (UASD)" },
+        "hasCredential": [
+          { "@type": "EducationalOccupationalCredential", "name": "Money Laundering Risk Manager (MLRM)", "credentialCategory": "certification", "recognizedBy": { "@type": "Organization", "name": "The Organization of Risk Management Certification (ORMC)" }, "dateCreated": "2026-10-02", "expires": "2027-10-02" },
+          { "@type": "EducationalOccupationalCredential", "name": "Diplomado en Prevención del Lavado de Activos y Financiamiento del Terrorismo", "credentialCategory": "diploma", "recognizedBy": [ { "@type": "Organization", "name": "Unidad de Análisis Financiero (UAF)" }, { "@type": "CollegeOrUniversity", "name": "Universidad APEC (UNAPEC)" } ] },
+          { "@type": "EducationalOccupationalCredential", "name": "Licenciatura en Sistemas", "credentialCategory": "degree", "recognizedBy": { "@type": "CollegeOrUniversity", "name": "Universidad Autónoma de Santo Domingo (UASD)" } }
+        ],
+        "knowsAbout": ["Prevención de lavado de activos", "PLAFT", "goAML", "OSINT", "Compliance", "Gestión de riesgos", "Debida diligencia", "Beneficiario final", "Personas Expuestas Políticamente", "Controles internos", "Automatización de procesos", "Ley 155-17"],
         "nationality": { "@type": "Country", "name": "República Dominicana" }
       },
       {
@@ -669,6 +678,83 @@
   .note { margin-top: 1rem; font-size: .76rem; color: var(--muted-2); line-height: 1.5; display: flex; gap: .5rem; }
   .note svg { width: 15px; height: 15px; flex: none; margin-top: 2px; color: var(--muted-2); }
 
+  /* --- Retrato y credenciales (perfil) --- */
+  .id-card { padding: 0; overflow: hidden; position: relative; top: 0; }
+  .id-body { padding: clamp(1.4rem, 3vw, 2rem); }
+  .portrait { position: relative; margin: 0; aspect-ratio: 4 / 5; max-height: 520px; width: 100%; overflow: hidden; background: #1b2532; }
+  .portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 22%; transition: transform 1.2s var(--ease); }
+  .id-card:hover .portrait img { transform: scale(1.03); }
+  .portrait::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background:
+      linear-gradient(180deg, transparent 55%, rgba(10, 28, 51, .55) 80%, rgba(12, 33, 56, .98)),
+      linear-gradient(135deg, rgba(0, 201, 183, .10), transparent 40%, rgba(214, 168, 79, .08));
+  }
+  .portrait-corner { position: absolute; z-index: 1; width: 34px; height: 34px; border: 2px solid var(--teal); opacity: .8; }
+  .portrait-corner.tl { top: 16px; left: 16px; border-right: 0; border-bottom: 0; border-top-left-radius: 8px; }
+  .portrait-corner.br { bottom: 16px; right: 16px; border-left: 0; border-top: 0; border-bottom-right-radius: 8px; border-color: var(--gold); }
+  .portrait-badge {
+    position: absolute; z-index: 1; left: 16px; bottom: 18px;
+    display: inline-flex; align-items: center; gap: .5rem;
+    padding: 8px 14px 8px 10px; border-radius: 999px;
+    font-family: var(--font-head); font-size: .72rem; font-weight: 700; letter-spacing: .08em; color: #1a1204;
+    background: linear-gradient(120deg, var(--gold), var(--gold-soft));
+    box-shadow: 0 10px 24px -10px rgba(214, 168, 79, .8);
+  }
+  .portrait-badge svg { width: 16px; height: 16px; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(4) .stat-num { color: var(--gold-soft); }
+  .stat:nth-child(3) .stat-num { color: var(--ice); }
+
+  .id-top { justify-content: space-between; }
+  .li-btn { width: 44px; height: 44px; flex: none; border-radius: 12px; display: grid; place-items: center; color: var(--electric); background: rgba(56, 189, 248, .1); border: 1px solid rgba(56, 189, 248, .3); transition: background-color .3s, color .3s, transform .3s var(--ease); }
+  .li-btn:hover { background: var(--electric); color: #04121f; transform: translateY(-2px); }
+  .li-btn svg { width: 20px; height: 20px; }
+  .footer-li { display: inline-flex; align-items: center; gap: .5rem; margin-top: .9rem; font-weight: 600; color: rgba(242, 246, 250, .85); padding: 6px 0; }
+  .footer-li svg { width: 18px; height: 18px; color: var(--electric); }
+  .footer-li:hover { color: var(--teal); }
+  .creds { margin-top: clamp(64px, 8vw, 110px); }
+  .creds-head { max-width: 760px; margin-bottom: 2.2rem; }
+  .creds-head h3 { font-size: clamp(1.4rem, 2.6vw, 2.1rem); font-weight: 700; text-transform: uppercase; }
+  .creds-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.2rem; }
+  .cred { padding: 1.6rem 1.5rem; display: flex; flex-direction: column; gap: .7rem; }
+  .cred:hover { transform: translateY(-4px); }
+  .cred h4 { font-family: var(--font-head); font-size: 1.08rem; font-weight: 700; line-height: 1.3; }
+  .cred > p { font-size: .9rem; color: var(--muted); }
+  .cred-top { display: flex; align-items: center; gap: .8rem; }
+  .cred-ic { width: 44px; height: 44px; border-radius: 13px; flex: none; display: grid; place-items: center; color: var(--teal); background: rgba(0, 201, 183, .1); border: 1px solid rgba(0, 201, 183, .28); }
+  .cred-ic.blue { color: var(--electric); background: rgba(56, 189, 248, .1); border-color: rgba(56, 189, 248, .28); }
+  .cred-ic svg { width: 22px; height: 22px; }
+  .cred-kicker { font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--teal); }
+  .cred-feat { margin-top: .2rem; }
+  .cred-mlrm { grid-row: span 2; background: linear-gradient(160deg, rgba(214, 168, 79, .16), rgba(18, 59, 89, .35) 45%, rgba(7, 20, 38, .75)); border-color: rgba(214, 168, 79, .3); }
+  .cred-mlrm::before { background: linear-gradient(135deg, rgba(214, 168, 79, .8), transparent 40%, transparent 60%, rgba(241, 209, 143, .6)); }
+  .cred-mlrm .cred-kicker { color: var(--gold-soft); }
+  .cred-mlrm h4 { font-size: 1.45rem; }
+  .mlrm-seal { width: 112px; height: 112px; margin-bottom: .4rem; }
+  .mlrm-seal .seal-ring { transform-origin: 60px 60px; animation: spin 26s linear infinite; }
+  .cred-meta { margin: auto 0 0; padding-top: 1rem; border-top: 1px solid rgba(214, 168, 79, .25); display: grid; gap: .55rem; }
+  .cred-meta div { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .cred-meta dt { font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted-2); font-weight: 700; }
+  .cred-meta dd { margin: 0; font-size: .84rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+  .cred-goaml { grid-column: span 2; }
+  .cred-wide { grid-column: 1 / -1; }
+  .chips { display: flex; flex-wrap: wrap; gap: .55rem; margin-top: .3rem; }
+  .chips li { padding: 8px 14px; border-radius: 12px; font-size: .82rem; font-weight: 600; line-height: 1.4; background: rgba(7, 20, 38, .6); border: 1px solid var(--line); color: rgba(242, 246, 250, .88); }
+  @media (max-width: 1024px) {
+    .portrait { max-height: 560px; }
+    .id-card { max-width: 640px; width: 100%; margin-inline: auto; }
+    .creds-grid { grid-template-columns: 1fr 1fr; }
+    .cred-mlrm { grid-row: auto; grid-column: 1 / -1; }
+    .cred-goaml { grid-column: 1 / -1; }
+  }
+  @media (max-width: 640px) {
+    .creds-grid { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: 1fr; }
+    .portrait { max-height: 460px; }
+  }
+  @media (hover: none) { .cred:hover { transform: none; } }
+
   /* =================================================================
      9. SERVICIOS
      ================================================================= */
@@ -1011,7 +1097,7 @@
     .plaft-step span { font-size: .52rem; letter-spacing: .02em; }
     .gauge { width: 60px; height: 60px; }
     .gauge-txt strong { font-size: .88rem; }
-    .id-top { flex-direction: column; align-items: flex-start; }
+    .id-top { align-items: flex-start; }
     .tl-item { grid-template-columns: 1fr; }
     .mail-card { grid-template-columns: 1fr; }
   }
@@ -1033,7 +1119,7 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
-    .ticker-track, .radar-sweep, .float-chip, .monogram .ring, .divider .d-pulse { animation: none !important; }
+    .ticker-track, .radar-sweep, .float-chip, .monogram .ring, .mlrm-seal .seal-ring, .divider .d-pulse { animation: none !important; }
     .js [data-reveal], .js .hero [data-hero] { opacity: 1 !important; transform: none !important; }
     .cursor-glow { display: none; }
     .console { transform: none; }
@@ -1057,6 +1143,7 @@
       <linearGradient id="gGauge" x1="0" x2="1"><stop offset="0" stop-color="#00C9B7"/><stop offset=".6" stop-color="#38BDF8"/><stop offset="1" stop-color="#D6A84F"/></linearGradient>
       <linearGradient id="gSpark" x1="0" x2="1"><stop offset="0" stop-color="#00C9B7"/><stop offset="1" stop-color="#38BDF8"/></linearGradient>
       <linearGradient id="gArea" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#38BDF8" stop-opacity=".32"/><stop offset="1" stop-color="#38BDF8" stop-opacity="0"/></linearGradient>
+      <linearGradient id="gGold" x1="0" x2="1"><stop offset="0" stop-color="#D6A84F"/><stop offset="1" stop-color="#F1D18F"/></linearGradient>
       <linearGradient id="gMark" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#00C9B7"/><stop offset="1" stop-color="#38BDF8"/></linearGradient>
     </defs>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
@@ -1082,6 +1169,7 @@
     <symbol id="i-nodes" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.2"/><circle cx="5" cy="18" r="2.2"/><circle cx="19" cy="18" r="2.2"/><circle cx="12" cy="12.5" r="1.8"/><path d="M12 7.2v3.5M10.6 13.6l-4 3M13.4 13.6l4 3M7.2 18h9.6"/></g></symbol>
     <symbol id="i-puzzle" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M10 4.5a2 2 0 1 1 4 0V6h4v4h-1.5a2 2 0 1 0 0 4H18v4h-4v-1.5a2 2 0 1 0-4 0V18H6v-4h1.5a2 2 0 1 0 0-4H6V6h4V4.5z"/></g></symbol>
     <symbol id="i-cycle" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5a8 8 0 0 0-14.6-4.3M4 12.5a8 8 0 0 0 14.6 4.3"/><path d="M4.5 3.5v4h4M19.5 20.5v-4h-4"/></g></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4v11H3v-11zm6.5 0h3.8v1.5h.06c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.77 2.5 4.77 5.76v5.69h-4v-5.04c0-1.2-.02-2.75-1.75-2.75-1.75 0-2.02 1.31-2.02 2.66v5.13h-4v-11z"/></symbol>
     <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.8 6.5l8.2 6 8.2-6"/></g></symbol>
     <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8.5" y="8.5" width="12" height="12" rx="2.2"/><path d="M15.5 8.5V5.7a2.2 2.2 0 0 0-2.2-2.2H5.7a2.2 2.2 0 0 0-2.2 2.2v7.6a2.2 2.2 0 0 0 2.2 2.2h2.8"/></g></symbol>
     <symbol id="i-info" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5M12 7.8h.01"/></g></symbol>
@@ -1144,6 +1232,7 @@
     <div class="mobile-menu-foot">
       <a class="btn btn-primary" href="#contacto">Conversemos <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
       <a class="mail" href="mailto:sanchezfiguereohansliery@gmail.com">sanchezfiguereohansliery@gmail.com</a>
+      <a class="mail" href="https://www.linkedin.com/in/hansliery-sanchez-figuereo-mlrm-b49ba254/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     </div>
   </div>
 
@@ -1290,6 +1379,8 @@
 
     <!-- ============================================================
          C. PERFIL PROFESIONAL
+         Fuentes: certificación laboral UAF (UAF-RRHH-2026-00454), hoja de vida
+         y certificado MLRM (ORMC). Actualice aquí si cambian los datos.
          ============================================================ -->
     <section class="section profile bg-grid" id="perfil" aria-labelledby="perfil-title">
       <div class="container profile-grid">
@@ -1297,72 +1388,164 @@
           <p class="eyebrow" data-reveal>Perfil profesional</p>
           <h2 class="h2" id="perfil-title" data-reveal style="--d:.08s">Experiencia que conecta <span class="grad">cumplimiento</span> y <span class="grad-gold">tecnología</span>.</h2>
 
-          <p data-reveal style="--d:.14s; margin-top:1.6rem"><strong>Hansliery Sánchez</strong> es profesional de informática con experiencia en prevención de lavado de activos, tecnología de la información, capacitación y gestión de procesos.</p>
-          <p data-reveal style="--d:.18s">Su trayectoria combina una sólida base tecnológica con experiencia institucional y desempeño actual en prevención de lavado de activos dentro del sector asegurador dominicano.</p>
-          <p data-reveal style="--d:.22s">Su enfoque integra regulación, análisis de riesgos, tecnología, datos y procesos para contribuir al fortalecimiento de los sistemas de cumplimiento.</p>
+          <p data-reveal style="--d:.14s; margin-top:1.6rem"><strong>Hansliery Sánchez</strong> combina formación en sistemas con una trayectoria dentro del ecosistema de prevención de lavado de activos de la República Dominicana: de la unidad de inteligencia financiera del país al sector asegurador. Está certificado como <strong>Money Laundering Risk Manager (MLRM)</strong> por ORMC.</p>
+          <p data-reveal style="--d:.18s">Durante ocho años formó parte de la <strong>Unidad de Análisis Financiero de la República Dominicana</strong>, en funciones de tecnología de la información y mesa de ayuda, y como facilitador de capacitaciones a sujetos obligados. Fue miembro del equipo de implementación de <strong>goAML</strong>, el sistema de reportes de la UAF, y docente en la formación de los sujetos obligados en su uso.</p>
+          <p data-reveal style="--d:.22s">Hoy aporta ese recorrido como Analista de Prevención de Lavado de Activos en el sector asegurador dominicano, con una mirada que une la norma, los datos y la automatización de procesos.</p>
 
-          <ol class="timeline" aria-label="Formación y experiencia">
-            <li class="card tl-item" data-reveal style="--d:.05s">
-              <span class="tl-ic" aria-hidden="true"><svg><use href="#i-grad"/></svg></span>
-              <div>
-                <span class="tl-kicker">Formación</span>
-                <h3>Licenciatura en Informática</h3>
-                <p>Base tecnológica orientada a sistemas, datos y procesos.</p>
-              </div>
-            </li>
-            <li class="card tl-item" data-reveal style="--d:.12s">
-              <span class="tl-ic" aria-hidden="true"><svg><use href="#i-building"/></svg></span>
-              <div>
-                <span class="tl-kicker">8 años · Experiencia institucional</span>
-                <h3>Unidad de Análisis Financiero de la República Dominicana</h3>
-                <p>Funciones vinculadas a tecnología de la información y soporte institucional.</p>
-              </div>
-            </li>
-            <li class="card tl-item gold" data-reveal style="--d:.19s">
+          <ol class="timeline" aria-label="Trayectoria profesional y formación">
+            <li class="card tl-item gold" data-reveal style="--d:.05s">
               <span class="tl-ic" aria-hidden="true"><svg><use href="#i-shield"/></svg></span>
               <div>
-                <span class="tl-kicker">Actualidad</span>
+                <span class="tl-kicker">2026 · Actualidad</span>
                 <h3>Analista de Prevención de Lavado de Activos</h3>
                 <p>Sector asegurador dominicano.</p>
+              </div>
+            </li>
+            <li class="card tl-item" data-reveal style="--d:.1s">
+              <span class="tl-ic" aria-hidden="true"><svg><use href="#i-cap"/></svg></span>
+              <div>
+                <span class="tl-kicker">2020 – 2026 · Facilitador</span>
+                <h3>Capacitaciones sobre reportería a sujetos obligados</h3>
+                <p>Más de 2,300 sujetos obligados capacitados en la Unidad de Análisis Financiero, incluida la formación en el uso de la plataforma goAML.</p>
+              </div>
+            </li>
+            <li class="card tl-item" data-reveal style="--d:.15s">
+              <span class="tl-ic" aria-hidden="true"><svg><use href="#i-building"/></svg></span>
+              <div>
+                <span class="tl-kicker">2018 – 2026 · 8 años</span>
+                <h3>Unidad de Análisis Financiero de la República Dominicana</h3>
+                <p>Soporte de Mesa de Ayuda TIC: primera línea de atención a sujetos obligados y oficiales de cumplimiento, administración de portales institucionales y elaboración de guías y manuales de usuario.</p>
+              </div>
+            </li>
+            <li class="card tl-item" data-reveal style="--d:.2s">
+              <span class="tl-ic" aria-hidden="true"><svg><use href="#i-grad"/></svg></span>
+              <div>
+                <span class="tl-kicker">Formación académica · 2026</span>
+                <h3>Licenciatura en Sistemas</h3>
+                <p>Universidad Autónoma de Santo Domingo (UASD).</p>
               </div>
             </li>
           </ol>
         </div>
 
         <aside class="card id-card" data-reveal="right" aria-label="Resumen profesional">
-          <div class="id-top">
-            <div class="monogram" aria-hidden="true">
-              <svg viewBox="0 0 100 100">
-                <g class="ring"><circle cx="50" cy="50" r="46" fill="none" stroke="url(#gMark)" stroke-width="1.5" stroke-dasharray="4 7"/></g>
-                <circle cx="50" cy="50" r="37" fill="rgba(0,201,183,.08)" stroke="rgba(148,210,255,.25)"/>
-                <text x="50" y="58" text-anchor="middle" font-family="Sora, sans-serif" font-weight="800" font-size="24" fill="#F2F6FA">HS</text>
-                <circle cx="50" cy="4" r="3" fill="#D6A84F"/>
+          <figure class="portrait">
+            <picture>
+              <source srcset="assets/hansliery-sanchez.webp" type="image/webp">
+              <img src="assets/hansliery-sanchez.jpg" width="640" height="800" loading="lazy" decoding="async" alt="Hansliery Sánchez, consultor en compliance y gestión de riesgos, con traje oscuro.">
+            </picture>
+            <span class="portrait-corner tl" aria-hidden="true"></span>
+            <span class="portrait-corner br" aria-hidden="true"></span>
+            <figcaption class="portrait-badge"><svg aria-hidden="true"><use href="#i-shield"/></svg>Certified MLRM · ORMC</figcaption>
+          </figure>
+
+          <div class="id-body">
+            <div class="id-top">
+              <div>
+                <h3>Hansliery Sánchez</h3>
+                <p>Compliance &amp; Risk Advisory</p>
+              </div>
+              <a class="li-btn" href="https://www.linkedin.com/in/hansliery-sanchez-figuereo-mlrm-b49ba254/" target="_blank" rel="noopener noreferrer" aria-label="Perfil de LinkedIn de Hansliery Sánchez (se abre en una pestaña nueva)"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>
+            </div>
+
+            <p class="focus-label">Enfoque integrado</p>
+            <div class="tags">
+              <span class="tag t-teal">Regulación</span>
+              <span class="tag">Análisis de riesgos</span>
+              <span class="tag t-gold">Tecnología</span>
+              <span class="tag">Datos</span>
+              <span class="tag t-teal">Procesos</span>
+              <span class="tag">Capacitación</span>
+            </div>
+
+            <p class="focus-label">Experiencia formativa</p>
+            <div class="stats">
+              <div class="stat"><span class="stat-num" data-count="2300" data-suffix="+">2,300+</span><span class="stat-label">Sujetos obligados capacitados</span></div>
+              <div class="stat"><span class="stat-num" data-count="214">214</span><span class="stat-label">Horas de capacitación impartidas</span></div>
+              <div class="stat"><span class="stat-num" data-count="8">8</span><span class="stat-label">Años en la Unidad de Análisis Financiero</span></div>
+              <div class="stat"><span class="stat-num" data-count="93.38" data-decimals="2" data-suffix="%">93.38%</span><span class="stat-label">Calificación promedio de los participantes</span></div>
+            </div>
+            <p class="note"><svg aria-hidden="true"><use href="#i-info"/></svg>Estos indicadores representan experiencia formativa y no resultados comerciales ni garantías de desempeño.</p>
+          </div>
+        </aside>
+      </div>
+
+      <!-- Certificaciones, proyecto goAML y formación especializada -->
+      <div class="container creds">
+        <header class="creds-head" data-reveal>
+          <p class="eyebrow">Certificaciones y formación</p>
+          <h3>Credenciales que respaldan el <span class="grad">criterio técnico</span>.</h3>
+        </header>
+
+        <div class="creds-grid">
+          <article class="card cred cred-mlrm" data-reveal style="--d:0s">
+            <div class="mlrm-seal" aria-hidden="true">
+              <svg viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="56" fill="none" stroke="url(#gGold)" stroke-width="1.5" stroke-dasharray="3 5" class="seal-ring"/>
+                <circle cx="60" cy="60" r="44" fill="rgba(214,168,79,.1)" stroke="rgba(214,168,79,.55)"/>
+                <text x="60" y="66" text-anchor="middle" font-family="Sora, sans-serif" font-weight="800" font-size="20" fill="#F1D18F">MLRM</text>
               </svg>
             </div>
-            <div>
-              <h3>Hansliery Sánchez</h3>
-              <p>Compliance &amp; Risk Advisory</p>
+            <span class="cred-kicker">Certificación internacional · Octubre 2026</span>
+            <h4>Money Laundering Risk Manager</h4>
+            <p>The Organization of Risk Management Certification (ORMC), Londres, Reino Unido. Otorgada tras completar la formación y aprobar el examen de certificación.</p>
+            <dl class="cred-meta">
+              <div><dt>Vigencia</dt><dd>Hasta octubre de 2027</dd></div>
+              <div><dt>Código</dt><dd>MLRM-OL-021026-114-HS</dd></div>
+            </dl>
+          </article>
+
+          <article class="card cred cred-goaml" data-reveal style="--d:.08s">
+            <div class="cred-top">
+              <span class="cred-ic" aria-hidden="true"><svg><use href="#i-nodes"/></svg></span>
+              <span class="cred-kicker">Proyecto país · Ley 155-17</span>
             </div>
-          </div>
+            <h4>Implementación de goAML en la República Dominicana</h4>
+            <p>Sistema de reportes de la Unidad de Análisis Financiero, implementado con el acompañamiento de la Oficina de las Naciones Unidas contra la Droga y el Delito (UNODC).</p>
+            <ul class="feat cred-feat">
+              <li>Miembro del equipo de implementación</li>
+              <li>Docente en la capacitación de sujetos obligados en el uso de la plataforma</li>
+              <li>Elaboración del Manual de Usuario goAML publicado en el portal institucional</li>
+              <li>Acompañamiento del entrenamiento a analistas (traducción del entrenamiento virtual)</li>
+            </ul>
+          </article>
 
-          <p class="focus-label">Enfoque integrado</p>
-          <div class="tags">
-            <span class="tag t-teal">Regulación</span>
-            <span class="tag">Análisis de riesgos</span>
-            <span class="tag t-gold">Tecnología</span>
-            <span class="tag">Datos</span>
-            <span class="tag t-teal">Procesos</span>
-            <span class="tag">Capacitación</span>
-          </div>
+          <article class="card cred" data-reveal style="--d:.12s">
+            <div class="cred-top">
+              <span class="cred-ic blue" aria-hidden="true"><svg><use href="#i-search"/></svg></span>
+              <span class="cred-kicker">Basel Institute on Governance</span>
+            </div>
+            <h4>Formación especializada</h4>
+            <ul class="feat cred-feat">
+              <li>Análisis Financiero Básico</li>
+              <li>Inteligencia de Fuentes Abiertas (OSINT)</li>
+            </ul>
+          </article>
 
-          <p class="focus-label">Experiencia formativa</p>
-          <div class="stats">
-            <div class="stat"><span class="stat-num" data-count="2300" data-suffix="+">2,300+</span><span class="stat-label">Participantes en actividades formativas</span></div>
-            <div class="stat"><span class="stat-num" data-count="214">214</span><span class="stat-label">Horas de capacitación impartidas</span></div>
-            <div class="stat"><span class="stat-num" data-count="93.38" data-decimals="2" data-suffix="%">93.38%</span><span class="stat-label">Evaluación promedio reportada en actividades formativas</span></div>
-          </div>
-          <p class="note"><svg aria-hidden="true"><use href="#i-info"/></svg>Estos indicadores representan experiencia formativa y no resultados comerciales ni garantías de desempeño.</p>
-        </aside>
+          <article class="card cred" data-reveal style="--d:.16s">
+            <div class="cred-top">
+              <span class="cred-ic" aria-hidden="true"><svg><use href="#i-grad"/></svg></span>
+              <span class="cred-kicker">UAF · UNAPEC</span>
+            </div>
+            <h4>Diplomado en Prevención del Lavado de Activos y Financiamiento del Terrorismo</h4>
+          </article>
+
+          <article class="card cred cred-wide" data-reveal style="--d:.2s">
+            <div class="cred-top">
+              <span class="cred-ic blue" aria-hidden="true"><svg><use href="#i-target"/></svg></span>
+              <span class="cred-kicker">Formación complementaria · Plus Comply</span>
+            </div>
+            <ul class="chips" lang="en">
+              <li>Strengthening Compliance Associated with PEPs</li>
+              <li>Customer Due Diligence – Basics</li>
+              <li>Identification and Management of High-Risk Jurisdictions</li>
+              <li>International Screening Lists as Key Tools for Customer Due Diligence and Counterparts</li>
+              <li>Methodology to Analyze High-Risk Situations</li>
+              <li>Recommendations Associated with International Money Transfers to Fortify Control Processes</li>
+              <li>Cryptoassets – What They Are and How They Work</li>
+            </ul>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -1817,6 +2000,7 @@
         <div>
           <h4>Contacto</h4>
           <a class="footer-mail" href="mailto:sanchezfiguereohansliery@gmail.com">sanchezfiguereohansliery@gmail.com</a>
+          <a class="footer-li" href="https://www.linkedin.com/in/hansliery-sanchez-figuereo-mlrm-b49ba254/" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
           <p style="margin-top:1rem;font-size:.86rem;color:var(--muted)">República Dominicana · Latinoamérica · Proyección internacional</p>
         </div>
       </div>
@@ -1852,7 +2036,7 @@
       email: 'sanchezfiguereohansliery@gmail.com',
       phone: '',
       whatsapp: '',
-      linkedin: ''
+      linkedin: 'https://www.linkedin.com/in/hansliery-sanchez-figuereo-mlrm-b49ba254/'
     };
 
     var doc = document.documentElement;
