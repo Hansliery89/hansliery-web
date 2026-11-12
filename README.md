@@ -20,6 +20,7 @@ hansliery-web/
 │   ├── entregables/    ← 16 PDF modelo de los entregables de cada servicio
 │   │   └── _fuente/    ← Generador (python3 build.py; requiere Playwright, Chrome y las fuentes Sora/Manrope)
 │   └── hansliery-sanchez.(jpg|webp) ← Foto de perfil
+├── legal/              ← Términos, privacidad, cookies, aviso legal y accesibilidad (generadas con legal/_fuente/build.py)
 └── cursos/             ← Capacitaciones gratuitas (13 cursos + catálogo)
     ├── index.html      ← Catálogo
     ├── <curso>.html    ← Una página por curso (generada)
