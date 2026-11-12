@@ -1,5 +1,6 @@
 # robots.txt — Hansliery Sánchez · Compliance & Risk Advisory
+# Sitio no indexado: cada página incluye la etiqueta «noindex».
+# Se permite el rastreo para que los buscadores lean esa etiqueta y
+# retiren las páginas que pudieran haber indexado antes.
 User-agent: *
 Allow: /
-
-Sitemap: https://hansliery89.github.io/hansliery-web/sitemap.xml

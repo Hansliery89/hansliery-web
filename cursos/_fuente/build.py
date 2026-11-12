@@ -65,7 +65,8 @@ HEAD = """<!DOCTYPE html>
   <title>{title}</title>
   <meta name="description" content="{desc}">
   <meta name="author" content="Hansliery Sánchez">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="googlebot" content="noindex, nofollow">
   <meta name="theme-color" content="#FFFFFF">
   <meta name="color-scheme" content="light">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'none'">

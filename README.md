@@ -13,7 +13,6 @@ hansliery-web/
 ├── index.html          ← Sitio completo (HTML + CSS + JavaScript integrados)
 ├── favicon.svg         ← Icono del sitio (marca HS)
 ├── robots.txt          ← Indicaciones para buscadores
-├── sitemap.xml         ← Mapa del sitio (requiere dominio, ver abajo)
 ├── README.md           ← Este archivo
 ├── assets/
 │   ├── og-image.png    ← Imagen 1200×630 para vista previa en redes sociales
@@ -69,13 +68,19 @@ Cualquier hosting estático sirve. Suba **la carpeta completa** (no solo `index.
 
 **https://hansliery89.github.io/hansliery-web/** (GitHub Pages, rama `main`). Cada cambio subido a `main` se publica automáticamente en 1–2 minutos.
 
-El canonical, Open Graph, datos estructurados, `sitemap.xml` y `robots.txt` ya apuntan a esa dirección.
+El canonical, Open Graph y datos estructurados ya apuntan a esa dirección.
+
+### Visibilidad: sitio no indexado
+
+El sitio está oculto para los buscadores: todas las páginas llevan `<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">` y no hay `sitemap.xml`. Solo lo encuentra quien tenga el enlace. **No es una protección de acceso**: cualquiera que reciba el enlace puede abrirlo y reenviarlo.
+
+Para volver a hacerlo visible en Google: cambie la etiqueta a `index, follow` en `index.html`, `cursos/_fuente/build.py` (y regenere cursos y páginas legales), vuelva a crear `sitemap.xml` y añada la línea `Sitemap:` en `robots.txt`.
 
 ### Si adquiere un dominio propio
 
 1. Configure el dominio en *Settings → Pages → Custom domain* del repositorio.
-2. Reemplace `https://hansliery89.github.io/hansliery-web/` por el nuevo dominio en `index.html` (canonical, og:url, og:image, twitter:image y JSON-LD), `sitemap.xml` y `robots.txt`.
-3. Registre el sitio en Google Search Console y envíe el sitemap.
+2. Reemplace `https://hansliery89.github.io/hansliery-web/` por el nuevo dominio en `index.html` (canonical, og:url, og:image, twitter:image y JSON-LD) y en los generadores de `cursos/_fuente` y `legal/_fuente`.
+3. Si decide hacerlo público, siga los pasos de «Visibilidad» y registre el sitio en Google Search Console.
 
 ## Personalización rápida
 
