@@ -36,16 +36,17 @@ Cualquier hosting estático sirve. Suba **la carpeta completa** (no solo `index.
 | **Vercel / Cloudflare Pages** | Importe la carpeta o el repositorio; no hace falta comando de build. |
 | **Hosting tradicional (cPanel)** | Suba los archivos a `public_html` por el administrador de archivos o FTP. |
 
-## Al tener dominio propio (checklist SEO)
+## Dirección publicada
 
-Reemplace `SU-DOMINIO.com` por su dominio real en:
+**https://hansliery89.github.io/hansliery-web/** (GitHub Pages, rama `main`). Cada cambio subido a `main` se publica automáticamente en 1–2 minutos.
 
-1. `index.html` → descomente `<link rel="canonical">` y `<meta property="og:url">`.
-2. `index.html` → cambie `og:image` y `twitter:image` a URL absoluta, p. ej. `https://SU-DOMINIO.com/assets/og-image.png`.
-3. `index.html` → en el bloque JSON-LD, agregue `"url": "https://SU-DOMINIO.com/"` a `Person` y `ProfessionalService`.
-4. `sitemap.xml` → la etiqueta `<loc>` y la fecha `<lastmod>`.
-5. `robots.txt` → descomente la línea `Sitemap:`.
-6. Registre el sitio en Google Search Console y envíe el sitemap.
+El canonical, Open Graph, datos estructurados, `sitemap.xml` y `robots.txt` ya apuntan a esa dirección.
+
+### Si adquiere un dominio propio
+
+1. Configure el dominio en *Settings → Pages → Custom domain* del repositorio.
+2. Reemplace `https://hansliery89.github.io/hansliery-web/` por el nuevo dominio en `index.html` (canonical, og:url, og:image, twitter:image y JSON-LD), `sitemap.xml` y `robots.txt`.
+3. Registre el sitio en Google Search Console y envíe el sitemap.
 
 ## Personalización rápida
 

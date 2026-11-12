@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Sitemap — Hansliery Sánchez · Compliance & Risk Advisory
-  IMPORTANTE: reemplace https://SU-DOMINIO.com por el dominio definitivo antes de enviarlo
-  a Google Search Console. Las URL de un sitemap deben ser absolutas.
--->
+<!-- Sitemap — Hansliery Sánchez · Compliance & Risk Advisory.
+     Si adquiere un dominio propio, reemplace la URL de <loc>. -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://SU-DOMINIO.com/</loc>
-    <lastmod>2026-11-11</lastmod>
+    <loc>https://hansliery89.github.io/hansliery-web/</loc>
+    <lastmod>2026-11-12</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>

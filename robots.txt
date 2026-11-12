@@ -2,5 +2,4 @@
 User-agent: *
 Allow: /
 
-# Active esta línea cuando tenga el dominio definitivo (reemplace SU-DOMINIO.com):
-# Sitemap: https://SU-DOMINIO.com/sitemap.xml
+Sitemap: https://hansliery89.github.io/hansliery-web/sitemap.xml
