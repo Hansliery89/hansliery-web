@@ -98,11 +98,10 @@
           "name": "Servicios profesionales",
           "itemListElement": [
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Consultoría y fortalecimiento PLAFT" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gestión y evaluación de riesgos" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Debida diligencia y conocimiento de terceros" } },
+            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gestión de riesgos y debida diligencia" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Controles internos y gobierno de cumplimiento" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Capacitación profesional PLAFT" } },
-            { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Automatización e inteligencia aplicada al cumplimiento" } }
+            { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Compliance Guard Pro", "applicationCategory": "BusinessApplication", "description": "Plataforma SaaS de cumplimiento en desarrollo." } }
           ]
         }
       }
@@ -784,6 +783,71 @@
   .service-foot { margin-top: auto; padding-top: 1.3rem; border-top: 1px solid var(--line); margin-top: 1.5rem; }
   .service-foot-wrap { margin-top: auto; }
 
+  /* --- Servicios: 4 tarjetas + producto SaaS --- */
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .feat-2col { grid-template-columns: 1fr 1fr; column-gap: 1.2rem; }
+  .saas {
+    margin-top: clamp(2.4rem, 5vw, 3.6rem); padding: clamp(1.6rem, 4vw, 3rem);
+    display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 4vw, 3.5rem); align-items: center; overflow: hidden;
+    background:
+      radial-gradient(500px 300px at 100% 0%, rgba(214, 168, 79, .16), transparent 60%),
+      radial-gradient(500px 300px at 0% 100%, rgba(0, 201, 183, .12), transparent 60%),
+      linear-gradient(150deg, rgba(18, 59, 89, .55), rgba(7, 20, 38, .85));
+    border-color: rgba(214, 168, 79, .28);
+  }
+  .saas::before { background: linear-gradient(135deg, rgba(214, 168, 79, .8), transparent 35%, transparent 65%, rgba(0, 201, 183, .6)); opacity: .6; }
+  .saas-badges { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 1.2rem; }
+  .saas-badge, .saas-status { display: inline-flex; align-items: center; gap: .55rem; padding: 6px 13px; border-radius: 999px; font-size: .7rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+  .saas-badge { color: var(--electric); background: rgba(56, 189, 248, .1); border: 1px solid rgba(56, 189, 248, .3); }
+  .saas-status { color: var(--gold-soft); background: rgba(214, 168, 79, .1); border: 1px solid rgba(214, 168, 79, .35); }
+  .saas-status .pulse-dot { background: var(--gold); width: 7px; height: 7px; }
+  .saas-status .pulse-dot::after { border-color: var(--gold); }
+  .saas h3 { font-size: clamp(1.8rem, 3.6vw, 2.8rem); font-weight: 800; letter-spacing: -.02em; }
+  .saas-copy > p { margin-top: 1rem; color: var(--muted); font-size: 1rem; max-width: 520px; }
+  .saas-note { display: flex; gap: .55rem; font-size: .84rem !important; color: #F3DDAE !important; }
+  .saas-note svg { width: 16px; height: 16px; flex: none; margin-top: 3px; }
+  .saas-actions { margin-top: 1.8rem; }
+  .saas-visual { position: relative; perspective: 1200px; }
+  .saas-window { border-radius: 18px; overflow: hidden; background: rgba(7, 20, 38, .85); border: 1px solid var(--line-strong); box-shadow: 0 40px 80px -30px rgba(0, 0, 0, .9); transform: rotateY(-10deg) rotateX(4deg); transition: transform .8s var(--ease); }
+  .saas:hover .saas-window { transform: rotateY(-3deg) rotateX(1deg); }
+  .saas-bar { display: flex; align-items: center; gap: 6px; padding: 10px 14px; border-bottom: 1px solid var(--line); background: rgba(18, 59, 89, .4); }
+  .saas-bar i { width: 8px; height: 8px; border-radius: 50%; background: rgba(242, 246, 250, .2); }
+  .saas-bar i:first-child { background: var(--gold); }
+  .saas-bar span { margin-left: auto; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: var(--muted-2); }
+  .saas-body { display: grid; grid-template-columns: 46px 1fr; min-height: 230px; }
+  .saas-side { display: flex; flex-direction: column; gap: 10px; padding: 14px 10px; border-right: 1px solid var(--line); }
+  .saas-side b { height: 26px; border-radius: 8px; background: rgba(148, 210, 255, .08); }
+  .saas-side b.on { background: linear-gradient(135deg, rgba(214, 168, 79, .5), rgba(214, 168, 79, .15)); }
+  .saas-main { padding: 14px; display: grid; gap: 12px; }
+  .saas-row { display: flex; justify-content: space-between; align-items: center; }
+  .sk { display: block; height: 10px; border-radius: 6px; background: rgba(242, 246, 250, .14); }
+  .sk.w60 { width: 55%; }
+  .sk.pill { width: 54px; height: 18px; border-radius: 999px; background: rgba(0, 201, 183, .25); }
+  .saas-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .saas-tiles span { height: 44px; border-radius: 10px; background: rgba(18, 59, 89, .6); border: 1px solid var(--line); position: relative; overflow: hidden; }
+  .saas-tiles span::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .08), transparent); transform: translateX(-100%); animation: shimmer 2.6s ease-in-out infinite; }
+  .saas-tiles span:nth-child(2)::after { animation-delay: .4s; } .saas-tiles span:nth-child(3)::after { animation-delay: .8s; }
+  @keyframes shimmer { to { transform: translateX(100%); } }
+  .saas-chart { height: 64px; border-radius: 10px; background: rgba(18, 59, 89, .35); padding: 6px; }
+  .saas-chart svg { width: 100%; height: 100%; }
+  .saas-list { display: grid; gap: 7px; }
+  .saas-list span { height: 9px; border-radius: 5px; background: rgba(148, 210, 255, .1); }
+  .saas-list span:nth-child(2) { width: 82%; } .saas-list span:nth-child(3) { width: 64%; }
+  .saas-build { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-top: 1px solid var(--line); font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold-soft); font-weight: 700; }
+  .saas-build i { flex: 1; height: 4px; border-radius: 4px; background: rgba(214, 168, 79, .15); position: relative; overflow: hidden; }
+  .saas-build i::after { content: ""; position: absolute; top: 0; bottom: 0; width: 35%; border-radius: inherit; background: linear-gradient(90deg, transparent, var(--gold), transparent); animation: buildbar 2.4s ease-in-out infinite; }
+  @keyframes buildbar { from { left: -35%; } to { left: 100%; } }
+  .saas-caption { display: block; margin-top: .8rem; text-align: right; font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted-2); }
+  @media (max-width: 1024px) {
+    .saas { grid-template-columns: 1fr; }
+    .saas-window { transform: none; }
+    .saas:hover .saas-window { transform: none; }
+  }
+  @media (max-width: 760px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .feat-2col { grid-template-columns: 1fr; }
+  }
+
   /* =================================================================
      10. CAPACITACIONES
      ================================================================= */
@@ -1119,7 +1183,7 @@
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; transition-delay: 0s !important; }
-    .ticker-track, .radar-sweep, .float-chip, .monogram .ring, .mlrm-seal .seal-ring, .divider .d-pulse { animation: none !important; }
+    .ticker-track, .radar-sweep, .float-chip, .saas-tiles span::after, .saas-build i::after, .monogram .ring, .mlrm-seal .seal-ring, .divider .d-pulse { animation: none !important; }
     .js [data-reveal], .js .hero [data-hero] { opacity: 1 !important; transform: none !important; }
     .cursor-glow { display: none; }
     .console { transform: none; }
@@ -1558,7 +1622,7 @@
     </div>
 
     <!-- ============================================================
-         D. SERVICIOS PROFESIONALES
+         D. SERVICIOS PROFESIONALES (4) + PRODUCTO SAAS
          ============================================================ -->
     <section class="section services bg-hex" id="servicios" aria-labelledby="servicios-title">
       <div class="orb" style="width:420px;height:420px;background:#123B59;top:10%;right:-120px" aria-hidden="true"></div>
@@ -1589,52 +1653,34 @@
             <div class="service-foot-wrap"><div class="service-foot"><a class="btn-link" href="#contacto" data-service="Consultoría y fortalecimiento PLAFT">Consultar este servicio <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div></div>
           </article>
 
-          <!-- SERVICIO 02 -->
+          <!-- SERVICIO 02 (fusiona gestión de riesgos + debida diligencia) -->
           <article class="card service" data-tilt data-reveal style="--d:.08s">
             <div class="service-top">
-              <span class="service-ic" aria-hidden="true"><svg><use href="#i-risk"/></svg></span>
+              <span class="service-ic" aria-hidden="true"><svg><use href="#i-search"/></svg></span>
               <span class="service-num">SERVICIO<b>02</b></span>
             </div>
-            <h3>Gestión y evaluación de riesgos</h3>
-            <p>Herramientas para comprender, medir y priorizar la exposición al riesgo de lavado de activos y financiamiento del terrorismo.</p>
-            <ul class="feat">
+            <h3>Gestión de riesgos y debida diligencia</h3>
+            <p>Del enfoque basado en riesgos al conocimiento de clientes y terceros: herramientas para medir la exposición y aplicar el nivel de diligencia que corresponde.</p>
+            <ul class="feat feat-2col">
               <li>Enfoque basado en riesgos</li>
-              <li>Identificación y valoración de factores</li>
-              <li>Matrices de riesgo</li>
+              <li>Matrices y perfiles de riesgo</li>
               <li>Segmentación de clientes</li>
-              <li>Perfiles de riesgo</li>
-              <li>Criterios de priorización</li>
-              <li>Indicadores de exposición</li>
-            </ul>
-            <div class="service-foot-wrap"><div class="service-foot"><a class="btn-link" href="#contacto" data-service="Gestión y evaluación de riesgos">Consultar este servicio <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div></div>
-          </article>
-
-          <!-- SERVICIO 03 -->
-          <article class="card service" data-tilt data-reveal style="--d:.16s">
-            <div class="service-top">
-              <span class="service-ic" aria-hidden="true"><svg><use href="#i-search"/></svg></span>
-              <span class="service-num">SERVICIO<b>03</b></span>
-            </div>
-            <h3>Debida diligencia y conocimiento de terceros</h3>
-            <p>Procesos de conocimiento de clientes, proveedores y contrapartes con criterios claros, documentados y trazables.</p>
-            <ul class="feat">
+              <li>Criterios de priorización e indicadores de exposición</li>
               <li>KYC y KYB</li>
               <li>Identificación del beneficiario final</li>
               <li>Personas Expuestas Políticamente (PEP)</li>
               <li>Debida diligencia simplificada y ampliada</li>
-              <li>Señales de alerta</li>
-              <li>Screening</li>
-              <li>Gestión documental</li>
-              <li>Trazabilidad de revisiones</li>
+              <li>Señales de alerta y screening</li>
+              <li>Gestión documental y trazabilidad de revisiones</li>
             </ul>
-            <div class="service-foot-wrap"><div class="service-foot"><a class="btn-link" href="#contacto" data-service="Debida diligencia y conocimiento de terceros">Consultar este servicio <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div></div>
+            <div class="service-foot-wrap"><div class="service-foot"><a class="btn-link" href="#contacto" data-service="Gestión de riesgos y debida diligencia">Consultar este servicio <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div></div>
           </article>
 
-          <!-- SERVICIO 04 -->
+          <!-- SERVICIO 03 -->
           <article class="card service" data-tilt data-reveal style="--d:0s">
             <div class="service-top">
               <span class="service-ic" aria-hidden="true"><svg><use href="#i-control"/></svg></span>
-              <span class="service-num">SERVICIO<b>04</b></span>
+              <span class="service-num">SERVICIO<b>03</b></span>
             </div>
             <h3>Controles internos y gobierno de cumplimiento</h3>
             <p>Controles documentados, responsables definidos y evidencias que facilitan la supervisión y la toma de decisiones.</p>
@@ -1650,11 +1696,11 @@
             <div class="service-foot-wrap"><div class="service-foot"><a class="btn-link" href="#contacto" data-service="Controles internos y gobierno de cumplimiento">Consultar este servicio <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div></div>
           </article>
 
-          <!-- SERVICIO 05 -->
+          <!-- SERVICIO 04 -->
           <article class="card service" data-tilt data-reveal style="--d:.08s">
             <div class="service-top">
               <span class="service-ic" aria-hidden="true"><svg><use href="#i-cap"/></svg></span>
-              <span class="service-num">SERVICIO<b>05</b></span>
+              <span class="service-num">SERVICIO<b>04</b></span>
             </div>
             <h3>Capacitación profesional</h3>
             <p>Programas formativos con enfoque práctico, adaptados al rol, al sector y al nivel de cada audiencia.</p>
@@ -1669,29 +1715,41 @@
             </ul>
             <div class="service-foot-wrap"><div class="service-foot"><a class="btn-link" href="#contacto" data-service="Capacitación profesional">Consultar este servicio <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div></div>
           </article>
-
-          <!-- SERVICIO 06 -->
-          <article class="card service" data-tilt data-reveal style="--d:.16s">
-            <div class="service-top">
-              <span class="service-ic" aria-hidden="true"><svg><use href="#i-chip"/></svg></span>
-              <span class="service-num">SERVICIO<b>06</b></span>
-            </div>
-            <h3>Automatización e inteligencia aplicada</h3>
-            <p>Herramientas que reducen tareas manuales y mejoran la calidad de la información disponible para el análisis.</p>
-            <ul class="feat">
-              <li>Automatización con Excel</li>
-              <li>Power BI</li>
-              <li>Power Automate</li>
-              <li>Optimización de procesos manuales</li>
-              <li>Inteligencia artificial aplicada al análisis</li>
-              <li>Tableros de indicadores</li>
-              <li>Alertas y trazabilidad</li>
-              <li>Análisis de información</li>
-            </ul>
-            <p class="service-note">La tecnología complementa el criterio profesional; no sustituye la evaluación humana.</p>
-            <div class="service-foot-wrap"><div class="service-foot"><a class="btn-link" href="#contacto" data-service="Automatización e inteligencia aplicada">Consultar este servicio <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div></div>
-          </article>
         </div>
+
+        <!-- PRODUCTO SAAS: Compliance Guard Pro (en desarrollo) -->
+        <article class="card saas" id="compliance-guard-pro" data-reveal="scale" aria-labelledby="saas-title">
+          <div class="saas-copy">
+            <div class="saas-badges">
+              <span class="saas-badge">Plataforma SaaS</span>
+              <span class="saas-status"><span class="pulse-dot" aria-hidden="true"></span>En desarrollo</span>
+            </div>
+            <h3 id="saas-title">Compliance Guard <span class="grad-gold">Pro</span></h3>
+            <p>Plataforma propia, actualmente en fase de desarrollo, concebida para llevar la experiencia en prevención de lavado de activos y gestión de riesgos a una herramienta digital para equipos de cumplimiento.</p>
+            <p class="saas-note"><svg aria-hidden="true"><use href="#i-info"/></svg>La tecnología complementa el criterio profesional; no sustituye la evaluación humana.</p>
+            <div class="saas-actions">
+              <a class="btn btn-gold" href="#contacto" data-service="Compliance Guard Pro (información)">Quiero recibir novedades <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+          </div>
+
+          <!-- Vista conceptual (decorativa, sin datos reales) -->
+          <div class="saas-visual" aria-hidden="true">
+            <div class="saas-window">
+              <div class="saas-bar"><i></i><i></i><i></i><span>compliance guard pro</span></div>
+              <div class="saas-body">
+                <div class="saas-side"><b></b><b class="on"></b><b></b><b></b><b></b></div>
+                <div class="saas-main">
+                  <div class="saas-row"><span class="sk w60"></span><span class="sk pill"></span></div>
+                  <div class="saas-tiles"><span></span><span></span><span></span></div>
+                  <div class="saas-chart"><svg viewBox="0 0 300 80" preserveAspectRatio="none"><path d="M0 62 C40 58 60 40 100 44 S170 66 210 38 S260 18 300 22" fill="none" stroke="url(#gGold)" stroke-width="2.5"/></svg></div>
+                  <div class="saas-list"><span></span><span></span><span></span></div>
+                </div>
+              </div>
+              <div class="saas-build"><span>Fase de desarrollo</span><i></i></div>
+            </div>
+            <span class="saas-caption">Vista conceptual</span>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -1933,11 +1991,10 @@
               <select class="control" id="f-service" name="service" required aria-required="true" aria-describedby="e-service">
                 <option value="">Seleccione una opción</option>
                 <option>Consultoría y fortalecimiento PLAFT</option>
-                <option>Gestión y evaluación de riesgos</option>
-                <option>Debida diligencia y conocimiento de terceros</option>
+                <option>Gestión de riesgos y debida diligencia</option>
                 <option>Controles internos y gobierno de cumplimiento</option>
                 <option>Capacitación profesional</option>
-                <option>Automatización e inteligencia aplicada</option>
+                <option>Compliance Guard Pro (información)</option>
                 <option>Otro / Aún no lo tengo definido</option>
               </select>
               <span class="error" id="e-service" aria-live="polite"></span>
