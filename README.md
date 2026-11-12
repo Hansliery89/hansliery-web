@@ -17,6 +17,8 @@ hansliery-web/
 ├── README.md           ← Este archivo
 ├── assets/
 │   ├── og-image.png    ← Imagen 1200×630 para vista previa en redes sociales
+│   ├── entregables/    ← 16 PDF modelo de los entregables de cada servicio
+│   │   └── _fuente/    ← Generador (python3 build.py; requiere Playwright, Chrome y las fuentes Sora/Manrope)
 │   └── hansliery-sanchez.(jpg|webp) ← Foto de perfil
 └── cursos/             ← Capacitaciones gratuitas (13 cursos + catálogo)
     ├── index.html      ← Catálogo
