@@ -29,13 +29,13 @@
        ============================================================ -->
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_DO">
-  <meta property="og:site_name" content="Hansliery Sánchez · Compliance & Risk Advisory">
+  <meta property="og:site_name" content="HANSLIERY SÁNCHEZ · Compliance & Risk Advisory">
   <meta property="og:title" content="Hansliery Sánchez | Consultoría PLAFT, Compliance y Gestión de Riesgos">
   <meta property="og:description" content="Prevención de lavado de activos, cumplimiento normativo, gestión de riesgos, debida diligencia, capacitación y automatización. Estrategia. Prevención. Confianza.">
   <meta property="og:image" content="https://hansliery89.github.io/hansliery-web/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Hansliery Sánchez · Compliance & Risk Advisory">
+  <meta property="og:image:alt" content="HANSLIERY SÁNCHEZ · Compliance & Risk Advisory">
   <meta property="og:url" content="https://hansliery89.github.io/hansliery-web/">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Hansliery Sánchez | Consultoría PLAFT, Compliance y Gestión de Riesgos">
@@ -865,7 +865,18 @@
   .topic-tag { font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--muted); padding: 4px 9px; border-radius: 999px; border: 1px solid var(--line); background: rgba(7, 20, 38, .5); }
   .topic h3 { font-size: .98rem; font-weight: 600; line-height: 1.32; letter-spacing: 0; }
   .topic p { font-size: .82rem; color: var(--muted); line-height: 1.5; }
-  @media (min-width: 1281px) { .topic:nth-child(13), .topic:nth-child(14) { grid-column: span 2; } }
+  @media (min-width: 1281px) { .topic-cta { grid-column: span 3; } }
+  @media (min-width: 901px) and (max-width: 1280px) { .topic-cta { grid-column: span 2; } }
+  .topic { position: relative; }
+  .topic h3 a.topic-link { color: inherit; text-decoration: none; }
+  .topic h3 a.topic-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: 1; }
+  .topic h3 a.topic-link:focus-visible { outline: none; }
+  .topic:has(a.topic-link:focus-visible) { outline: 2px solid var(--electric); outline-offset: 3px; }
+  .topic-go { margin-top: auto; padding-top: .4rem; font-family: var(--font-head); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--teal); transition: transform .35s var(--ease); }
+  .topic:hover .topic-go { transform: translateX(4px); }
+  .topic.is-gold .topic-go { color: var(--gold-soft); }
+  .topic-cta { background: linear-gradient(140deg, rgba(0, 201, 183, .16), rgba(56, 189, 248, .08)) !important; border-color: rgba(0, 201, 183, .35) !important; }
+  .topic-cta .topic-n { color: var(--gold-soft); }
   .topic.is-accent { background: linear-gradient(150deg, rgba(0, 201, 183, .14), rgba(7, 20, 38, .7)); }
   .topic.is-gold { background: linear-gradient(150deg, rgba(214, 168, 79, .13), rgba(7, 20, 38, .7)); }
   .topic.is-gold .topic-n { color: var(--gold-soft); }
@@ -1254,10 +1265,10 @@
        ============================================================ -->
   <header class="header" id="header">
     <div class="container header-inner">
-      <a class="brand" href="#inicio" aria-label="Hansliery Sánchez · Compliance & Risk Advisory — ir al inicio">
+      <a class="brand" href="#inicio" aria-label="HANSLIERY SÁNCHEZ · Compliance & Risk Advisory — ir al inicio">
         <svg class="brand-mark" aria-hidden="true"><use href="#logo-mark"/></svg>
         <span class="brand-text">
-          <span class="brand-name">HANSliery <b>SÁNCHEZ</b></span>
+          <span class="brand-name">HANSLIERY <b>SÁNCHEZ</b></span>
           <span class="brand-tag">COMPLIANCE &amp; RISK ADVISORY</span>
         </span>
       </a>
@@ -1506,7 +1517,7 @@
           <div class="id-body">
             <div class="id-top">
               <div>
-                <h3>Hansliery Sánchez</h3>
+                <h3>HANSLIERY SÁNCHEZ</h3>
                 <p>Compliance &amp; Risk Advisory</p>
               </div>
               <a class="li-btn" href="https://www.linkedin.com/in/hansliery-sanchez-figuereo-mlrm-b49ba254/" target="_blank" rel="noopener noreferrer" aria-label="Perfil de LinkedIn de Hansliery Sánchez (se abre en una pestaña nueva)"><svg aria-hidden="true"><use href="#i-linkedin"/></svg></a>
@@ -1570,6 +1581,7 @@
               <li>Miembro del equipo de implementación</li>
               <li>Docente en la capacitación de sujetos obligados en el uso de la plataforma</li>
               <li>Elaboración del Manual de Usuario goAML publicado en el portal institucional</li>
+              <li>Autor de la guía institucional TI-GA-03 «Registro en goAML para usuarios»</li>
               <li>Acompañamiento del entrenamiento a analistas (traducción del entrenamiento virtual)</li>
             </ul>
           </article>
@@ -1761,24 +1773,24 @@
         <header class="section-head center">
           <p class="eyebrow" data-reveal>Capacitaciones</p>
           <h2 class="h2" id="cap-title" data-reveal style="--d:.08s">Conocimiento que se transforma en <span class="grad-gold">criterio</span>.</h2>
-          <p class="lead" data-reveal style="--d:.14s">Programas de capacitación diseñados para fortalecer las competencias técnicas de los equipos y mejorar la comprensión de los riesgos.</p>
+          <p class="lead" data-reveal style="--d:.14s">Programas de capacitación diseñados para fortalecer las competencias técnicas de los equipos y mejorar la comprensión de los riesgos. Explora los cursos gratuitos: cada uno incluye evaluación y fuentes oficiales.</p>
         </header>
 
-        <ol class="topics" aria-label="Temas de capacitación">
-          <li class="card topic" data-reveal style="--d:0s"><div class="topic-top"><span class="topic-n">01</span><span class="topic-tag">Fundamentos</span></div><h3>Fundamentos de prevención de lavado de activos</h3><p>Conceptos, etapas y actores del sistema de prevención.</p></li>
-          <li class="card topic is-accent" data-reveal style="--d:.05s"><div class="topic-top"><span class="topic-n">02</span><span class="topic-tag">Regulación</span></div><h3>Marco regulatorio dominicano y Ley 155-17</h3><p>Obligaciones, sujetos obligados y estructura normativa.</p></li>
-          <li class="card topic" data-reveal style="--d:.1s"><div class="topic-top"><span class="topic-n">03</span><span class="topic-tag">Riesgos</span></div><h3>Enfoque basado en riesgos</h3><p>Identificar, evaluar y mitigar según la exposición real.</p></li>
-          <li class="card topic" data-reveal style="--d:.15s"><div class="topic-top"><span class="topic-n">04</span><span class="topic-tag">Riesgos</span></div><h3>Matrices de evaluación y segmentación</h3><p>Factores, ponderaciones y criterios de clasificación.</p></li>
-          <li class="card topic" data-reveal style="--d:0s"><div class="topic-top"><span class="topic-n">05</span><span class="topic-tag">Debida diligencia</span></div><h3>Debida diligencia y conocimiento del cliente</h3><p>Niveles de diligencia, documentación y actualización.</p></li>
-          <li class="card topic" data-reveal style="--d:.05s"><div class="topic-top"><span class="topic-n">06</span><span class="topic-tag">Debida diligencia</span></div><h3>Beneficiario final</h3><p>Propiedad, control efectivo y estructuras complejas.</p></li>
-          <li class="card topic" data-reveal style="--d:.1s"><div class="topic-top"><span class="topic-n">07</span><span class="topic-tag">Debida diligencia</span></div><h3>Personas Expuestas Políticamente</h3><p>Identificación, vínculos y medidas reforzadas.</p></li>
-          <li class="card topic is-gold" data-reveal style="--d:.15s"><div class="topic-top"><span class="topic-n">08</span><span class="topic-tag">Reportes</span></div><h3>Reportes de Operaciones Sospechosas (ROS)</h3><p>Cuando la sospecha está vinculada a operaciones o transacciones: análisis, sustento y documentación.</p></li>
-          <li class="card topic is-gold" data-reveal style="--d:0s"><div class="topic-top"><span class="topic-n">09</span><span class="topic-tag">Reportes</span></div><h3>Reportes de Actividad Sospechosa (RAS)</h3><p>Cuando la sospecha se refiere a actividades o comportamientos, conforme al contexto institucional aplicable.</p></li>
-          <li class="card topic" data-reveal style="--d:.05s"><div class="topic-top"><span class="topic-n">10</span><span class="topic-tag">Tipologías</span></div><h3>Señales de alerta y análisis de casos</h3><p>Reconocimiento de patrones a partir de casos prácticos.</p></li>
-          <li class="card topic" data-reveal style="--d:.1s"><div class="topic-top"><span class="topic-n">11</span><span class="topic-tag">Riesgos emergentes</span></div><h3>Activos virtuales y riesgos emergentes</h3><p>Nuevos productos, canales y vulnerabilidades.</p></li>
-          <li class="card topic" data-reveal style="--d:.15s"><div class="topic-top"><span class="topic-n">12</span><span class="topic-tag">Riesgos emergentes</span></div><h3>Fraude digital y delitos financieros tecnológicos</h3><p>Modalidades frecuentes y controles preventivos.</p></li>
-          <li class="card topic is-accent" data-reveal style="--d:0s"><div class="topic-top"><span class="topic-n">13</span><span class="topic-tag">Tecnología</span></div><h3>Automatización de procesos de cumplimiento</h3><p>Reducción de tareas manuales con trazabilidad.</p></li>
-          <li class="card topic is-accent" data-reveal style="--d:.05s"><div class="topic-top"><span class="topic-n">14</span><span class="topic-tag">Tecnología</span></div><h3>Inteligencia artificial aplicada a PLAFT</h3><p>Usos responsables, límites y supervisión humana.</p></li>
+        <ol class="topics" aria-label="Cursos de capacitación">
+          <li class="card topic" data-reveal style="--d:0.05s"><div class="topic-top"><span class="topic-n">01</span><span class="topic-tag">Fundamentos</span></div><h3><a class="topic-link" href="cursos/fundamentos-prevencion-lavado-de-activos.html">Fundamentos de prevención de lavado de activos</a></h3><p>Qué es el lavado, cómo opera y quiénes participan en su prevención.</p><span class="topic-go" aria-hidden="true">Tomar el curso →</span></li>
+          <li class="card topic is-accent" data-reveal style="--d:0.10s"><div class="topic-top"><span class="topic-n">02</span><span class="topic-tag">Regulación</span></div><h3><a class="topic-link" href="cursos/marco-regulatorio-ley-155-17.html">Marco regulatorio dominicano y Ley 155-17</a></h3><p>La ley, su reglamento, los sujetos obligados, sus deberes y el régimen de sanciones.</p><span class="topic-go" aria-hidden="true">Tomar el curso →</span></li>
+          <li class="card topic" data-reveal style="--d:0.15s"><div class="topic-top"><span class="topic-n">03</span><span class="topic-tag">Riesgos</span></div><h3><a class="topic-link" href="cursos/enfoque-basado-en-riesgos.html">Enfoque basado en riesgos</a></h3><p>Cómo concentrar los recursos donde el riesgo es mayor, con criterio y evidencia.</p><span class="topic-go" aria-hidden="true">Tomar el curso →</span></li>
+          <li class="card topic" data-reveal style="--d:0.00s"><div class="topic-top"><span class="topic-n">04</span><span class="topic-tag">Riesgos</span></div><h3><a class="topic-link" href="cursos/matrices-de-evaluacion-y-segmentacion.html">Matrices de evaluación y segmentación</a></h3><p>Diseño de matrices de riesgo de clientes, ponderaciones y segmentación.</p><span class="topic-go" aria-hidden="true">Tomar el curso →</span></li>
+          <li class="card topic" data-reveal style="--d:0.05s"><div class="topic-top"><span class="topic-n">05</span><span class="topic-tag">Debida diligencia</span></div><h3><a class="topic-link" href="cursos/debida-diligencia-y-conocimiento-del-cliente.html">Debida diligencia y conocimiento del cliente</a></h3><p>Identificar, verificar y conocer al cliente según su nivel de riesgo.</p><span class="topic-go" aria-hidden="true">Tomar el curso →</span></li>
+          <li class="card topic" data-reveal style="--d:0.10s"><div class="topic-top"><span class="topic-n">06</span><span class="topic-tag">Debida diligencia</span></div><h3><a class="topic-link" href="cursos/beneficiario-final.html">Beneficiario final</a></h3><p>Llegar a la persona física que realmente posee o controla.</p><span class="topic-go" aria-hidden="true">Tomar el curso →</span></li>
+          <li class="card topic" data-reveal style="--d:0.15s"><div class="topic-top"><span class="topic-n">07</span><span class="topic-tag">Debida diligencia</span></div><h3><a class="topic-link" href="cursos/personas-expuestas-politicamente.html">Personas Expuestas Políticamente (PEP)</a></h3><p>Quién es PEP, a quién alcanza y qué medidas aplicar sin estigmatizar.</p><span class="topic-go" aria-hidden="true">Tomar el curso →</span></li>
+          <li class="card topic is-gold topic-featured" data-reveal style="--d:0.00s"><div class="topic-top"><span class="topic-n">08</span><span class="topic-tag">Reportería</span></div><h3><a class="topic-link" href="cursos/reporteria-ros-ras-rte.html">Reportería: ROS, RAS y RTE</a></h3><p>Cuándo y cómo reportar a la UAF, con ejemplos por sector y uso de goAML.</p><span class="topic-go" aria-hidden="true">Tomar el curso →</span></li>
+          <li class="card topic" data-reveal style="--d:0.05s"><div class="topic-top"><span class="topic-n">09</span><span class="topic-tag">Tipologías</span></div><h3><a class="topic-link" href="cursos/senales-de-alerta-y-analisis-de-casos.html">Señales de alerta y análisis de casos</a></h3><p>De la alerta a la decisión: un método para analizar y documentar.</p><span class="topic-go" aria-hidden="true">Tomar el curso →</span></li>
+          <li class="card topic" data-reveal style="--d:0.10s"><div class="topic-top"><span class="topic-n">10</span><span class="topic-tag">Riesgos emergentes</span></div><h3><a class="topic-link" href="cursos/activos-virtuales-y-riesgos-emergentes.html">Activos virtuales y riesgos emergentes</a></h3><p>Criptoactivos, proveedores de servicios y señales de alerta.</p><span class="topic-go" aria-hidden="true">Tomar el curso →</span></li>
+          <li class="card topic" data-reveal style="--d:0.15s"><div class="topic-top"><span class="topic-n">11</span><span class="topic-tag">Riesgos emergentes</span></div><h3><a class="topic-link" href="cursos/fraude-digital-y-delitos-financieros-tecnologicos.html">Fraude digital y delitos financieros tecnológicos</a></h3><p>Ciberfraude, mulas de dinero y su vínculo con el lavado.</p><span class="topic-go" aria-hidden="true">Tomar el curso →</span></li>
+          <li class="card topic is-accent" data-reveal style="--d:0.00s"><div class="topic-top"><span class="topic-n">12</span><span class="topic-tag">Tecnología</span></div><h3><a class="topic-link" href="cursos/automatizacion-de-procesos-de-cumplimiento.html">Automatización de procesos de cumplimiento</a></h3><p>Qué automatizar, con qué herramientas y con qué controles.</p><span class="topic-go" aria-hidden="true">Tomar el curso →</span></li>
+          <li class="card topic is-accent" data-reveal style="--d:0.05s"><div class="topic-top"><span class="topic-n">13</span><span class="topic-tag">Tecnología</span></div><h3><a class="topic-link" href="cursos/inteligencia-artificial-aplicada-a-plaft.html">Inteligencia artificial aplicada a PLAFT</a></h3><p>Usos, riesgos y gobierno responsable de la IA en cumplimiento.</p><span class="topic-go" aria-hidden="true">Tomar el curso →</span></li>
+          <li class="card topic topic-cta" data-reveal><div class="topic-top"><span class="topic-n">★</span><span class="topic-tag">Cursos gratuitos</span></div><h3><a class="topic-link" href="cursos/index.html">Ver el catálogo completo</a></h3><p>Cada curso incluye evaluación interactiva y las fuentes oficiales que lo sustentan. Tu avance se guarda en tu navegador.</p><span class="topic-go" aria-hidden="true">Ir al catálogo →</span></li>
         </ol>
 
         <div class="card modes" data-reveal>
@@ -2035,7 +2047,7 @@
           <a class="brand" href="#inicio" aria-label="Hansliery Sánchez — volver al inicio">
             <svg class="brand-mark" aria-hidden="true"><use href="#logo-mark"/></svg>
             <span class="brand-text">
-              <span class="brand-name">Hansliery <b>Sánchez</b></span>
+              <span class="brand-name">HANSLIERY <b>SÁNCHEZ</b></span>
               <span class="brand-tag">COMPLIANCE &amp; RISK ADVISORY</span>
             </span>
           </a>
@@ -2065,7 +2077,7 @@
       <p class="disclaimer"><strong>Aviso profesional.</strong> El contenido de este sitio tiene fines informativos y formativos. Los servicios se ofrecen a título personal y no constituyen representación de empleadores, autoridades u organismos públicos. La información no sustituye asesoría jurídica especializada ni la evaluación independiente que corresponda a cada organización.</p>
 
       <div class="footer-bottom">
-        <span>© 2026 Hansliery Sánchez · Compliance &amp; Risk Advisory</span>
+        <span>© 2026 HANSLIERY SÁNCHEZ · Compliance &amp; Risk Advisory</span>
         <span>Estrategia. Prevención. Confianza.</span>
       </div>
     </div>

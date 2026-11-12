@@ -15,9 +15,31 @@ hansliery-web/
 ├── robots.txt          ← Indicaciones para buscadores
 ├── sitemap.xml         ← Mapa del sitio (requiere dominio, ver abajo)
 ├── README.md           ← Este archivo
-└── assets/
-    └── og-image.png    ← Imagen 1200×630 para vista previa en redes sociales
+├── assets/
+│   ├── og-image.png    ← Imagen 1200×630 para vista previa en redes sociales
+│   └── hansliery-sanchez.(jpg|webp) ← Foto de perfil
+└── cursos/             ← Capacitaciones gratuitas (13 cursos + catálogo)
+    ├── index.html      ← Catálogo
+    ├── <curso>.html    ← Una página por curso (generada)
+    ├── cursos.css / cursos.js
+    └── _fuente/        ← Contenido editable y generador
 ```
+
+## Cursos
+
+Los cursos se generan a partir de archivos de contenido en `cursos/_fuente/`:
+
+- `cursos_1.py` … `cursos_4.py`: texto, evaluación y fuentes de cada curso.
+- `fuentes.py`: registro único de fuentes oficiales citadas.
+- `build.py`: genera las páginas HTML, el catálogo y `indice.json`.
+
+Para editar un curso, modifique su archivo de contenido y ejecute:
+
+```
+python3 cursos/_fuente/build.py
+```
+
+Dentro del texto, `[[3]]` crea una cita a la fuente número 3 del curso. El generador mezcla las opciones de cada pregunta para que la respuesta correcta no caiga siempre en la misma letra, y valida que toda cita apunte a una fuente existente.
 
 No requiere instalación, compilación ni frameworks. Solo depende de Google Fonts (Sora + Manrope). Si las fuentes no cargan, el sitio usa tipografías del sistema y sigue funcionando.
 

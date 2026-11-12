@@ -1,0 +1,93 @@
+[
+ {
+  "num": 1,
+  "slug": "fundamentos-prevencion-lavado-de-activos",
+  "title": "Fundamentos de prevención de lavado de activos",
+  "tag": "Fundamentos",
+  "card": "Qué es el lavado, cómo opera y quiénes participan en su prevención."
+ },
+ {
+  "num": 2,
+  "slug": "marco-regulatorio-ley-155-17",
+  "title": "Marco regulatorio dominicano y Ley 155-17",
+  "tag": "Regulación",
+  "card": "La ley, su reglamento, los sujetos obligados, sus deberes y el régimen de sanciones."
+ },
+ {
+  "num": 3,
+  "slug": "enfoque-basado-en-riesgos",
+  "title": "Enfoque basado en riesgos",
+  "tag": "Riesgos",
+  "card": "Cómo concentrar los recursos donde el riesgo es mayor, con criterio y evidencia."
+ },
+ {
+  "num": 4,
+  "slug": "matrices-de-evaluacion-y-segmentacion",
+  "title": "Matrices de evaluación y segmentación",
+  "tag": "Riesgos",
+  "card": "Diseño de matrices de riesgo de clientes, ponderaciones y segmentación."
+ },
+ {
+  "num": 5,
+  "slug": "debida-diligencia-y-conocimiento-del-cliente",
+  "title": "Debida diligencia y conocimiento del cliente",
+  "tag": "Debida diligencia",
+  "card": "Identificar, verificar y conocer al cliente según su nivel de riesgo."
+ },
+ {
+  "num": 6,
+  "slug": "beneficiario-final",
+  "title": "Beneficiario final",
+  "tag": "Debida diligencia",
+  "card": "Llegar a la persona física que realmente posee o controla."
+ },
+ {
+  "num": 7,
+  "slug": "personas-expuestas-politicamente",
+  "title": "Personas Expuestas Políticamente (PEP)",
+  "tag": "Debida diligencia",
+  "card": "Quién es PEP, a quién alcanza y qué medidas aplicar sin estigmatizar."
+ },
+ {
+  "num": 8,
+  "slug": "reporteria-ros-ras-rte",
+  "title": "Reportería: ROS, RAS y RTE",
+  "tag": "Reportería",
+  "card": "Cuándo y cómo reportar a la UAF, con ejemplos por sector y uso de goAML."
+ },
+ {
+  "num": 9,
+  "slug": "senales-de-alerta-y-analisis-de-casos",
+  "title": "Señales de alerta y análisis de casos",
+  "tag": "Tipologías",
+  "card": "De la alerta a la decisión: un método para analizar y documentar."
+ },
+ {
+  "num": 10,
+  "slug": "activos-virtuales-y-riesgos-emergentes",
+  "title": "Activos virtuales y riesgos emergentes",
+  "tag": "Riesgos emergentes",
+  "card": "Criptoactivos, proveedores de servicios y señales de alerta."
+ },
+ {
+  "num": 11,
+  "slug": "fraude-digital-y-delitos-financieros-tecnologicos",
+  "title": "Fraude digital y delitos financieros tecnológicos",
+  "tag": "Riesgos emergentes",
+  "card": "Ciberfraude, mulas de dinero y su vínculo con el lavado."
+ },
+ {
+  "num": 12,
+  "slug": "automatizacion-de-procesos-de-cumplimiento",
+  "title": "Automatización de procesos de cumplimiento",
+  "tag": "Tecnología",
+  "card": "Qué automatizar, con qué herramientas y con qué controles."
+ },
+ {
+  "num": 13,
+  "slug": "inteligencia-artificial-aplicada-a-plaft",
+  "title": "Inteligencia artificial aplicada a PLAFT",
+  "tag": "Tecnología",
+  "card": "Usos, riesgos y gobierno responsable de la IA en cumplimiento."
+ }
+]
