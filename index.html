@@ -848,6 +848,119 @@
     .feat-2col { grid-template-columns: 1fr; }
   }
 
+
+  /* --- Servicios: buscador por necesidad + pestañas + matriz de riesgo --- */
+  .sv-finder { margin-bottom: 1.6rem; text-align: center; }
+  .sv-finder-q { font-family: var(--font-head); font-weight: 700; font-size: 1rem; margin-bottom: .9rem; color: var(--ice); }
+  .sv-needs { display: flex; flex-wrap: wrap; gap: .55rem; justify-content: center; }
+  .sv-need { font: inherit; font-size: .84rem; color: var(--ice); background: rgba(18, 59, 89, .45); border: 1px solid var(--line-strong); border-radius: 999px; padding: .55rem 1rem; cursor: pointer; transition: border-color .25s, background .25s, transform .25s; }
+  .sv-need:hover, .sv-need:focus-visible { border-color: var(--teal); background: rgba(0, 201, 183, .12); transform: translateY(-2px); outline: none; }
+  .sv-need.is-on { border-color: var(--teal); background: rgba(0, 201, 183, .18); }
+  .sv-tabs { padding: 0; overflow: hidden; }
+  .sv-tablist { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--line); }
+  .sv-tablist [role="tab"] { font: inherit; text-align: left; display: flex; gap: .75rem; align-items: center; padding: 1.1rem 1.2rem; background: transparent; color: var(--muted); border: 0; border-bottom: 3px solid transparent; cursor: pointer; transition: color .25s, background .25s, border-color .25s; }
+  .sv-tablist [role="tab"]:not(:last-child) { border-right: 1px solid var(--line); }
+  .sv-tablist [role="tab"]:hover { color: var(--ice); background: rgba(18, 59, 89, .35); }
+  .sv-tablist [role="tab"]:focus-visible { outline: 2px solid var(--teal); outline-offset: -2px; }
+  .sv-tablist [role="tab"][aria-selected="true"] { color: var(--ice); background: rgba(0, 201, 183, .08); border-bottom-color: var(--teal); }
+  .sv-tab-n { font-family: var(--font-head); font-weight: 800; font-size: 1.35rem; color: transparent; -webkit-text-stroke: 1px rgba(148, 210, 255, .45); }
+  [aria-selected="true"] .sv-tab-n { -webkit-text-stroke-color: var(--teal); }
+  .sv-tab-t { font-family: var(--font-head); font-weight: 700; font-size: .82rem; line-height: 1.3; text-transform: uppercase; letter-spacing: .02em; }
+  .sv-panel { padding: clamp(1.4rem, 3.5vw, 2.6rem); }
+  .sv-panel:focus-visible { outline: 2px solid var(--teal); outline-offset: -4px; }
+  .sv-panel[hidden] { display: none; }
+  .sv-panel.is-in { animation: svIn .5s var(--ease); }
+  @keyframes svIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .sv-top { display: flex; gap: 1.2rem; align-items: flex-start; margin-bottom: 1.8rem; }
+  .sv-top .service-ic { flex: none; }
+  .sv-num { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
+  .sv-top h3 { font-size: clamp(1.25rem, 2.4vw, 1.6rem); font-weight: 700; margin: .25rem 0 .5rem; line-height: 1.2; }
+  .sv-top p { color: var(--muted); max-width: 70ch; }
+  .sv-panel h4 { font-family: var(--font-head); font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; color: var(--gold-soft); margin-bottom: .9rem; }
+  .sv-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: clamp(1.4rem, 3vw, 2.4rem); }
+  .sv-grid-b { margin-top: 2rem; padding-top: 1.8rem; border-top: 1px solid var(--line); grid-template-columns: 1.6fr 1fr; }
+  .sv-ideal { padding: 1.3rem 1.3rem 1.1rem; border-radius: var(--radius-sm); background: rgba(214, 168, 79, .06); border: 1px solid rgba(214, 168, 79, .22); align-self: start; }
+  .sv-check { display: grid; gap: .65rem; }
+  .sv-check li { position: relative; padding-left: 1.7rem; font-size: .9rem; line-height: 1.45; }
+  .sv-check li::before { content: ""; position: absolute; left: 0; top: .15em; width: 1.05rem; height: 1.05rem; border-radius: 50%; background: rgba(214, 168, 79, .18) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23F1D18F' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5L20 7'/%3E%3C/svg%3E") center/62% no-repeat; }
+  .sv-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem; }
+  .sv-cards li { padding: .95rem 1rem; border-radius: 12px; background: rgba(7, 20, 38, .45); border: 1px solid var(--line); transition: border-color .25s; }
+  .sv-cards li:hover { border-color: rgba(0, 201, 183, .4); }
+  .sv-cards b { display: block; font-family: var(--font-head); font-size: .88rem; margin-bottom: .25rem; color: var(--ice); }
+  .sv-cards span { font-size: .82rem; color: var(--muted); line-height: 1.45; }
+  .sv-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: .8rem; counter-reset: st; }
+  .sv-steps li { counter-increment: st; position: relative; padding-top: 2.6rem; }
+  .sv-steps li::before { content: counter(st, decimal-leading-zero); position: absolute; top: 0; left: 0; width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; font-family: var(--font-head); font-size: .72rem; font-weight: 700; color: var(--night); background: var(--teal); }
+  .sv-steps li:not(:last-child)::after { content: ""; position: absolute; top: 1rem; left: 2.4rem; right: -.4rem; height: 1px; background: linear-gradient(90deg, var(--teal), transparent); }
+  .sv-steps b { display: block; font-size: .9rem; margin-bottom: .2rem; }
+  .sv-steps span { font-size: .8rem; color: var(--muted); line-height: 1.45; }
+  .sv-deliv { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.4rem; }
+  .sv-deliv li { font-size: .8rem; padding: .45rem .8rem; border-radius: 8px; background: rgba(56, 189, 248, .08); border: 1px solid rgba(56, 189, 248, .25); color: #CFEAFB; }
+  .sv-cta { width: 100%; justify-content: center; }
+
+  .mx { margin-top: 2rem; padding: clamp(1.2rem, 3vw, 2rem); border-radius: var(--radius); border: 1px solid rgba(0, 201, 183, .3); background: radial-gradient(600px 260px at 0% 0%, rgba(0, 201, 183, .1), transparent 60%), rgba(7, 20, 38, .6); scroll-margin-top: calc(var(--header-h) + 20px); }
+  .mx-head { display: grid; grid-template-columns: 1.2fr 1fr; gap: 1.5rem; align-items: end; margin-bottom: 1.5rem; }
+  .mx-kicker { font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: var(--teal); font-weight: 700; }
+  .mx-head h4 { font-size: 1.25rem; letter-spacing: 0; text-transform: none; color: var(--ice); margin: .35rem 0 .4rem; }
+  .mx-head p { font-size: .88rem; color: var(--muted); }
+  .mx-weights { display: grid; grid-template-columns: repeat(5, 1fr); gap: .4rem; }
+  .mx-weights span { text-align: center; font-size: .68rem; color: var(--muted); padding: .55rem .2rem; border-radius: 10px; background: rgba(18, 59, 89, .5); border: 1px solid var(--line); line-height: 1.25; }
+  .mx-weights b { display: block; font-family: var(--font-head); font-size: 1rem; color: var(--ice); }
+  .mx-body { display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(1.2rem, 3vw, 2rem); }
+  .mx-select span { display: block; font-size: .78rem; color: var(--muted); margin-bottom: .4rem; }
+  .mx-select select { width: 100%; font-size: .85rem; }
+  .mx-ctx { font-size: .8rem; color: var(--muted-2); margin: .6rem 0 1rem; min-height: 1.2em; }
+  .mx-sliders { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem 1.2rem; }
+  .mx-sl span { display: flex; justify-content: space-between; font-size: .82rem; margin-bottom: .35rem; }
+  .mx-sl output { font-family: var(--font-head); font-weight: 700; color: var(--teal); }
+  .mx-sl-ef output { color: var(--gold-soft); }
+  .mx-sl input { width: 100%; accent-color: var(--teal); cursor: pointer; }
+  .mx-sl-ef input { accent-color: var(--gold); }
+  .mx-out { display: grid; gap: .9rem; align-content: start; }
+  .mx-res { padding: 1rem 1.1rem; border-radius: 14px; background: rgba(18, 59, 89, .45); border: 1px solid var(--line); display: grid; grid-template-columns: 1fr auto; align-items: center; gap: .3rem .8rem; }
+  .mx-lab { font-size: .75rem; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); grid-column: 1 / -1; }
+  .mx-res strong { font-family: var(--font-head); font-size: 2rem; line-height: 1; }
+  .mx-cat { font-style: normal; font-size: .78rem; font-weight: 700; padding: .3rem .7rem; border-radius: 999px; background: var(--c, #333); color: var(--night); }
+  .mx-bar { grid-column: 1 / -1; height: 6px; border-radius: 6px; background: rgba(148, 210, 255, .12); overflow: hidden; margin-top: .3rem; }
+  .mx-bar i { display: block; height: 100%; width: 0; border-radius: inherit; background: var(--c, var(--teal)); transition: width .5s var(--ease), background .3s; }
+  .mx-ctl { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+  .mx-ctl b { color: var(--ice); }
+  .mx-scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; text-align: center; font-size: .66rem; font-weight: 700; color: var(--night); }
+  .mx-scale li { padding: .35rem .1rem; line-height: 1.2; }
+  .mx-scale li:first-child { border-radius: 8px 0 0 8px; } .mx-scale li:last-child { border-radius: 0 8px 8px 0; }
+  .mx-scale small { font-weight: 600; opacity: .8; }
+  .c1 { background: #2DD4BF; --c: #2DD4BF; } .c2 { background: #7DD3FC; --c: #7DD3FC; } .c3 { background: #FACC15; --c: #FACC15; } .c4 { background: #FB923C; --c: #FB923C; } .c5 { background: #F87171; --c: #F87171; }
+  .mx-note { margin-top: 1.3rem; font-size: .76rem; color: var(--muted-2); line-height: 1.55; }
+  .mx-note strong { color: var(--muted); }
+
+  .saas-feats { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; margin: 1.2rem 0; }
+  .saas-feats li { font-size: .8rem; color: var(--muted); line-height: 1.45; padding-left: .9rem; border-left: 2px solid rgba(214, 168, 79, .5); }
+  .saas-feats b { display: block; color: var(--ice); font-size: .86rem; margin-bottom: .15rem; }
+  .saas-try { margin: -.2rem 0 1rem; font-size: .88rem; }
+
+  @media (max-width: 1100px) {
+    .sv-grid, .sv-grid-b, .mx-head, .mx-body { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 900px) {
+    .sv-tablist { grid-template-columns: 1fr 1fr; }
+    .sv-tablist [role="tab"]:nth-child(2) { border-right: 0; }
+    .sv-tablist [role="tab"]:nth-child(-n+2) { border-bottom-color: var(--line); }
+    .sv-tablist [role="tab"]:nth-child(-n+2)[aria-selected="true"] { border-bottom-color: var(--teal); }
+    .sv-steps { grid-template-columns: 1fr 1fr; row-gap: 1.2rem; }
+    .sv-steps li:nth-child(2)::after { display: none; }
+    .saas-feats { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .sv-cards, .mx-sliders { grid-template-columns: 1fr; }
+    .sv-top { flex-direction: column; }
+    .sv-tab-t { font-size: .72rem; }
+    .sv-tablist [role="tab"] { padding: .9rem .8rem; gap: .5rem; }
+    .mx-weights { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .mx-weights span { font-size: .58rem; }
+    .mx-scale { font-size: .58rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { .sv-panel.is-in { animation: none; } .mx-bar i { transition: none; } }
+
   /* =================================================================
      10. CAPACITACIONES
      ================================================================= */
@@ -1645,88 +1758,172 @@
           <p class="lead" data-reveal style="--d:.14s">Servicios diseñados según el tamaño, la actividad y la exposición al riesgo de cada organización.</p>
         </header>
 
-        <div class="services-grid">
-          <!-- SERVICIO 01 -->
-          <article class="card service" data-tilt data-reveal style="--d:0s">
-            <div class="service-top">
+        <div class="sv-finder" data-reveal>
+          <p class="sv-finder-q">¿Qué necesita tu organización?</p>
+          <div class="sv-needs"><button type="button" class="sv-need" data-go="consultoria">Me van a inspeccionar o tengo observaciones</button><button type="button" class="sv-need" data-go="riesgos">Necesito una matriz de riesgo</button><button type="button" class="sv-need" data-go="riesgos">Debo conocer mejor a mis clientes (KYC, beneficiario final, PEP)</button><button type="button" class="sv-need" data-go="controles">Mis controles no están documentados</button><button type="button" class="sv-need" data-go="controles">La gerencia necesita reportes de cumplimiento</button><button type="button" class="sv-need" data-go="capacitacion">Debo capacitar a mi equipo</button><button type="button" class="sv-need" data-go="saas">Quiero automatizar el cumplimiento</button></div>
+        </div>
+
+        <div class="sv-tabs card" data-reveal>
+          <div class="sv-tablist" role="tablist" aria-label="Servicios"><button type="button" role="tab" id="sv-t-consultoria" aria-controls="sv-p-consultoria" data-sv="consultoria"><span class="sv-tab-n">01</span><span class="sv-tab-t">Consultoría y fortalecimiento PLAFT</span></button><button type="button" role="tab" id="sv-t-riesgos" aria-controls="sv-p-riesgos" data-sv="riesgos"><span class="sv-tab-n">02</span><span class="sv-tab-t">Gestión de riesgos y debida diligencia</span></button><button type="button" role="tab" id="sv-t-controles" aria-controls="sv-p-controles" data-sv="controles"><span class="sv-tab-n">03</span><span class="sv-tab-t">Controles internos y gobierno de cumplimiento</span></button><button type="button" role="tab" id="sv-t-capacitacion" aria-controls="sv-p-capacitacion" data-sv="capacitacion"><span class="sv-tab-n">04</span><span class="sv-tab-t">Capacitación profesional</span></button></div>
+
+          <div class="sv-panel" role="tabpanel" id="sv-p-consultoria" aria-labelledby="sv-t-consultoria" tabindex="0">
+            <div class="sv-top">
               <span class="service-ic" aria-hidden="true"><svg><use href="#i-shield"/></svg></span>
-              <span class="service-num">SERVICIO<b>01</b></span>
+              <div>
+                <span class="sv-num">Servicio 01</span>
+                <h3>Consultoría y fortalecimiento PLAFT</h3>
+                <p>Una revisión estructurada de tu programa de cumplimiento para saber dónde estás frente a la norma, qué falta y en qué orden corregirlo.</p>
+              </div>
             </div>
-            <h3>Consultoría y fortalecimiento PLAFT</h3>
-            <p>Revisión estructurada del sistema de prevención para identificar brechas y priorizar mejoras con sustento metodológico.</p>
-            <ul class="feat">
-              <li>Diagnóstico de procesos</li>
-              <li>Evaluación de componentes del sistema PLAFT</li>
-              <li>Identificación de brechas</li>
-              <li>Planes de mejora</li>
-              <li>Acompañamiento metodológico</li>
-              <li>Revisión de procedimientos</li>
-            </ul>
-            <div class="service-foot-wrap"><div class="service-foot"><a class="btn-link" href="#contacto" data-service="Consultoría y fortalecimiento PLAFT">Consultar este servicio <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div></div>
-          </article>
-
-          <!-- SERVICIO 02 (fusiona gestión de riesgos + debida diligencia) -->
-          <article class="card service" data-tilt data-reveal style="--d:.08s">
-            <div class="service-top">
+            <div class="sv-grid">
+              <div class="sv-ideal">
+                <h4>Este servicio es para ti si…</h4>
+                <ul class="sv-check"><li>Se acerca una inspección de tu supervisor o recibiste observaciones.</li><li>Tu manual y procedimientos no se han revisado recientemente.</li><li>Estás iniciando como sujeto obligado y necesitas estructurar el programa.</li><li>Quieres una opinión independiente sobre la eficacia de tu sistema.</li></ul>
+              </div>
+              <div class="sv-incl">
+                <h4>Qué incluye</h4>
+                <ul class="sv-cards"><li><b>Diagnóstico normativo</b><span>Contraste del programa con la Ley 155-17, su reglamento y la norma de tu supervisor.</span></li><li><b>Evaluación por componentes</b><span>Políticas, oficial de cumplimiento, debida diligencia, monitoreo, reportes, capacitación, auditoría y registros.</span></li><li><b>Brechas priorizadas</b><span>Cada hallazgo con su nivel de riesgo, impacto regulatorio y prioridad.</span></li><li><b>Plan de mejora</b><span>Acciones con responsables, plazos e indicadores de avance.</span></li><li><b>Manuales y procedimientos</b><span>Revisión y actualización de la documentación del programa.</span></li><li><b>Acompañamiento</b><span>Apoyo metodológico durante la implementación de las mejoras.</span></li></ul>
+              </div>
+            </div>
+            <div class="sv-grid sv-grid-b">
+              <div>
+                <h4>Cómo trabajamos</h4>
+                <ol class="sv-steps"><li><b>Levantamiento</b><span>Entrevistas, revisión documental y de procesos.</span></li><li><b>Evaluación</b><span>Contraste con la normativa y buenas prácticas.</span></li><li><b>Informe</b><span>Brechas, prioridades y recomendaciones.</span></li><li><b>Acompañamiento</b><span>Seguimiento a la implementación.</span></li></ol>
+              </div>
+              <div>
+                <h4>Lo que recibes</h4>
+                <ul class="sv-deliv"><li>Informe de diagnóstico</li><li>Matriz de brechas</li><li>Plan de acción</li><li>Manual y procedimientos actualizados</li></ul>
+                <a class="btn btn-primary sv-cta" href="#contacto" data-service="Consultoría y fortalecimiento PLAFT">Consultar este servicio <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+            </div>
+          </div>
+          <div class="sv-panel" role="tabpanel" id="sv-p-riesgos" aria-labelledby="sv-t-riesgos" tabindex="0">
+            <div class="sv-top">
               <span class="service-ic" aria-hidden="true"><svg><use href="#i-search"/></svg></span>
-              <span class="service-num">SERVICIO<b>02</b></span>
+              <div>
+                <span class="sv-num">Servicio 02</span>
+                <h3>Gestión de riesgos y debida diligencia</h3>
+                <p>Herramientas para medir tu exposición al riesgo y aplicar a cada cliente el nivel de diligencia que corresponde, con criterios documentados y trazables.</p>
+              </div>
             </div>
-            <h3>Gestión de riesgos y debida diligencia</h3>
-            <p>Del enfoque basado en riesgos al conocimiento de clientes y terceros: herramientas para medir la exposición y aplicar el nivel de diligencia que corresponde.</p>
-            <ul class="feat feat-2col">
-              <li>Enfoque basado en riesgos</li>
-              <li>Matrices y perfiles de riesgo</li>
-              <li>Segmentación de clientes</li>
-              <li>Criterios de priorización e indicadores de exposición</li>
-              <li>KYC y KYB</li>
-              <li>Identificación del beneficiario final</li>
-              <li>Personas Expuestas Políticamente (PEP)</li>
-              <li>Debida diligencia simplificada y ampliada</li>
-              <li>Señales de alerta y screening</li>
-              <li>Gestión documental y trazabilidad de revisiones</li>
-            </ul>
-            <div class="service-foot-wrap"><div class="service-foot"><a class="btn-link" href="#contacto" data-service="Gestión de riesgos y debida diligencia">Consultar este servicio <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div></div>
-          </article>
-
-          <!-- SERVICIO 03 -->
-          <article class="card service" data-tilt data-reveal style="--d:0s">
-            <div class="service-top">
+            <div class="sv-grid">
+              <div class="sv-ideal">
+                <h4>Este servicio es para ti si…</h4>
+                <ul class="sv-check"><li>Necesitas elaborar o actualizar tu autoevaluación de riesgos.</li><li>No tienes una matriz de riesgo de clientes o no está calibrada.</li><li>Tu proceso de conocimiento del cliente no identifica bien al beneficiario final o a las PEP.</li><li>Necesitas criterios claros para aplicar debida diligencia simplificada o ampliada.</li></ul>
+              </div>
+              <div class="sv-incl">
+                <h4>Qué incluye</h4>
+                <ul class="sv-cards"><li><b>Autoevaluación de riesgos</b><span>Identificación y medición de riesgos LA/FT/FPADM de la entidad por factor.</span></li><li><b>Matriz de riesgo parametrizada</b><span>Cinco factores ponderados, riesgo inherente y residual, categorías de 1 a 5.</span></li><li><b>Segmentación y perfiles</b><span>Grupos de clientes homogéneos y umbrales de monitoreo.</span></li><li><b>KYC / KYB</b><span>Procedimientos y formularios para personas físicas y jurídicas.</span></li><li><b>Beneficiario final y PEP</b><span>Criterios de identificación, verificación y medidas reforzadas.</span></li><li><b>Screening y trazabilidad</b><span>Consulta en listas, gestión de coincidencias y expediente documentado.</span></li></ul>
+              </div>
+            </div>
+            <div class="mx" id="matriz-riesgo">
+              <div class="mx-head">
+                <div>
+                  <span class="mx-kicker">Metodología propia · Motor de riesgo de Compliance Guard Pro</span>
+                  <h4>Prueba la matriz de riesgo</h4>
+                  <p>Elige una línea de negocio de referencia o ajusta los factores. El modelo pondera cinco factores, calcula el riesgo inherente y lo reduce según la efectividad de los controles.</p>
+                </div>
+                <div class="mx-weights" aria-label="Pesos por factor">
+                  <span><b>30 %</b>Cliente</span><span><b>20 %</b>Producto</span><span><b>15 %</b>Canal</span><span><b>25 %</b>Jurisdicción</span><span><b>10 %</b>Transaccionalidad</span>
+                </div>
+              </div>
+              <div class="mx-body">
+                <div class="mx-inputs">
+                  <label class="mx-select"><span>Línea de referencia (sujeto obligado y producto)</span>
+                    <select id="mx-row" class="control">
+                      <optgroup label="Sujetos obligados financieros"><option value="0">SOF-01 · Cuenta de ahorro (Entidades de intermediación financiera)</option><option value="1">SOF-02 · Cuenta corriente (Entidades de intermediación financiera)</option><option value="2">SOF-03 · Transferencias / SWIFT (Entidades de intermediación financiera)</option><option value="3">SOF-04 · Tarjetas de crédito/débito (Entidades de intermediación financiera)</option><option value="4">SOF-05 · Préstamos (Entidades de intermediación financiera)</option><option value="5">SOF-06 · Banca electrónica / banca móvil (Entidades de intermediación financiera)</option><option value="6">SOF-07 · Corretaje de títulos valores (Intermediarios de valores)</option><option value="7">SOF-08 · Ventas a futuro (derivados) (Intermediarios de valores)</option><option value="8">SOF-09 · Cambio de divisas (Canje/cambio de divisas y remesas)</option><option value="9">SOF-10 · Remesas internacionales (Canje/cambio de divisas y remesas)</option><option value="10">SOF-11 · Operaciones interbancarias / política monetaria (Banco Central de la República Dominicana)</option><option value="11">SOF-12 · Administración de fideicomisos (Fiduciarias)</option><option value="12">SOF-13 · Fideicomiso de administración inmobiliaria (Fiduciarias)</option><option value="13">SOF-14 · Cuenta de ahorro cooperativa (Cooperativas de ahorro y crédito)</option><option value="14">SOF-15 · Préstamos cooperativos (Cooperativas de ahorro y crédito)</option><option value="15">SOF-16 · Seguro de vida con valor de rescate (Cías. de seguros, reaseguro y corredores)</option><option value="16">SOF-17 · Seguro general (no vida) (Cías. de seguros, reaseguro y corredores)</option><option value="17">SOF-18 · Reaseguro internacional (Cías. de seguros, reaseguro y corredores)</option><option value="18">SOF-19 · Fondo de inversión abierto (Sociedades administradoras de fondos de inversión)</option><option value="19">SOF-20 · Titularización de activos (Sociedades titularizadoras)</option><option value="20">SOF-21 · Operaciones bursátiles (Puestos de bolsa e intermediarios de valores)</option><option value="21">SOF-22 · Custodia y compensación de valores (Depósito centralizado de valores)</option><option value="22">SOF-23 · Emisión primaria de valores (Emisores de valores de oferta pública)</option></optgroup>
+                      <optgroup label="Sujetos obligados no financieros"><option value="23">APNFD-01 · Compra de fichas (Casinos, juegos de azar, bancas de lotería y apuestas)</option><option value="24">APNFD-02 · Pago de premios (Casinos, juegos de azar, bancas de lotería y apuestas)</option><option value="25">APNFD-03 · Apuestas / lotería en línea (Casinos, juegos de azar, bancas de lotería y apuestas)</option><option value="26">APNFD-04 · Factoraje de facturas (Empresas de factoraje)</option><option value="27">APNFD-05 · Compra/venta de bienes inmuebles (Agentes inmobiliarios)</option><option value="28">APNFD-06 · Venta de joyas / metales preciosos (Comerciantes de metales preciosos, piedras preciosas y joyas)</option><option value="29">APNFD-07 · Compra/venta de piedras preciosas (alto valor) (Comerciantes de metales preciosos, piedras preciosas y joyas)</option><option value="30">APNFD-08 · Compra, venta o remodelación de inmuebles (Abogados, notarios y contadores)</option><option value="31">APNFD-09 · Administración del dinero, valores u otros bienes del cliente (Abogados, notarios y contadores)</option><option value="32">APNFD-10 · Administración de cuentas bancarias, ahorro o valores (Abogados, notarios y contadores)</option><option value="33">APNFD-11 · Organización de contribuciones para creación/operación de empresas (Abogados, notarios y contadores)</option><option value="34">APNFD-12 · Creación/administración de personas jurídicas y compraventa de entidades (Abogados, notarios y contadores)</option><option value="35">APNFD-13 · Constitución de sociedades, fusión/escisión, compraventa de acciones (Abogados, notarios y contadores)</option><option value="36">APNFD-14 · Actuación como agente de creación de personas jurídicas (Abogados, notarios y contadores)</option><option value="37">APNFD-15 · Actuación como director, apoderado o socio nominal (Abogados, notarios y contadores)</option><option value="38">APNFD-16 · Provisión de domicilio registrado, comercial o postal (Abogados, notarios y contadores)</option><option value="39">APNFD-17 · Actuación o arreglo como accionista nominal para otra persona (Abogados, notarios y contadores)</option><option value="40">APNFD-18 · Venta de vehículos de motor (Comercio de vehículos, armas de fuego, barcos y aviones)</option><option value="41">APNFD-19 · Venta de armas de fuego (Comercio de vehículos, armas de fuego, barcos y aviones)</option><option value="42">APNFD-20 · Venta de embarcaciones y aeronaves (Comercio de vehículos, armas de fuego, barcos y aviones)</option><option value="43">APNFD-21 · Préstamo con garantía prendaria (Casas de empeño)</option><option value="44">APNFD-22 · Venta de inmueble (proyecto constructivo) (Empresas constructoras)</option><option value="45">APNFD-23 · Recepción de pagos en efectivo por construcción (Empresas constructoras)</option></optgroup>
+                    </select>
+                  </label>
+                  <p class="mx-ctx" id="mx-ctx" aria-live="polite"></p>
+                  <div class="mx-sliders">
+                    <label class="mx-sl"><span>Cliente <output id="mx-o0">3</output></span><input type="range" min="1" max="5" step="1" value="3" id="mx-s0" aria-label="Riesgo Cliente de 1 a 5"></label><label class="mx-sl"><span>Producto/servicio <output id="mx-o1">3</output></span><input type="range" min="1" max="5" step="1" value="3" id="mx-s1" aria-label="Riesgo Producto/servicio de 1 a 5"></label><label class="mx-sl"><span>Canal <output id="mx-o2">3</output></span><input type="range" min="1" max="5" step="1" value="3" id="mx-s2" aria-label="Riesgo Canal de 1 a 5"></label><label class="mx-sl"><span>Jurisdicción <output id="mx-o3">3</output></span><input type="range" min="1" max="5" step="1" value="3" id="mx-s3" aria-label="Riesgo Jurisdicción de 1 a 5"></label><label class="mx-sl"><span>Transaccionalidad <output id="mx-o4">3</output></span><input type="range" min="1" max="5" step="1" value="3" id="mx-s4" aria-label="Riesgo Transaccionalidad de 1 a 5"></label>
+                    <label class="mx-sl mx-sl-ef"><span>Efectividad de controles <output id="mx-oef">10 %</output></span><input type="range" min="0" max="60" step="5" value="10" id="mx-ef" aria-label="Efectividad de los controles en porcentaje"></label>
+                  </div>
+                </div>
+                <div class="mx-out" aria-live="polite">
+                  <div class="mx-res"><span class="mx-lab">Riesgo inherente</span><strong id="mx-inh">0.00</strong><em class="mx-cat" id="mx-inh-cat">—</em><div class="mx-bar"><i id="mx-inh-bar"></i></div></div>
+                  <div class="mx-res"><span class="mx-lab">Riesgo residual</span><strong id="mx-res">0.00</strong><em class="mx-cat" id="mx-res-cat">—</em><div class="mx-bar"><i id="mx-res-bar"></i></div></div>
+                  <p class="mx-ctl" id="mx-ctl"></p>
+                  <ul class="mx-scale" aria-label="Escala de categorías"><li class="c1">Muy bajo<br><small>&lt; 1.50</small></li><li class="c2">Bajo<br><small>1.50–2.49</small></li><li class="c3">Medio<br><small>2.50–3.49</small></li><li class="c4">Alto<br><small>3.50–4.49</small></li><li class="c5">Muy alto<br><small>≥ 4.50</small></li></ul>
+                </div>
+              </div>
+              <p class="mx-note">Inherente = Σ (factor × peso). Residual = inherente × (1 − efectividad de controles), con un mínimo de 1. Los puntajes de cada línea son <strong>valores de partida parametrizables</strong> por el oficial de cumplimiento: deben calibrarse con datos históricos de la entidad y revisarse periódicamente. Herramienta ilustrativa; no constituye una evaluación de riesgo de ninguna organización.</p>
+            </div>
+            <div class="sv-grid sv-grid-b">
+              <div>
+                <h4>Cómo trabajamos</h4>
+                <ol class="sv-steps"><li><b>Contexto</b><span>Actividad, productos, canales y zonas de operación.</span></li><li><b>Parametrización</b><span>Factores, pesos, escalas y rangos.</span></li><li><b>Calibración</b><span>Prueba con datos reales y ajuste.</span></li><li><b>Implementación</b><span>Procedimientos de diligencia por nivel de riesgo.</span></li></ol>
+              </div>
+              <div>
+                <h4>Lo que recibes</h4>
+                <ul class="sv-deliv"><li>Matriz de riesgo en Excel</li><li>Metodología documentada</li><li>Formularios y checklists de debida diligencia</li><li>Procedimiento de screening</li></ul>
+                <a class="btn btn-primary sv-cta" href="#contacto" data-service="Gestión de riesgos y debida diligencia">Consultar este servicio <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+            </div>
+          </div>
+          <div class="sv-panel" role="tabpanel" id="sv-p-controles" aria-labelledby="sv-t-controles" tabindex="0">
+            <div class="sv-top">
               <span class="service-ic" aria-hidden="true"><svg><use href="#i-control"/></svg></span>
-              <span class="service-num">SERVICIO<b>03</b></span>
+              <div>
+                <span class="sv-num">Servicio 03</span>
+                <h3>Controles internos y gobierno de cumplimiento</h3>
+                <p>Controles diseñados, documentados y con evidencia, responsables definidos e indicadores que permiten a la gerencia supervisar el cumplimiento.</p>
+              </div>
             </div>
-            <h3>Controles internos y gobierno de cumplimiento</h3>
-            <p>Controles documentados, responsables definidos y evidencias que facilitan la supervisión y la toma de decisiones.</p>
-            <ul class="feat">
-              <li>Diseño de controles</li>
-              <li>Documentación de procedimientos</li>
-              <li>Matrices de responsabilidades</li>
-              <li>Indicadores de cumplimiento</li>
-              <li>Evidencias de control</li>
-              <li>Reportes gerenciales</li>
-              <li>Seguimiento de oportunidades de mejora</li>
-            </ul>
-            <div class="service-foot-wrap"><div class="service-foot"><a class="btn-link" href="#contacto" data-service="Controles internos y gobierno de cumplimiento">Consultar este servicio <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div></div>
-          </article>
-
-          <!-- SERVICIO 04 -->
-          <article class="card service" data-tilt data-reveal style="--d:.08s">
-            <div class="service-top">
+            <div class="sv-grid">
+              <div class="sv-ideal">
+                <h4>Este servicio es para ti si…</h4>
+                <ul class="sv-check"><li>Tus controles existen en la práctica, pero no están documentados ni evidenciados.</li><li>La gerencia o el consejo no reciben información periódica de cumplimiento.</li><li>No hay responsables claros para cada actividad del programa.</li><li>Los hallazgos de auditoría se repiten de un año a otro.</li></ul>
+              </div>
+              <div class="sv-incl">
+                <h4>Qué incluye</h4>
+                <ul class="sv-cards"><li><b>Diseño de controles</b><span>Preventivos y detectivos, vinculados a cada riesgo identificado.</span></li><li><b>Documentación</b><span>Procedimientos y fichas de control claras y aplicables.</span></li><li><b>Matriz de responsabilidades</b><span>Quién ejecuta, aprueba, supervisa e informa cada actividad.</span></li><li><b>Indicadores</b><span>Métricas de cumplimiento y de riesgo con metas y umbrales.</span></li><li><b>Evidencias y pruebas</b><span>Qué evidencia genera cada control y cómo se verifica.</span></li><li><b>Reportes gerenciales</b><span>Informes periódicos para la gerencia y el consejo, y seguimiento de mejoras.</span></li></ul>
+              </div>
+            </div>
+            <div class="sv-grid sv-grid-b">
+              <div>
+                <h4>Cómo trabajamos</h4>
+                <ol class="sv-steps"><li><b>Mapeo</b><span>Procesos, riesgos y controles existentes.</span></li><li><b>Diseño</b><span>Controles, responsables e indicadores.</span></li><li><b>Documentación</b><span>Fichas, evidencias y reportes.</span></li><li><b>Seguimiento</b><span>Pruebas periódicas y mejora continua.</span></li></ol>
+              </div>
+              <div>
+                <h4>Lo que recibes</h4>
+                <ul class="sv-deliv"><li>Matriz de controles</li><li>Matriz de responsabilidades</li><li>Tablero de indicadores</li><li>Plantilla de informe gerencial</li></ul>
+                <a class="btn btn-primary sv-cta" href="#contacto" data-service="Controles internos y gobierno de cumplimiento">Consultar este servicio <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+            </div>
+          </div>
+          <div class="sv-panel" role="tabpanel" id="sv-p-capacitacion" aria-labelledby="sv-t-capacitacion" tabindex="0">
+            <div class="sv-top">
               <span class="service-ic" aria-hidden="true"><svg><use href="#i-cap"/></svg></span>
-              <span class="service-num">SERVICIO<b>04</b></span>
+              <div>
+                <span class="sv-num">Servicio 04</span>
+                <h3>Capacitación profesional</h3>
+                <p>Programas formativos con enfoque práctico, adaptados a cada audiencia y con evidencias que respaldan el cumplimiento de la obligación de capacitar.</p>
+              </div>
             </div>
-            <h3>Capacitación profesional</h3>
-            <p>Programas formativos con enfoque práctico, adaptados al rol, al sector y al nivel de cada audiencia.</p>
-            <ul class="feat">
-              <li>Formación PLAFT</li>
-              <li>Talleres especializados</li>
-              <li>Capacitación de equipos de cumplimiento</li>
-              <li>Formación de personal operativo</li>
-              <li>Programas para directivos</li>
-              <li>Casos prácticos</li>
-              <li>Evaluaciones de aprendizaje</li>
-            </ul>
-            <div class="service-foot-wrap"><div class="service-foot"><a class="btn-link" href="#contacto" data-service="Capacitación profesional">Consultar este servicio <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div></div>
-          </article>
+            <div class="sv-grid">
+              <div class="sv-ideal">
+                <h4>Este servicio es para ti si…</h4>
+                <ul class="sv-check"><li>Debes cumplir tu plan anual de capacitación en prevención.</li><li>Ingresó personal nuevo o cambió la normativa aplicable.</li><li>Tu consejo o alta gerencia necesita una formación ejecutiva.</li><li>Quieres mejorar la calidad de los reportes y de la detección de alertas.</li></ul>
+              </div>
+              <div class="sv-incl">
+                <h4>Qué incluye</h4>
+                <ul class="sv-cards"><li><b>Programa anual</b><span>Plan por audiencias alineado a tus riesgos y a tu normativa.</span></li><li><b>Talleres especializados</b><span>Reportería, debida diligencia, beneficiario final, PEP, señales de alerta y más.</span></li><li><b>Casos prácticos</b><span>Ejercicios por sector, basados en tipologías reales y casos hipotéticos.</span></li><li><b>Formación ejecutiva</b><span>Sesiones para directivos sobre responsabilidades y gobierno del riesgo.</span></li><li><b>Evaluación del aprendizaje</b><span>Pruebas de entrada y salida con resultados medibles.</span></li><li><b>Evidencias</b><span>Registro de asistencia, contenidos y resultados para auditoría y supervisión.</span></li></ul>
+              </div>
+            </div>
+            <div class="sv-grid sv-grid-b">
+              <div>
+                <h4>Cómo trabajamos</h4>
+                <ol class="sv-steps"><li><b>Necesidades</b><span>Audiencias, roles y brechas de conocimiento.</span></li><li><b>Diseño</b><span>Contenidos, casos y evaluaciones.</span></li><li><b>Ejecución</b><span>Presencial, virtual o mixta.</span></li><li><b>Medición</b><span>Resultados e informe final.</span></li></ol>
+              </div>
+              <div>
+                <h4>Lo que recibes</h4>
+                <ul class="sv-deliv"><li>Plan de capacitación</li><li>Material y casos prácticos</li><li>Evaluaciones y resultados</li><li>Registro de evidencias</li></ul>
+                <a class="btn btn-primary sv-cta" href="#contacto" data-service="Capacitación profesional">Consultar este servicio <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- PRODUCTO SAAS: Compliance Guard Pro (en desarrollo) -->
@@ -1738,6 +1935,13 @@
             </div>
             <h3 id="saas-title">Compliance Guard <span class="grad-gold">Pro</span></h3>
             <p>Plataforma propia, actualmente en fase de desarrollo, concebida para llevar la experiencia en prevención de lavado de activos y gestión de riesgos a una herramienta digital para equipos de cumplimiento.</p>
+            <ul class="saas-feats">
+              <li><b>Motor de riesgo</b>Cinco factores ponderados: cliente, producto, canal, jurisdicción y transaccionalidad.</li>
+              <li><b>Inherente y residual</b>Medición antes y después de la efectividad de los controles.</li>
+              <li><b>Catálogos de referencia</b>Sujetos obligados financieros y no financieros de la Ley 155-17 y jurisdicciones por nivel de riesgo.</li>
+              <li><b>Parametrizable y trazable</b>Pesos y puntajes ajustables por el oficial de cumplimiento, con registro de cambios.</li>
+            </ul>
+            <p class="saas-try"><a class="btn-link" href="#matriz-riesgo" data-open-sv="riesgos">Prueba una versión ilustrativa del motor de riesgo <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></p>
             <p class="saas-note"><svg aria-hidden="true"><use href="#i-info"/></svg>La tecnología complementa el criterio profesional; no sustituye la evaluación humana.</p>
             <div class="saas-actions">
               <a class="btn btn-gold" href="#contacto" data-service="Compliance Guard Pro (información)">Quiero recibir novedades <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
@@ -2403,6 +2607,92 @@
           }
         });
       });
+    });
+
+
+    /* ---------------------------------------------------------------
+       10b. Servicios: pestañas, buscador por necesidad y matriz de riesgo
+       --------------------------------------------------------------- */
+    safe('serviceTabs', function () {
+      var tabs = $$('.sv-tablist [role="tab"]');
+      if (!tabs.length) return;
+      var panels = tabs.map(function (t) { return document.getElementById(t.getAttribute('aria-controls')); });
+      var show = function (i, focus) {
+        tabs.forEach(function (t, j) {
+          var on = i === j;
+          t.setAttribute('aria-selected', on ? 'true' : 'false');
+          t.tabIndex = on ? 0 : -1;
+          panels[j].hidden = !on;
+          panels[j].classList.toggle('is-in', on);
+        });
+        if (focus) tabs[i].focus();
+      };
+      tabs.forEach(function (t, i) {
+        t.addEventListener('click', function () { show(i); });
+        t.addEventListener('keydown', function (e) {
+          var k = e.key, n = tabs.length, j = null;
+          if (k === 'ArrowRight' || k === 'ArrowDown') j = (i + 1) % n;
+          else if (k === 'ArrowLeft' || k === 'ArrowUp') j = (i - 1 + n) % n;
+          else if (k === 'Home') j = 0; else if (k === 'End') j = n - 1;
+          if (j !== null) { e.preventDefault(); show(j, true); }
+        });
+      });
+      show(0);
+      var openSv = function (key) {
+        var i = tabs.findIndex(function (t) { return t.getAttribute('data-sv') === key; });
+        if (i >= 0) show(i);
+        return i;
+      };
+      $$('.sv-need').forEach(function (b) {
+        b.addEventListener('click', function () {
+          $$('.sv-need').forEach(function (x) { x.classList.toggle('is-on', x === b); });
+          var key = b.getAttribute('data-go');
+          var target = key === 'saas' ? document.getElementById('compliance-guard-pro') : (openSv(key), document.querySelector('.sv-tabs'));
+          if (target) target.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
+        });
+      });
+      $$('[data-open-sv]').forEach(function (a) {
+        a.addEventListener('click', function () { openSv(a.getAttribute('data-open-sv')); });
+      });
+    });
+
+    safe('riskMatrix', function () {
+      var sel = $('#mx-row');
+      if (!sel) return;
+      var D = [["SOF-01", "1. Entidades de intermediación financiera", "Cuenta de ahorro", "Sucursal", "República Dominicana (nacional)", [3, 2, 2, 1, 2], "KYC estándar, monitoreo transaccional", 0.1], ["SOF-02", "1. Entidades de intermediación financiera", "Cuenta corriente", "Sucursal", "República Dominicana (nacional)", [3, 3, 2, 1, 2], "KYC estándar, monitoreo transaccional", 0.1], ["SOF-03", "1. Entidades de intermediación financiera", "Transferencias / SWIFT", "Corresponsal bancario", "Países de Alto Riesgo GAFI (lista negra/gris)", [4, 5, 4, 5, 5], "Monitoreo reforzado, filtrado de listas, EDD", 0.3], ["SOF-04", "1. Entidades de intermediación financiera", "Tarjetas de crédito/débito", "ATM / Móvil", "República Dominicana (nacional)", [3, 3, 3, 1, 3], "Monitoreo transaccional, límites operacionales", 0.15], ["SOF-05", "1. Entidades de intermediación financiera", "Préstamos", "Sucursal", "República Dominicana (nacional)", [3, 3, 2, 1, 2], "Analisis de origen de fondos, KYC", 0.1], ["SOF-06", "1. Entidades de intermediación financiera", "Banca electrónica / banca móvil", "Web / app móvil", "Estados Unidos", [3, 3, 4, 2, 3], "Autenticación reforzada, monitoreo de geolocalización", 0.15], ["SOF-07", "2. Intermediarios de valores", "Corretaje de títulos valores", "Oficina / plataforma electrónica", "Unión Europea / España", [4, 4, 3, 2, 3], "EDD, verificación de origen de fondos", 0.2], ["SOF-08", "2. Intermediarios de valores", "Ventas a futuro (derivados)", "Plataforma electrónica", "Latinoamérica y el Caribe", [4, 5, 4, 3, 4], "Monitoreo reforzado, límites de exposición", 0.2], ["SOF-09", "3. Canje/cambio de divisas y remesas", "Cambio de divisas", "Sucursal", "Estados Unidos", [4, 5, 3, 2, 5], "Monitoreo reforzado, reporte de operaciones en efectivo", 0.25], ["SOF-10", "3. Canje/cambio de divisas y remesas", "Remesas internacionales", "Agente remesador", "Países de Alto Riesgo GAFI (lista negra/gris)", [4, 5, 3, 5, 5], "EDD, filtrado de listas OFAC/ONU, límites por operación", 0.3], ["SOF-11", "4. Banco Central de la República Dominicana", "Operaciones interbancarias / política monetaria", "Directo (interbancario)", "República Dominicana (nacional)", [1, 1, 1, 1, 1], "Supervisión regulatoria propia", 0.05], ["SOF-12", "5. Fiduciarias", "Administración de fideicomisos", "Oficina", "República Dominicana (nacional)", [4, 4, 2, 2, 3], "Verificación de beneficiario final (UBO), EDD", 0.2], ["SOF-13", "5. Fiduciarias", "Fideicomiso de administración inmobiliaria", "Oficina", "Latinoamérica y el Caribe", [4, 4, 2, 3, 3], "Verificación UBO, analisis de origen de fondos", 0.2], ["SOF-14", "6. Cooperativas de ahorro y crédito", "Cuenta de ahorro cooperativa", "Sucursal", "República Dominicana (nacional)", [2, 2, 2, 1, 2], "KYC estándar", 0.1], ["SOF-15", "6. Cooperativas de ahorro y crédito", "Préstamos cooperativos", "Sucursal", "República Dominicana (nacional)", [2, 2, 2, 1, 2], "KYC estándar, analisis de capacidad de pago", 0.1], ["SOF-16", "7. Cías. de seguros, reaseguro y corredores", "Seguro de vida con valor de rescate", "Corredor de seguros", "República Dominicana (nacional)", [3, 4, 3, 2, 3], "KYC, verificación de beneficiarios de póliza", 0.15], ["SOF-17", "7. Cías. de seguros, reaseguro y corredores", "Seguro general (no vida)", "Corredor de seguros", "República Dominicana (nacional)", [2, 2, 3, 1, 2], "KYC estándar", 0.1], ["SOF-18", "7. Cías. de seguros, reaseguro y corredores", "Reaseguro internacional", "Corredor de seguros", "Latinoamérica y el Caribe", [3, 3, 3, 3, 3], "Debida diligencia de contraparte", 0.15], ["SOF-19", "8. Sociedades administradoras de fondos de inversión", "Fondo de inversión abierto", "Oficina / plataforma", "República Dominicana (nacional)", [3, 3, 3, 2, 3], "KYC, monitoreo de aportes y retiros", 0.15], ["SOF-20", "9. Sociedades titularizadoras", "Titularización de activos", "Oficina", "República Dominicana (nacional)", [3, 4, 2, 2, 3], "Verificación de origen de activos titularizados", 0.15], ["SOF-21", "10. Puestos de bolsa e intermediarios de valores", "Operaciones bursátiles", "Puesto de bolsa", "República Dominicana (nacional)", [3, 3, 3, 2, 3], "KYC, monitoreo transaccional", 0.15], ["SOF-22", "11. Depósito centralizado de valores", "Custodia y compensación de valores", "Plataforma electrónica", "República Dominicana (nacional)", [2, 2, 2, 1, 2], "Controles operativos de custodia", 0.1], ["SOF-23", "12. Emisores de valores de oferta pública", "Emisión primaria de valores", "Oficina", "República Dominicana (nacional)", [3, 4, 2, 2, 3], "Verificación de prospecto y origen de fondos", 0.15], ["APNFD-01", "a. Casinos, juegos de azar, bancas de lotería y apuestas", "Compra de fichas", "Presencial", "República Dominicana (nacional)", [4, 5, 2, 1, 5], "EDD, límites de cambio en efectivo", 0.2], ["APNFD-02", "a. Casinos, juegos de azar, bancas de lotería y apuestas", "Pago de premios", "Caja / presencial", "República Dominicana (nacional)", [4, 5, 2, 1, 5], "EDD, verificación de identidad en premios altos", 0.2], ["APNFD-03", "a. Casinos, juegos de azar, bancas de lotería y apuestas", "Apuestas / lotería en línea", "En línea", "Latinoamérica y el Caribe", [4, 5, 4, 3, 5], "Monitoreo reforzado, verificación de origen de fondos", 0.2], ["APNFD-04", "b. Empresas de factoraje", "Factoraje de facturas", "Oficina", "República Dominicana (nacional)", [3, 3, 2, 1, 3], "Verificación de facturas y contraparte", 0.15], ["APNFD-05", "c. Agentes inmobiliarios", "Compra/venta de bienes inmuebles", "Presencial", "Latinoamérica y el Caribe", [4, 4, 2, 3, 4], "Verificación de origen de fondos y UBO", 0.2], ["APNFD-06", "d. Comerciantes de metales preciosos, piedras preciosas y joyas", "Venta de joyas / metales preciosos", "Tienda", "República Dominicana (nacional)", [3, 4, 2, 2, 3], "Limites de operaciones en efectivo", 0.15], ["APNFD-07", "d. Comerciantes de metales preciosos, piedras preciosas y joyas", "Compra/venta de piedras preciosas (alto valor)", "Tienda / comercio internacional", "Centros offshore (paraísos fiscales)", [4, 5, 2, 4, 4], "EDD, verificación de procedencia y certificación", 0.25], ["APNFD-08", "e. Abogados, notarios y contadores", "Compra, venta o remodelación de inmuebles", "Presencial", "Latinoamérica y el Caribe", [4, 4, 2, 3, 4], "Verificación de origen de fondos", 0.2], ["APNFD-09", "e. Abogados, notarios y contadores", "Administración del dinero, valores u otros bienes del cliente", "Oficina", "Unión Europea / España", [4, 4, 2, 3, 4], "Segregación de cuentas de cliente, EDD", 0.25], ["APNFD-10", "e. Abogados, notarios y contadores", "Administración de cuentas bancarias, ahorro o valores", "Oficina", "República Dominicana (nacional)", [4, 4, 2, 2, 4], "EDD, verificación de mandato", 0.2], ["APNFD-11", "e. Abogados, notarios y contadores", "Organización de contribuciones para creación/operación de empresas", "Oficina", "República Dominicana (nacional)", [4, 4, 2, 2, 3], "Verificación de origen de fondos de aportantes", 0.2], ["APNFD-12", "e. Abogados, notarios y contadores", "Creación/administración de personas jurídicas y compraventa de entidades", "Oficina", "Centros offshore (paraísos fiscales)", [5, 5, 2, 4, 4], "Verificación UBO reforzada, EDD", 0.25], ["APNFD-13", "e. Abogados, notarios y contadores", "Constitución de sociedades, fusión/escisión, compraventa de acciones", "Oficina", "Latinoamérica y el Caribe", [4, 4, 2, 3, 4], "Verificación UBO, EDD", 0.2], ["APNFD-14", "e. Abogados, notarios y contadores", "Actuación como agente de creación de personas jurídicas", "Oficina", "Centros offshore (paraísos fiscales)", [5, 5, 2, 4, 4], "Verificación UBO reforzada, EDD", 0.25], ["APNFD-15", "e. Abogados, notarios y contadores", "Actuación como director, apoderado o socio nominal", "Oficina", "Países de Alto Riesgo GAFI (lista negra/gris)", [5, 5, 2, 5, 4], "EDD reforzada, prohibición de estructuras opacas", 0.2], ["APNFD-16", "e. Abogados, notarios y contadores", "Provisión de domicilio registrado, comercial o postal", "Oficina", "Países de Alto Riesgo GAFI (lista negra/gris)", [5, 4, 2, 5, 3], "Verificación de actividad real del cliente", 0.15], ["APNFD-17", "e. Abogados, notarios y contadores", "Actuación o arreglo como accionista nominal para otra persona", "Oficina", "Países de Alto Riesgo GAFI (lista negra/gris)", [5, 5, 2, 5, 4], "EDD reforzada, verificación de titular real", 0.2], ["APNFD-18", "f. Comercio de vehículos, armas de fuego, barcos y aviones", "Venta de vehículos de motor", "Presencial", "República Dominicana (nacional)", [3, 3, 2, 1, 3], "Verificación de origen de fondos en pagos altos", 0.15], ["APNFD-19", "f. Comercio de vehículos, armas de fuego, barcos y aviones", "Venta de armas de fuego", "Presencial", "República Dominicana (nacional)", [4, 5, 2, 2, 4], "Verificación de licencia y antecedentes", 0.2], ["APNFD-20", "f. Comercio de vehículos, armas de fuego, barcos y aviones", "Venta de embarcaciones y aeronaves", "Presencial", "Centros offshore (paraísos fiscales)", [4, 5, 2, 4, 4], "Verificación de origen de fondos y titularidad", 0.2], ["APNFD-21", "g. Casas de empeño", "Préstamo con garantía prendaria", "Sucursal", "República Dominicana (nacional)", [3, 4, 2, 1, 4], "Verificación de identidad y origen del bien", 0.15], ["APNFD-22", "h. Empresas constructoras", "Venta de inmueble (proyecto constructivo)", "Oficina", "República Dominicana (nacional)", [3, 4, 2, 2, 3], "Verificación de origen de fondos", 0.15], ["APNFD-23", "h. Empresas constructoras", "Recepción de pagos en efectivo por construcción", "Oficina", "República Dominicana (nacional)", [3, 4, 2, 1, 4], "Limites de pagos en efectivo, verificación de origen", 0.2]];
+      var W = [0.30, 0.20, 0.15, 0.25, 0.10];
+      var CATS = [[1.5, 'Muy bajo', 'c1'], [2.5, 'Bajo', 'c2'], [3.5, 'Medio', 'c3'], [4.5, 'Alto', 'c4'], [99, 'Muy alto', 'c5']];
+      var cat = function (v) { for (var i = 0; i < CATS.length; i++) if (v < CATS[i][0]) return CATS[i]; };
+      var sl = [0, 1, 2, 3, 4].map(function (i) { return $('#mx-s' + i); });
+      var ef = $('#mx-ef');
+      var paint = function (id, v) {
+        var c = cat(v), el = $('#' + id), ce = $('#' + id + '-cat'), bar = $('#' + id + '-bar');
+        el.textContent = (Math.round((v + 1e-9) * 100) / 100).toFixed(2);
+        ce.textContent = c[1]; ce.className = 'mx-cat ' + c[2];
+        bar.className = c[2]; bar.style.background = ''; bar.style.width = (v / 5 * 100) + '%';
+      };
+      var calc = function () {
+        var inh = 0;
+        sl.forEach(function (s, i) { var v = +s.value; inh += v * W[i]; $('#mx-o' + i).textContent = v; });
+        var e = +ef.value / 100;
+        $('#mx-oef').textContent = ef.value + ' %';
+        inh = Math.round(inh * 1000) / 1000;
+        var res = Math.max(1, inh * (1 - e));
+        paint('mx-inh', inh); paint('mx-res', res);
+      };
+      var load = function () {
+        var r = D[+sel.value];
+        r[5].forEach(function (v, i) { sl[i].value = v; });
+        ef.value = Math.round(r[7] * 100);
+        $('#mx-ctx').textContent = r[1].replace(/^[0-9a-h]+\.\s*/, '') + ' · Canal: ' + r[3] + ' · Jurisdicción: ' + r[4];
+        var c = $('#mx-ctl'); c.textContent = '';
+        var b = document.createElement('b'); b.textContent = 'Controles de referencia: ';
+        c.appendChild(b); c.appendChild(document.createTextNode(r[6] + ' (efectividad estimada ' + Math.round(r[7] * 100) + ' %).'));
+        calc();
+      };
+      sel.addEventListener('change', load);
+      sl.concat(ef).forEach(function (s) { s.addEventListener('input', calc); });
+      load();
     });
 
     /* ---------------------------------------------------------------
