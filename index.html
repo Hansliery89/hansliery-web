@@ -103,7 +103,8 @@
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Controles internos y gobierno de cumplimiento" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Capacitación profesional PLAFT" } },
             { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Compliance Guard Pro", "applicationCategory": "BusinessApplication", "description": "Plataforma SaaS de cumplimiento en desarrollo." } },
-            { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "LEXIUM Legal Suite", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "Software de gestión integral para firmas de abogados en República Dominicana: expedientes, plazos, facturación electrónica e-CF, portal del cliente y cumplimiento PLAFT." } }
+            { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "LEXIUM Legal Suite", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "Software de gestión integral para firmas de abogados en República Dominicana: expedientes, plazos, facturación electrónica e-CF, portal del cliente y cumplimiento PLAFT." } },
+            { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "MEDINOVAQ", "applicationCategory": "HealthApplication", "operatingSystem": "Web", "url": "https://medinovaq.pages.dev/", "description": "Plataforma SaaS para consultorios y clínicas en República Dominicana: agenda, expediente clínico, recetas, facturación, telemedicina, portal del paciente y asistente de IA con aprobación médica." } }
           ]
         }
       }
@@ -812,7 +813,7 @@
   .saas-copy > p { margin-top: 1rem; color: var(--muted); font-size: 1rem; max-width: 520px; }
   .saas-note { display: flex; gap: .55rem; font-size: .84rem !important; color: #6B5412 !important; }
   .saas-note svg { width: 16px; height: 16px; flex: none; margin-top: 3px; }
-  .saas-actions { margin-top: 1.8rem; }
+  .saas-actions { margin-top: 1.8rem; display: flex; flex-wrap: wrap; gap: .8rem; align-items: center; }
   .saas-visual { position: relative; perspective: 1200px; }
   .saas-window { border-radius: 18px; overflow: hidden; background: rgba(255, 255, 255, .85); border: 1px solid var(--line-strong); box-shadow: 0 40px 80px -30px rgba(10, 25, 47, .198); transform: rotateY(-10deg) rotateX(4deg); transition: transform .8s var(--ease); }
   .saas:hover .saas-window { transform: rotateY(-3deg) rotateX(1deg); }
@@ -1881,7 +1882,7 @@
 
         <div class="sv-finder" data-reveal>
           <p class="sv-finder-q">¿Qué necesita tu organización?</p>
-          <div class="sv-needs"><button type="button" class="sv-need" data-go="consultoria">Me van a inspeccionar o tengo observaciones</button><button type="button" class="sv-need" data-go="riesgos">Necesito una matriz de riesgo</button><button type="button" class="sv-need" data-go="riesgos">Debo conocer mejor a mis clientes (KYC, beneficiario final, PEP)</button><button type="button" class="sv-need" data-go="controles">Mis controles no están documentados</button><button type="button" class="sv-need" data-go="controles">La gerencia necesita reportes de cumplimiento</button><button type="button" class="sv-need" data-go="capacitacion">Debo capacitar a mi equipo</button><button type="button" class="sv-need" data-go="saas">Quiero automatizar el cumplimiento</button><button type="button" class="sv-need" data-go="lexium">Tengo una firma de abogados</button></div>
+          <div class="sv-needs"><button type="button" class="sv-need" data-go="consultoria">Me van a inspeccionar o tengo observaciones</button><button type="button" class="sv-need" data-go="riesgos">Necesito una matriz de riesgo</button><button type="button" class="sv-need" data-go="riesgos">Debo conocer mejor a mis clientes (KYC, beneficiario final, PEP)</button><button type="button" class="sv-need" data-go="controles">Mis controles no están documentados</button><button type="button" class="sv-need" data-go="controles">La gerencia necesita reportes de cumplimiento</button><button type="button" class="sv-need" data-go="capacitacion">Debo capacitar a mi equipo</button><button type="button" class="sv-need" data-go="saas">Quiero automatizar el cumplimiento</button><button type="button" class="sv-need" data-go="lexium">Tengo una firma de abogados</button><button type="button" class="sv-need" data-go="medinovaq">Tengo un consultorio o una clínica</button></div>
         </div>
 
         <div class="sv-tabs card" data-reveal>
@@ -2062,7 +2063,7 @@
         <header class="section-head">
           <p class="eyebrow" data-reveal>Software propio</p>
           <h2 class="h2" id="software-title" data-reveal style="--d:.08s">Herramientas que llevan la experiencia a la <span class="grad">tecnología</span>.</h2>
-          <p class="lead" data-reveal style="--d:.14s">Plataformas desarrolladas a partir de la práctica diaria del cumplimiento y la gestión de riesgos en República Dominicana.</p>
+          <p class="lead" data-reveal style="--d:.14s">Plataformas para equipos de cumplimiento, firmas de abogados y centros de salud, desarrolladas en República Dominicana con la seguridad y la trazabilidad como base.</p>
         </header>
 
         <!-- PRODUCTO SAAS: Compliance Guard Pro (en desarrollo) -->
@@ -2134,6 +2135,42 @@
                 <source srcset="assets/lexium-dashboard.webp" type="image/webp">
                 <img class="saas-shot" src="assets/lexium-dashboard.jpg" width="1280" height="800" loading="lazy" decoding="async" alt="Panel general de LEXIUM Legal Suite con audiencias próximas, plazos y cuentas por cobrar de una firma de ejemplo">
               </picture>
+            </div>
+            <span class="saas-caption">Pantalla real · datos de demostración</span>
+          </div>
+        </article>
+
+        <!-- PRODUCTO: MEDINOVAQ (demo pública disponible) -->
+        <article class="card saas" id="medinovaq" data-reveal="scale" aria-labelledby="medinovaq-title">
+          <div class="saas-copy">
+            <div class="saas-badges">
+              <span class="saas-badge">Software para consultorios y clínicas</span>
+              <span class="saas-status saas-live"><span class="pulse-dot" aria-hidden="true"></span>Demo disponible</span>
+            </div>
+            <h3 id="medinovaq-title">MEDINOVAQ <span class="grad-gold">Salud</span></h3>
+            <p>Plataforma SaaS para médicos independientes, consultorios y clínicas en República Dominicana: agenda, expediente clínico, recetas, facturación, telemedicina y portal del paciente en un solo lugar.</p>
+            <ul class="saas-feats">
+              <li><b>Agenda y recepción</b>Citas por médico y sede sin superposiciones, llegada a sala, lista de espera y recordatorios.</li>
+              <li><b>Expediente clínico</b>Notas firmadas e inalterables con huella de integridad, diagnósticos CIE-10, signos vitales y enmiendas trazables.</li>
+              <li><b>Recetas, órdenes y cobros</b>Alerta de alergias al recetar, órdenes de laboratorio e imagen, facturas a pacientes y cuentas por cobrar.</li>
+              <li><b>Videoconsulta, portal y MEDINOVAQ AI</b>Sala virtual, portal del paciente y resúmenes de IA que el médico revisa y aprueba: la IA no diagnostica ni receta.</li>
+            </ul>
+            <p class="saas-note"><svg aria-hidden="true"><use href="#i-lock"/></svg>Aislamiento de datos por institución, doble factor de autenticación para el personal, cifrado y bitácora de auditoría. La demo usa exclusivamente datos ficticios.</p>
+            <div class="saas-actions">
+              <a class="btn btn-gold" href="https://medinovaq.pages.dev/ingresar" target="_blank" rel="noopener">Explorar la demo <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <a class="btn btn-ghost" href="#contacto" data-service="MEDINOVAQ (demostración)">Solicitar una demostración guiada</a>
+            </div>
+          </div>
+
+          <div class="saas-visual">
+            <div class="saas-window">
+              <div class="saas-bar" aria-hidden="true"><i></i><i></i><i></i><span>medinovaq</span></div>
+              <a href="https://medinovaq.pages.dev/ingresar" target="_blank" rel="noopener" aria-label="Abrir la demo de MEDINOVAQ en una pestaña nueva">
+                <picture>
+                  <source srcset="assets/medinovaq-agenda.webp" type="image/webp">
+                  <img class="saas-shot" src="assets/medinovaq-agenda.jpg" width="1280" height="800" loading="lazy" decoding="async" alt="Agenda del día de un médico en MEDINOVAQ con citas realizadas, pacientes en sala y botones para atender, con datos ficticios">
+                </picture>
+              </a>
             </div>
             <span class="saas-caption">Pantalla real · datos de demostración</span>
           </div>
@@ -2351,6 +2388,7 @@
           <div class="card pc-mini"><b>Paquete de implementación</b><p class="pc-pct">−10 %</p><small>Al contratar juntos diagnóstico, matriz de riesgo y manual.</small></div>
           <div class="card pc-mini pc-saas"><b>Compliance Guard <span class="grad-gold">Pro</span></b><p class="pc-quote">En desarrollo</p><small>Los planes y precios se publicarán al lanzamiento. Inscríbase para recibir la tarifa de fundador.</small><a class="btn-link" href="#contacto" data-service="Compliance Guard Pro (información)">Quiero la tarifa de fundador <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
           <div class="card pc-mini pc-saas"><b>LEXIUM <span class="grad-gold">Legal Suite</span></b><p class="pc-quote">Demo disponible</p><small>Planes por usuario, en la nube o instalado en la oficina. Se cotiza según el tamaño de la firma.</small><a class="btn-link" href="#contacto" data-service="LEXIUM Legal Suite (demostración)">Solicitar una demostración <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+          <div class="card pc-mini pc-saas"><b>MEDINOVAQ <span class="grad-gold">Salud</span></b><p class="pc-quote">Demo disponible</p><small>Tarifa por institución más una tarifa por profesional, con prueba de 14 días. Precios de referencia en la demo.</small><a class="btn-link" href="https://medinovaq.pages.dev/precios" target="_blank" rel="noopener">Ver precios y demo <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
         </div>
 
         <div class="pc-fiscal" data-reveal>
@@ -2479,6 +2517,7 @@
                 <option>Capacitación profesional</option>
                 <option>Compliance Guard Pro (información)</option>
                 <option>LEXIUM Legal Suite (demostración)</option>
+                <option>MEDINOVAQ (demostración)</option>
                 <option>Otro / Aún no lo tengo definido</option>
               </select>
               <span class="error" id="e-service" aria-live="polite"></span>
@@ -2927,7 +2966,7 @@
         b.addEventListener('click', function () {
           $$('.sv-need').forEach(function (x) { x.classList.toggle('is-on', x === b); });
           var key = b.getAttribute('data-go');
-          var target = key === 'saas' ? document.getElementById('compliance-guard-pro') : key === 'lexium' ? document.getElementById('lexium-legal-suite') : (openSv(key), document.querySelector('.sv-tabs'));
+          var target = key === 'saas' ? document.getElementById('compliance-guard-pro') : key === 'lexium' ? document.getElementById('lexium-legal-suite') : key === 'medinovaq' ? document.getElementById('medinovaq') : (openSv(key), document.querySelector('.sv-tabs'));
           if (target) target.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
         });
       });

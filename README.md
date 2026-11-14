@@ -18,6 +18,8 @@ hansliery-web/
 │   ├── og-image.png    ← Imagen 1200×630 para vista previa en redes sociales
 │   ├── entregables/    ← 16 PDF modelo de los entregables de cada servicio
 │   │   └── _fuente/    ← Generador (python3 build.py; requiere Playwright, Chrome y las fuentes Sora/Manrope)
+│   ├── lexium-dashboard.(jpg|webp) ← Captura de LEXIUM (datos de demostración)
+│   ├── medinovaq-agenda.(jpg|webp) ← Captura de MEDINOVAQ (datos ficticios; demo en https://medinovaq.pages.dev)
 │   └── hansliery-sanchez.(jpg|webp) ← Foto de perfil
 ├── legal/              ← Términos, privacidad, cookies, aviso legal y accesibilidad (generadas con legal/_fuente/build.py)
 └── cursos/             ← Capacitaciones gratuitas (13 cursos + catálogo)
