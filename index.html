@@ -102,7 +102,8 @@
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Gestión de riesgos y debida diligencia" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Controles internos y gobierno de cumplimiento" } },
             { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Capacitación profesional PLAFT" } },
-            { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Compliance Guard Pro", "applicationCategory": "BusinessApplication", "description": "Plataforma SaaS de cumplimiento en desarrollo." } }
+            { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "Compliance Guard Pro", "applicationCategory": "BusinessApplication", "description": "Plataforma SaaS de cumplimiento en desarrollo." } },
+            { "@type": "Offer", "itemOffered": { "@type": "SoftwareApplication", "name": "LEXIUM Legal Suite", "applicationCategory": "BusinessApplication", "operatingSystem": "Web", "description": "Software de gestión integral para firmas de abogados en República Dominicana: expedientes, plazos, facturación electrónica e-CF, portal del cliente y cumplimiento PLAFT." } }
           ]
         }
       }
@@ -842,11 +843,22 @@
   .saas-build i { flex: 1; height: 4px; border-radius: 4px; background: rgba(212, 175, 55, .15); position: relative; overflow: hidden; }
   .saas-build i::after { content: ""; position: absolute; top: 0; bottom: 0; width: 35%; border-radius: inherit; background: linear-gradient(90deg, transparent, var(--gold), transparent); animation: buildbar 2.4s ease-in-out infinite; }
   @keyframes buildbar { from { left: -35%; } to { left: 100%; } }
+  .saas + .saas { margin-top: clamp(1.6rem, 4vw, 2.4rem); }
+  .software .saas:first-of-type { margin-top: 0; }
+  .saas-alt { grid-template-columns: 1.05fr .95fr; }
+  .saas-alt .saas-visual { order: -1; }
+  .saas-alt .saas-window { transform: rotateY(10deg) rotateX(4deg); }
+  .saas-alt:hover .saas-window { transform: rotateY(3deg) rotateX(1deg); }
+  .saas-shot { display: block; width: 100%; height: auto; }
+  .saas-live { color: #0F766E; background: rgba(16, 185, 129, .1); border-color: rgba(16, 185, 129, .35); }
+  .saas-live .pulse-dot { background: #10B981; }
+  .saas-live .pulse-dot::after { border-color: #10B981; }
   .saas-caption { display: block; margin-top: .8rem; text-align: right; font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted-2); }
   @media (max-width: 1024px) {
-    .saas { grid-template-columns: 1fr; }
+    .saas, .saas-alt { grid-template-columns: 1fr; }
+    .saas-alt .saas-visual { order: 0; }
     .saas-window { transform: none; }
-    .saas:hover .saas-window { transform: none; }
+    .saas:hover .saas-window, .saas-alt .saas-window, .saas-alt:hover .saas-window { transform: none; }
   }
   @media (max-width: 760px) {
     .services-grid { grid-template-columns: 1fr; }
@@ -1496,6 +1508,7 @@
           <li><a class="nav-link" href="#inicio">Inicio</a></li>
           <li><a class="nav-link" href="#perfil">Perfil profesional</a></li>
           <li><a class="nav-link" href="#servicios">Servicios</a></li>
+          <li><a class="nav-link" href="#software">Software</a></li>
           <li><a class="nav-link" href="#capacitaciones">Capacitaciones</a></li>
           <li><a class="nav-link" href="#metodologia">Metodología</a></li>
           <li><a class="nav-link" href="#costos">Costos</a></li>
@@ -1518,6 +1531,7 @@
         <li><a class="m-link" href="#inicio">Inicio</a></li>
         <li><a class="m-link" href="#perfil">Perfil profesional</a></li>
         <li><a class="m-link" href="#servicios">Servicios</a></li>
+        <li><a class="m-link" href="#software">Software</a></li>
         <li><a class="m-link" href="#capacitaciones">Capacitaciones</a></li>
         <li><a class="m-link" href="#metodologia">Metodología</a></li>
         <li><a class="m-link" href="#costos">Costos</a></li>
@@ -1854,7 +1868,7 @@
     </div>
 
     <!-- ============================================================
-         D. SERVICIOS PROFESIONALES (4) + PRODUCTO SAAS
+         D. SERVICIOS PROFESIONALES (4)
          ============================================================ -->
     <section class="section services bg-hex" id="servicios" aria-labelledby="servicios-title">
       <div class="orb" style="width:420px;height:420px;background:#38BDF8;top:10%;right:-120px" aria-hidden="true"></div>
@@ -1867,7 +1881,7 @@
 
         <div class="sv-finder" data-reveal>
           <p class="sv-finder-q">¿Qué necesita tu organización?</p>
-          <div class="sv-needs"><button type="button" class="sv-need" data-go="consultoria">Me van a inspeccionar o tengo observaciones</button><button type="button" class="sv-need" data-go="riesgos">Necesito una matriz de riesgo</button><button type="button" class="sv-need" data-go="riesgos">Debo conocer mejor a mis clientes (KYC, beneficiario final, PEP)</button><button type="button" class="sv-need" data-go="controles">Mis controles no están documentados</button><button type="button" class="sv-need" data-go="controles">La gerencia necesita reportes de cumplimiento</button><button type="button" class="sv-need" data-go="capacitacion">Debo capacitar a mi equipo</button><button type="button" class="sv-need" data-go="saas">Quiero automatizar el cumplimiento</button></div>
+          <div class="sv-needs"><button type="button" class="sv-need" data-go="consultoria">Me van a inspeccionar o tengo observaciones</button><button type="button" class="sv-need" data-go="riesgos">Necesito una matriz de riesgo</button><button type="button" class="sv-need" data-go="riesgos">Debo conocer mejor a mis clientes (KYC, beneficiario final, PEP)</button><button type="button" class="sv-need" data-go="controles">Mis controles no están documentados</button><button type="button" class="sv-need" data-go="controles">La gerencia necesita reportes de cumplimiento</button><button type="button" class="sv-need" data-go="capacitacion">Debo capacitar a mi equipo</button><button type="button" class="sv-need" data-go="saas">Quiero automatizar el cumplimiento</button><button type="button" class="sv-need" data-go="lexium">Tengo una firma de abogados</button></div>
         </div>
 
         <div class="sv-tabs card" data-reveal>
@@ -2037,6 +2051,20 @@
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <!-- ============================================================
+         D2. SOFTWARE PROPIO
+         ============================================================ -->
+    <section class="section software bg-grid" id="software" aria-labelledby="software-title">
+      <div class="container">
+        <header class="section-head">
+          <p class="eyebrow" data-reveal>Software propio</p>
+          <h2 class="h2" id="software-title" data-reveal style="--d:.08s">Herramientas que llevan la experiencia a la <span class="grad">tecnología</span>.</h2>
+          <p class="lead" data-reveal style="--d:.14s">Plataformas desarrolladas a partir de la práctica diaria del cumplimiento y la gestión de riesgos en República Dominicana.</p>
+        </header>
+
         <!-- PRODUCTO SAAS: Compliance Guard Pro (en desarrollo) -->
         <article class="card saas" id="compliance-guard-pro" data-reveal="scale" aria-labelledby="saas-title">
           <div class="saas-copy">
@@ -2075,6 +2103,39 @@
               <div class="saas-build"><span>Fase de desarrollo</span><i></i></div>
             </div>
             <span class="saas-caption">Vista conceptual</span>
+          </div>
+        </article>
+
+        <!-- PRODUCTO: LEXIUM Legal Suite (demo disponible) -->
+        <article class="card saas saas-alt" id="lexium-legal-suite" data-reveal="scale" aria-labelledby="lexium-title">
+          <div class="saas-copy">
+            <div class="saas-badges">
+              <span class="saas-badge">Software para firmas de abogados</span>
+              <span class="saas-status saas-live"><span class="pulse-dot" aria-hidden="true"></span>Demo disponible</span>
+            </div>
+            <h3 id="lexium-title">LEXIUM <span class="grad-gold">Legal Suite</span></h3>
+            <p>Gestión integral para bufetes y abogados independientes en República Dominicana: expedientes, plazos, facturación fiscal, portal del cliente y cumplimiento PLAFT en una sola plataforma.</p>
+            <ul class="saas-feats">
+              <li><b>Expedientes y plazos</b>Audiencias, tareas, calculadora de días hábiles y enlace con Acceso Digital del Poder Judicial.</li>
+              <li><b>Facturación electrónica e-CF</b>E31, E32 y nota de crédito E34 con código QR, ITBIS y cuentas por cobrar.</li>
+              <li><b>45 plantillas dominicanas</b>Actos y contratos llenados desde el expediente, en Word o PDF, con firma electrónica por enlace.</li>
+              <li><b>Seguimiento de clientes y PLAFT</b>Debida diligencia según la Ley 155-17, conflictos de intereses y avisos por WhatsApp y correo.</li>
+            </ul>
+            <p class="saas-note"><svg aria-hidden="true"><use href="#i-lock"/></svg>Roles, doble factor de autenticación, cifrado y bitácora de auditoría. Disponible en la nube o instalado en la oficina.</p>
+            <div class="saas-actions">
+              <a class="btn btn-gold" href="#contacto" data-service="LEXIUM Legal Suite (demostración)">Solicitar una demostración <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            </div>
+          </div>
+
+          <div class="saas-visual">
+            <div class="saas-window">
+              <div class="saas-bar" aria-hidden="true"><i></i><i></i><i></i><span>lexium legal suite</span></div>
+              <picture>
+                <source srcset="assets/lexium-dashboard.webp" type="image/webp">
+                <img class="saas-shot" src="assets/lexium-dashboard.jpg" width="1280" height="800" loading="lazy" decoding="async" alt="Panel general de LEXIUM Legal Suite con audiencias próximas, plazos y cuentas por cobrar de una firma de ejemplo">
+              </picture>
+            </div>
+            <span class="saas-caption">Pantalla real · datos de demostración</span>
           </div>
         </article>
       </div>
@@ -2289,6 +2350,7 @@
           <div class="card pc-mini"><b>Hora de consultoría</b><p><span class="pc-amt" data-dop="3500" data-usd="65">RD$3,500</span><span class=pc-suf>/hora</span></p><small>Consultas puntuales fuera de un plan. Mínimo 2 horas.</small></div>
           <div class="card pc-mini"><b>Paquete de implementación</b><p class="pc-pct">−10 %</p><small>Al contratar juntos diagnóstico, matriz de riesgo y manual.</small></div>
           <div class="card pc-mini pc-saas"><b>Compliance Guard <span class="grad-gold">Pro</span></b><p class="pc-quote">En desarrollo</p><small>Los planes y precios se publicarán al lanzamiento. Inscríbase para recibir la tarifa de fundador.</small><a class="btn-link" href="#contacto" data-service="Compliance Guard Pro (información)">Quiero la tarifa de fundador <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+          <div class="card pc-mini pc-saas"><b>LEXIUM <span class="grad-gold">Legal Suite</span></b><p class="pc-quote">Demo disponible</p><small>Planes por usuario, en la nube o instalado en la oficina. Se cotiza según el tamaño de la firma.</small><a class="btn-link" href="#contacto" data-service="LEXIUM Legal Suite (demostración)">Solicitar una demostración <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
         </div>
 
         <div class="pc-fiscal" data-reveal>
@@ -2416,6 +2478,7 @@
                 <option>Controles internos y gobierno de cumplimiento</option>
                 <option>Capacitación profesional</option>
                 <option>Compliance Guard Pro (información)</option>
+                <option>LEXIUM Legal Suite (demostración)</option>
                 <option>Otro / Aún no lo tengo definido</option>
               </select>
               <span class="error" id="e-service" aria-live="polite"></span>
@@ -2864,7 +2927,7 @@
         b.addEventListener('click', function () {
           $$('.sv-need').forEach(function (x) { x.classList.toggle('is-on', x === b); });
           var key = b.getAttribute('data-go');
-          var target = key === 'saas' ? document.getElementById('compliance-guard-pro') : (openSv(key), document.querySelector('.sv-tabs'));
+          var target = key === 'saas' ? document.getElementById('compliance-guard-pro') : key === 'lexium' ? document.getElementById('lexium-legal-suite') : (openSv(key), document.querySelector('.sv-tabs'));
           if (target) target.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
         });
       });
