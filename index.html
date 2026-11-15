@@ -959,7 +959,7 @@
   .mx-note { margin-top: 1.3rem; font-size: .76rem; color: var(--muted-2); line-height: 1.55; }
   .mx-note strong { color: var(--muted); }
 
-  .dx-card { margin-top: 1.4rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1.2rem; align-items: center; padding: 1.2rem 1.4rem; border-radius: var(--radius); border: 1px solid var(--line-strong); background: linear-gradient(120deg, rgba(37, 99, 235, .05), rgba(56, 189, 248, .04)); transition: border-color .3s, box-shadow .3s, transform .3s var(--ease); }
+  .dx-card { scroll-margin-top: calc(var(--header-h) + 24px); margin-top: 1.4rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1.2rem; align-items: center; padding: 1.2rem 1.4rem; border-radius: var(--radius); border: 1px solid var(--line-strong); background: linear-gradient(120deg, rgba(37, 99, 235, .05), rgba(56, 189, 248, .04)); transition: border-color .3s, box-shadow .3s, transform .3s var(--ease); }
   .dx-card:hover { border-color: rgba(37, 99, 235, .45); box-shadow: 0 22px 50px -34px rgba(37, 99, 235, .7); transform: translateY(-2px); }
   .dx-ic { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: #FFFFFF; border: 1px solid var(--line-strong); }
   .dx-ic svg { width: 24px; height: 24px; fill: none; stroke: var(--teal); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
@@ -1893,7 +1893,7 @@
 
         <div class="sv-finder" data-reveal>
           <p class="sv-finder-q">¿Qué necesita tu organización?</p>
-          <div class="sv-needs"><button type="button" class="sv-need" data-go="consultoria">Me van a inspeccionar o tengo observaciones</button><button type="button" class="sv-need" data-go="riesgos">Necesito una matriz de riesgo</button><button type="button" class="sv-need" data-go="riesgos">Debo conocer mejor a mis clientes (KYC, beneficiario final, PEP)</button><button type="button" class="sv-need" data-go="controles">Mis controles no están documentados</button><button type="button" class="sv-need" data-go="controles">La gerencia necesita reportes de cumplimiento</button><button type="button" class="sv-need" data-go="capacitacion">Debo capacitar a mi equipo</button><button type="button" class="sv-need" data-go="saas">Quiero automatizar el cumplimiento</button><button type="button" class="sv-need" data-go="lexium">Tengo una firma de abogados</button><button type="button" class="sv-need" data-go="medinovaq">Tengo un consultorio o una clínica</button></div>
+          <div class="sv-needs"><button type="button" class="sv-need" data-go="consultoria">Me van a inspeccionar o tengo observaciones</button><button type="button" class="sv-need" data-go="riesgos">Necesito una matriz de riesgo</button><button type="button" class="sv-need" data-go="diagnostico">Quiero conocer mi exposición al riesgo LA/FT</button><button type="button" class="sv-need" data-go="riesgos">Debo conocer mejor a mis clientes (KYC, beneficiario final, PEP)</button><button type="button" class="sv-need" data-go="controles">Mis controles no están documentados</button><button type="button" class="sv-need" data-go="controles">La gerencia necesita reportes de cumplimiento</button><button type="button" class="sv-need" data-go="capacitacion">Debo capacitar a mi equipo</button><button type="button" class="sv-need" data-go="saas">Quiero automatizar el cumplimiento</button><button type="button" class="sv-need" data-go="lexium">Tengo una firma de abogados</button><button type="button" class="sv-need" data-go="medinovaq">Tengo un consultorio o una clínica</button></div>
         </div>
 
         <div class="sv-tabs card" data-reveal>
@@ -1984,7 +1984,7 @@
               </div>
               <p class="mx-note">Inherente = Σ (factor × peso). Residual = inherente × (1 − efectividad de controles), con un mínimo de 1. Los puntajes de cada línea son <strong>valores de partida parametrizables</strong> por el oficial de cumplimiento: deben calibrarse con datos históricos de la entidad y revisarse periódicamente. Herramienta ilustrativa; no constituye una evaluación de riesgo de ninguna organización.</p>
             </div>
-            <div class="dx-card">
+            <div class="dx-card" id="diagnostico">
               <span class="dx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12.5l2.2 2.2 4.8-4.8"/></svg></span>
               <div class="dx-txt">
                 <h4>Diagnóstico preliminar de riesgos LA/FT</h4>
@@ -2986,13 +2986,21 @@
         b.addEventListener('click', function () {
           $$('.sv-need').forEach(function (x) { x.classList.toggle('is-on', x === b); });
           var key = b.getAttribute('data-go');
-          var target = key === 'saas' ? document.getElementById('compliance-guard-pro') : key === 'lexium' ? document.getElementById('lexium-legal-suite') : key === 'medinovaq' ? document.getElementById('medinovaq') : (openSv(key), document.querySelector('.sv-tabs'));
+          var target = key === 'diagnostico' ? (openSv('riesgos'), document.getElementById('diagnostico')) : key === 'saas' ? document.getElementById('compliance-guard-pro') : key === 'lexium' ? document.getElementById('lexium-legal-suite') : key === 'medinovaq' ? document.getElementById('medinovaq') : (openSv(key), document.querySelector('.sv-tabs'));
           if (target) target.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'start' });
         });
       });
       $$('[data-open-sv]').forEach(function (a) {
         a.addEventListener('click', function () { openSv(a.getAttribute('data-open-sv')); });
       });
+      var dxHash = function () {
+        if (location.hash !== '#diagnostico') return;
+        openSv('riesgos');
+        var c = document.getElementById('diagnostico');
+        if (c) setTimeout(function () { c.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'center' }); }, 60);
+      };
+      window.addEventListener('hashchange', dxHash);
+      dxHash();
     });
 
     safe('riskMatrix', function () {
