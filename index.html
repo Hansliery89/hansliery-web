@@ -959,6 +959,17 @@
   .mx-note { margin-top: 1.3rem; font-size: .76rem; color: var(--muted-2); line-height: 1.55; }
   .mx-note strong { color: var(--muted); }
 
+  .dx-card { margin-top: 1.4rem; display: grid; grid-template-columns: auto 1fr auto; gap: 1.2rem; align-items: center; padding: 1.2rem 1.4rem; border-radius: var(--radius); border: 1px solid var(--line-strong); background: linear-gradient(120deg, rgba(37, 99, 235, .05), rgba(56, 189, 248, .04)); transition: border-color .3s, box-shadow .3s, transform .3s var(--ease); }
+  .dx-card:hover { border-color: rgba(37, 99, 235, .45); box-shadow: 0 22px 50px -34px rgba(37, 99, 235, .7); transform: translateY(-2px); }
+  .dx-ic { width: 48px; height: 48px; border-radius: 14px; display: grid; place-items: center; background: #FFFFFF; border: 1px solid var(--line-strong); }
+  .dx-ic svg { width: 24px; height: 24px; fill: none; stroke: var(--teal); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .sv-panel .dx-txt h4 { font-family: var(--font-head); font-size: 1rem; letter-spacing: 0; text-transform: none; color: var(--ice); margin: 0 0 .3rem; }
+  .dx-txt p { font-size: .86rem; color: var(--muted); line-height: 1.55; max-width: 72ch; }
+  .dx-meta { display: inline-flex; align-items: center; gap: .4rem; margin-top: .5rem; font-size: .76rem; font-weight: 600; color: var(--electric-ink); }
+  .dx-meta svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
+  .dx-btn { white-space: nowrap; }
+  @media (max-width: 900px) { .dx-card { grid-template-columns: auto 1fr; } .dx-btn { grid-column: 1 / -1; justify-content: center; } }
+  @media (max-width: 600px) { .dx-card { grid-template-columns: 1fr; padding: 1.2rem; } .dx-btn { white-space: normal; } }
   .saas-feats { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; margin: 1.2rem 0; }
   .saas-feats li { font-size: .8rem; color: var(--muted); line-height: 1.45; padding-left: .9rem; border-left: 2px solid rgba(212, 175, 55, .5); }
   .saas-feats b { display: block; color: var(--ice); font-size: .86rem; margin-bottom: .15rem; }
@@ -1972,6 +1983,15 @@
                 </div>
               </div>
               <p class="mx-note">Inherente = Σ (factor × peso). Residual = inherente × (1 − efectividad de controles), con un mínimo de 1. Los puntajes de cada línea son <strong>valores de partida parametrizables</strong> por el oficial de cumplimiento: deben calibrarse con datos históricos de la entidad y revisarse periódicamente. Herramienta ilustrativa; no constituye una evaluación de riesgo de ninguna organización.</p>
+            </div>
+            <div class="dx-card">
+              <span class="dx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M8.5 12.5l2.2 2.2 4.8-4.8"/></svg></span>
+              <div class="dx-txt">
+                <h4>Diagnóstico preliminar de riesgos LA/FT</h4>
+                <p>Identifica la exposición de tu organización al riesgo de lavado de activos y financiamiento del terrorismo mediante una evaluación orientativa basada en su actividad económica, productos, servicios, clientes, canales y jurisdicciones.</p>
+                <small class="dx-meta"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Evaluación online · Resultados descargables en PDF</small>
+              </div>
+              <a class="btn btn-primary dx-btn" href="diagnostico-riesgos.html">Iniciar diagnóstico gratuito <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
             </div>
             <div class="sv-grid sv-grid-b">
               <div>
@@ -3075,6 +3095,23 @@
         });
       });
     });
+
+    /* ---------------------------------------------------------------
+       10d. Contacto prellenado desde el diagnóstico preliminar
+       --------------------------------------------------------------- */
+    safe('diagnosticPrefill', function () {
+      var q = new URLSearchParams(location.search);
+      if (q.get('servicio') !== 'riesgos') return;
+      var select = $('#f-service'), msg = $('#f-msg');
+      if (select) { select.value = 'Gestión de riesgos y debida diligencia'; select.dispatchEvent(new Event('change')); }
+      var cats = ['Muy bajo', 'Bajo', 'Medio', 'Alto', 'Muy alto'];
+      var c = q.get('dx'), pts = parseInt(q.get('pts'), 10);
+      if (msg && !msg.value.trim() && cats.indexOf(c) > -1 && pts >= 0 && pts <= 100) {
+        msg.value = 'Completé el diagnóstico preliminar de riesgos LA/FT (riesgo residual estimado: ' + c + ', ' + pts + '/100) y me interesa profundizar en los resultados.';
+        msg.dispatchEvent(new Event('input'));
+      }
+    });
+
 
     /* ---------------------------------------------------------------
        11. Utilidades: copiar al portapapeles y aviso temporal

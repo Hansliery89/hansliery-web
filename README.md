@@ -21,6 +21,7 @@ hansliery-web/
 │   ├── lexium-dashboard.(jpg|webp) ← Captura de LEXIUM (datos de demostración)
 │   ├── medinovaq-agenda.(jpg|webp) ← Captura de MEDINOVAQ (datos ficticios; demo en https://medinovaq.pages.dev)
 │   └── hansliery-sanchez.(jpg|webp) ← Foto de perfil
+├── diagnostico-riesgos.html ← Evaluador preliminar de riesgos LA/FT (generado con assets/diagnostico/build.py)
 ├── legal/              ← Términos, privacidad, cookies, aviso legal y accesibilidad (generadas con legal/_fuente/build.py)
 └── cursos/             ← Capacitaciones gratuitas (13 cursos + catálogo)
     ├── index.html      ← Catálogo
@@ -46,6 +47,10 @@ python3 cursos/_fuente/build.py
 Dentro del texto, `[[3]]` crea una cita a la fuente número 3 del curso. El generador mezcla las opciones de cada pregunta para que la respuesta correcta no caiga siempre en la misma letra, y valida que toda cita apunte a una fuente existente.
 
 No requiere instalación, compilación ni frameworks. Solo depende de Google Fonts (Sora + Manrope). Si las fuentes no cargan, el sitio usa tipografías del sistema y sigue funcionando.
+
+## Diagnóstico preliminar de riesgos
+
+`diagnostico-riesgos.html` es un cuestionario de 26 preguntas en 6 pasos que calcula, solo en el navegador, el riesgo inherente y residual por factor con la metodología de la matriz (pesos 30/20/15/25/10, controles hasta 30 %). Muestra un mapa de calor, las brechas prioritarias y un informe imprimible como PDF. Se accede desde la tarjeta del Servicio 02. Preguntas, puntajes y recomendaciones están en `assets/diagnostico/diagnostico.js`; estilos en `diagnostico.css`; el marco de la página en `body.html` (ejecute `python3 assets/diagnostico/build.py` tras editarlo). El botón «Solicitar asesoría profesional» abre `index.html?servicio=riesgos&dx=…&pts=…#contacto`, que preselecciona el servicio y redacta el mensaje.
 
 ## Costos
 

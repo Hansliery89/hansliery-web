@@ -1,0 +1,115 @@
+<main id="contenido" class="dg">
+  <section class="hero dg-hero">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Ruta"><a href="index.html">Inicio</a><span>/</span><a href="index.html#servicios">Servicios</a><span>/</span><span aria-current="page">Diagnóstico preliminar</span></nav>
+      <div class="dg-hero-grid">
+        <div>
+          <p class="eyebrow"><span class="tag">Gratuito</span> Gestión de riesgos y debida diligencia</p>
+          <h1>Conozca gratis la exposición de su organización al riesgo <span class="dg-grad">LA/FT</span></h1>
+          <p class="summary">Una evaluación orientativa de unos 5 minutos basada en su actividad económica, productos, servicios, clientes, canales, jurisdicciones y controles. Al final obtiene un mapa de calor, las brechas prioritarias y un informe descargable en PDF.</p>
+          <ol class="dg-flow" aria-label="Cómo funciona">
+            <li><span class="dg-flow-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 12h6M10 16h6"/></svg></span><b>Responda el test</b><small>26 preguntas en 6 pasos</small></li>
+            <li><span class="dg-flow-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/><path d="M12 12l7-7M16 5h3v3"/></svg></span><b>Reciba su diagnóstico</b><small>Mapa de calor y puntaje</small></li>
+            <li><span class="dg-flow-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 18l5-6 4 3 7-9"/><path d="M15 6h5v5M4 21h16"/></svg></span><b>Tome el control</b><small>Brechas y próximos pasos</small></li>
+          </ol>
+          <div class="dg-hero-actions">
+            <a class="btn btn-primary" href="#evaluador" id="dg-start-top">Comenzar ahora</a>
+            <a class="dg-back" href="index.html#servicios">← Volver al portal</a>
+          </div>
+        </div>
+        <figure class="dg-preview" aria-hidden="true">
+          <div class="dg-prev-card">
+            <p class="dg-prev-title">Mapa de calor</p>
+            <div class="dg-prev-grid">
+              <span>Clientes</span><i class="h3"></i><i class="h2"></i><i class="h4"></i>
+              <span>Productos</span><i class="h2"></i><i class="h3"></i><i class="h2"></i>
+              <span>Canales</span><i class="h1"></i><i class="h2"></i><i class="h1"></i>
+              <span>Jurisdicción</span><i class="h4"></i><i class="h3"></i><i class="h3"></i>
+              <span>Operaciones</span><i class="h2"></i><i class="h1"></i><i class="h2"></i>
+            </div>
+          </div>
+          <div class="dg-prev-badge"><svg viewBox="0 0 48 48"><path d="M24 3.5l17.8 10.25v20.5L24 44.5 6.2 34.25v-20.5L24 3.5z"/></svg><b>LA/FT</b><small>Informe de diagnóstico</small></div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="dg-main" id="evaluador" aria-labelledby="dg-title">
+    <div class="wrap">
+      <noscript><p class="dg-noscript">El evaluador necesita JavaScript activado en su navegador.</p></noscript>
+
+      <div class="dg-shell" id="dg-shell">
+        <div class="dg-steps" aria-hidden="true" id="dg-steps"></div>
+        <div class="dg-bar" role="progressbar" aria-label="Avance del diagnóstico" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="dg-bar"><i></i></div>
+        <h2 class="dg-sr" id="dg-title">Evaluador preliminar de riesgos LA/FT</h2>
+        <form id="dg-form" novalidate>
+          <div id="dg-pages"></div>
+          <p class="dg-error" id="dg-error" role="alert" hidden></p>
+          <div class="dg-nav">
+            <button type="button" class="btn btn-ghost" id="dg-prev">Anterior</button>
+            <span class="dg-count" id="dg-count" aria-live="polite"></span>
+            <button type="button" class="btn btn-primary" id="dg-next">Siguiente</button>
+          </div>
+        </form>
+        <p class="dg-privacy"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg>Sus respuestas se procesan solo en su navegador: no se envían ni se guardan en ningún servidor.</p>
+      </div>
+
+      <div class="dg-result" id="dg-result" hidden tabindex="-1" aria-labelledby="dg-res-title">
+        <header class="dg-res-head">
+          <div class="dg-print-brand">HANSLIERY <b>SÁNCHEZ</b> · COMPLIANCE &amp; RISK ADVISORY</div>
+          <p class="eyebrow"><span class="tag">Resultado</span> <span id="dg-date"></span></p>
+          <h2 id="dg-res-title">Diagnóstico preliminar de riesgos LA/FT</h2>
+          <p class="dg-org" id="dg-org"></p>
+        </header>
+
+        <div class="dg-score">
+          <div class="dg-gauge">
+            <svg viewBox="0 0 120 120" aria-hidden="true"><circle class="dg-g-bg" cx="60" cy="60" r="52"/><circle class="dg-g-fg" id="dg-gauge" cx="60" cy="60" r="52"/></svg>
+            <div class="dg-g-txt"><strong id="dg-score">0</strong><small>/100</small></div>
+          </div>
+          <div class="dg-score-txt">
+            <p class="dg-lab">Riesgo residual estimado</p>
+            <p class="dg-cat-big" id="dg-cat">—</p>
+            <p id="dg-reading"></p>
+            <ul class="dg-kpis">
+              <li><b id="dg-inh">—</b><span>Riesgo inherente (1–5)</span></li>
+              <li><b id="dg-mat">—</b><span>Madurez de controles</span></li>
+              <li><b id="dg-res">—</b><span>Riesgo residual (1–5)</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 class="dg-h3">Mapa de calor por factor de riesgo</h3>
+        <div class="dg-table-wrap">
+          <table class="dg-heat">
+            <thead><tr><th scope="col">Factor</th><th scope="col">Exposición</th><th scope="col">Preparación</th><th scope="col">Riesgo residual</th><th scope="col">Puntaje</th></tr></thead>
+            <tbody id="dg-heat"></tbody>
+          </table>
+        </div>
+        <p class="dg-scale"><span class="lv1">Muy bajo</span><span class="lv2">Bajo</span><span class="lv3">Medio</span><span class="lv4">Alto</span><span class="lv5">Muy alto</span></p>
+
+        <h3 class="dg-h3">Brechas prioritarias</h3>
+        <ol class="dg-gaps" id="dg-gaps"></ol>
+
+        <details class="dg-answers">
+          <summary>Ver respuestas registradas</summary>
+          <div class="dg-table-wrap"><table class="dg-ans"><tbody id="dg-ans"></tbody></table></div>
+        </details>
+
+        <p class="dg-method"><b>Cómo se calcula.</b> Cada factor (cliente 30 %, producto o servicio 20 %, canal 15 %, jurisdicción 25 % y transaccionalidad 10 %) se puntúa de 1 a 5 según sus respuestas. El riesgo inherente es la suma ponderada. Los controles declarados reducen ese valor hasta un máximo de 30 % para obtener el riesgo residual, con un mínimo de 1. Es la misma metodología de la matriz de riesgo de Compliance Guard Pro, aplicada a un cuestionario general.</p>
+        <p class="dg-disclaimer">Resultado orientativo basado únicamente en las respuestas declaradas. No constituye una autoevaluación de riesgos conforme a la Ley 155-17, una auditoría ni una opinión profesional, y no sustituye la evaluación que corresponde a cada sujeto obligado ni el criterio de su oficial de cumplimiento.</p>
+
+        <div class="dg-actions">
+          <button type="button" class="btn btn-primary" id="dg-pdf"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Descargar informe PDF</button>
+          <button type="button" class="btn btn-ghost" id="dg-restart">Repetir diagnóstico</button>
+        </div>
+        <p class="dg-pdf-hint">Se abrirá la ventana de impresión: elija «Guardar como PDF».</p>
+
+        <aside class="dg-cta" aria-label="Asesoría profesional">
+          <p>¿Deseas profundizar en los resultados y fortalecer la gestión de riesgos de tu organización?</p>
+          <a class="btn btn-primary" id="dg-contact" href="index.html?servicio=riesgos#contacto">Solicitar asesoría profesional</a>
+        </aside>
+      </div>
+    </div>
+  </section>
+</main>
