@@ -3000,7 +3000,16 @@
         if (c) setTimeout(function () { c.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'center' }); }, 60);
       };
       window.addEventListener('hashchange', dxHash);
-      dxHash();
+      if (location.hash === '#diagnostico') {
+        if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+        dxHash();
+        /* repetir cuando terminen de cargar fuentes e imágenes, que desplazan el contenido */
+        window.addEventListener('load', function () { setTimeout(function () {
+          openSv('riesgos');
+          var c = document.getElementById('diagnostico');
+          if (c) c.scrollIntoView({ behavior: 'auto', block: 'center' });
+        }, 350); });
+      }
     });
 
     safe('riskMatrix', function () {
