@@ -1,0 +1,8 @@
+﻿name,title,cases_total,cases_active,cases_opened,won,lost,settled,win_rate,hours,billable_hours,utilization,revenue,cost,expenses,benefit,clients,clients_gained,clients_lost
+Dra. Carolina Valdez Peña,Socia Directora,4,2,2,2,0,0,100.0,543.5,447.5,29.1,4670250.0,2860000.0,62000.0,1748250.0,4,2,0
+Lic. Rafael Augusto Medina,Socio,3,2,1,1,0,0,100.0,721.0,612.0,39.7,5445125.0,2530000.0,12000.0,2903125.0,3,1,0
+Licda. Mariela Santos Ureña,Asociada Senior,3,1,1,0,1,1,50.0,573.5,484.0,31.4,5109000.0,2310000.0,16800.0,2782200.0,3,0,0
+Lic. José Miguel Rosario,Asociado Senior,2,1,2,1,0,0,100.0,381.5,324.5,21.1,1897500.0,2420000.0,2500.0,-525000.0,2,0,0
+Licda. Andrea Polanco Cruz,Asociada,3,2,2,1,0,0,100.0,663.5,548.0,35.6,2513875.0,1650000.0,2500.0,861375.0,3,2,0
+Lic. Héctor Luis Brito,Asociado,3,2,2,1,0,0,100.0,868.0,725.0,47.1,3134500.0,1595000.0,35000.0,1504500.0,3,1,0
+Licda. Paola Jiménez Reyes,Abogada Junior,2,1,1,0,1,0,0.0,305.5,251.5,16.3,781500.0,935000.0,30300.0,-183800.0,2,1,1

@@ -21,6 +21,7 @@ hansliery-web/
 │   ├── lexium-dashboard.(jpg|webp) ← Captura de LEXIUM (datos de demostración)
 │   ├── medinovaq-agenda.(jpg|webp) ← Captura de MEDINOVAQ (datos ficticios; demo en https://medinovaq.pages.dev)
 │   └── hansliery-sanchez.(jpg|webp) ← Foto de perfil
+├── lexium-demo/        ← Demo pública de LEXIUM Legal Suite (solo lectura, datos ficticios; generada, no editar a mano)
 ├── diagnostico-riesgos.html ← Evaluador preliminar de riesgos LA/FT (generado con assets/diagnostico/build.py)
 ├── legal/              ← Términos, privacidad, cookies, aviso legal y accesibilidad (generadas con legal/_fuente/build.py)
 └── cursos/             ← Capacitaciones gratuitas (13 cursos + catálogo)
@@ -28,6 +29,16 @@ hansliery-web/
     ├── <curso>.html    ← Una página por curso (generada)
     ├── cursos.css / cursos.js
     └── _fuente/        ← Contenido editable y generador
+```
+
+## Demo pública de LEXIUM
+
+`lexium-demo/` es la interfaz real de LEXIUM Legal Suite compilada en modo demostración. No tiene servidor: un *service worker* (`demo-sw.js`) responde con datos ficticios grabados del sistema, así que todo se puede recorrer con cinco perfiles (socia, administrador, abogado, asistente y cliente) y nada se guarda. El botón «Explorar la demo» de la tarjeta de LEXIUM abre `lexium-demo/login`; «Solicitar una demostración guiada» dentro de la demo vuelve a `index.html?servicio=lexium#contacto` con el formulario prellenado.
+
+Para actualizarla, desde el repositorio privado de LEXIUM:
+
+```
+python scripts/build_public_demo.py --out ../hansliery-web/lexium-demo --base /hansliery-web/lexium-demo/
 ```
 
 ## Cursos

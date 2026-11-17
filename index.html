@@ -2141,20 +2141,24 @@
               <li><b>Facturación electrónica e-CF</b>E31, E32 y nota de crédito E34 con código QR, ITBIS y cuentas por cobrar.</li>
               <li><b>45 plantillas dominicanas</b>Actos y contratos llenados desde el expediente, en Word o PDF, con firma electrónica por enlace.</li>
               <li><b>Seguimiento de clientes y PLAFT</b>Debida diligencia según la Ley 155-17, conflictos de intereses y avisos por WhatsApp y correo.</li>
+              <li><b>Verificación documental antifraude</b>Detecta facturas, recibos y poderes alterados: ediciones en PDF, sellos clonados y cédula, RNC o NCF inválidos.</li>
             </ul>
             <p class="saas-note"><svg aria-hidden="true"><use href="#i-lock"/></svg>Roles, doble factor de autenticación, cifrado y bitácora de auditoría. Disponible en la nube o instalado en la oficina.</p>
             <div class="saas-actions">
-              <a class="btn btn-gold" href="#contacto" data-service="LEXIUM Legal Suite (demostración)">Solicitar una demostración <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <a class="btn btn-gold" href="lexium-demo/login/" target="_blank" rel="noopener">Explorar la demo <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+              <a class="btn btn-ghost" href="#contacto" data-service="LEXIUM Legal Suite (demostración)">Solicitar una demostración guiada</a>
             </div>
           </div>
 
           <div class="saas-visual">
             <div class="saas-window">
               <div class="saas-bar" aria-hidden="true"><i></i><i></i><i></i><span>lexium legal suite</span></div>
-              <picture>
-                <source srcset="assets/lexium-dashboard.webp" type="image/webp">
-                <img class="saas-shot" src="assets/lexium-dashboard.jpg" width="1280" height="800" loading="lazy" decoding="async" alt="Panel general de LEXIUM Legal Suite con audiencias próximas, plazos y cuentas por cobrar de una firma de ejemplo">
-              </picture>
+              <a href="lexium-demo/login/" target="_blank" rel="noopener" aria-label="Abrir la demo de LEXIUM Legal Suite en una pestaña nueva">
+                <picture>
+                  <source srcset="assets/lexium-dashboard.webp" type="image/webp">
+                  <img class="saas-shot" src="assets/lexium-dashboard.jpg" width="1280" height="800" loading="lazy" decoding="async" alt="Panel general de LEXIUM Legal Suite con audiencias próximas, plazos y cuentas por cobrar de una firma de ejemplo">
+                </picture>
+              </a>
             </div>
             <span class="saas-caption">Pantalla real · datos de demostración</span>
           </div>
@@ -2407,7 +2411,7 @@
           <div class="card pc-mini"><b>Hora de consultoría</b><p><span class="pc-amt" data-dop="3500" data-usd="65">RD$3,500</span><span class=pc-suf>/hora</span></p><small>Consultas puntuales fuera de un plan. Mínimo 2 horas.</small></div>
           <div class="card pc-mini"><b>Paquete de implementación</b><p class="pc-pct">−10 %</p><small>Al contratar juntos diagnóstico, matriz de riesgo y manual.</small></div>
           <div class="card pc-mini pc-saas"><b>Compliance Guard <span class="grad-gold">Pro</span></b><p class="pc-quote">En desarrollo</p><small>Los planes y precios se publicarán al lanzamiento. Inscríbase para recibir la tarifa de fundador.</small><a class="btn-link" href="#contacto" data-service="Compliance Guard Pro (información)">Quiero la tarifa de fundador <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
-          <div class="card pc-mini pc-saas"><b>LEXIUM <span class="grad-gold">Legal Suite</span></b><p class="pc-quote">Demo disponible</p><small>Planes por usuario, en la nube o instalado en la oficina. Se cotiza según el tamaño de la firma.</small><a class="btn-link" href="#contacto" data-service="LEXIUM Legal Suite (demostración)">Solicitar una demostración <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
+          <div class="card pc-mini pc-saas"><b>LEXIUM <span class="grad-gold">Legal Suite</span></b><p class="pc-quote">Demo disponible</p><small>Planes por usuario, en la nube o instalado en la oficina. Se cotiza según el tamaño de la firma.</small><a class="btn-link" href="lexium-demo/login/" target="_blank" rel="noopener">Explorar la demo <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
           <div class="card pc-mini pc-saas"><b>MEDINOVAQ <span class="grad-gold">Salud</span></b><p class="pc-quote">Demo disponible</p><small>Tarifa por institución más una tarifa por profesional, con prueba de 14 días. Precios de referencia en la demo.</small><a class="btn-link" href="https://medinovaq.pages.dev/precios" target="_blank" rel="noopener">Ver precios y demo <svg aria-hidden="true"><use href="#i-arrow"/></svg></a></div>
         </div>
 
@@ -3118,6 +3122,12 @@
        --------------------------------------------------------------- */
     safe('diagnosticPrefill', function () {
       var q = new URLSearchParams(location.search);
+      if (q.get('servicio') === 'lexium') {
+        var sel = $('#f-service'), m = $('#f-msg');
+        if (sel) { sel.value = 'LEXIUM Legal Suite (demostración)'; sel.dispatchEvent(new Event('change')); }
+        if (m && !m.value.trim()) { m.value = 'Exploré la demo pública de LEXIUM Legal Suite y me interesa una demostración guiada para mi firma.'; m.dispatchEvent(new Event('input')); }
+        return;
+      }
       if (q.get('servicio') !== 'riesgos') return;
       var select = $('#f-service'), msg = $('#f-msg');
       if (select) { select.value = 'Gestión de riesgos y debida diligencia'; select.dispatchEvent(new Event('change')); }
