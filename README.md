@@ -62,7 +62,8 @@ El menú (5 opciones: Servicios · Sobre mí · Software · Cursos · Costos) y 
 
 Los cursos se generan a partir de archivos de contenido en `cursos/_fuente/`:
 
-- `cursos_1.py` … `cursos_4.py`: texto, evaluación y fuentes de cada curso.
+- `c01.py` … `c13.py`: un archivo por curso (módulos, glosario, evaluación y fuentes).
+- `capas.py`: ayudas `ess()` («Lo esencial», para público general) y `deep()` («Para profundizar», desplegable de nivel profesional). Cada módulo combina: esencial + desarrollo + profundizar.
 - `fuentes.py`: registro único de fuentes oficiales citadas.
 - `build.py`: genera las páginas HTML, el catálogo y `indice.json`.
 
@@ -145,7 +146,7 @@ Para recibir los mensajes directamente, complete `form_endpoint` en `assets/siti
 - La red de partículas se pausa cuando el hero no está visible o la pestaña está oculta.
 - Efectos de cursor e inclinación 3D solo en dispositivos con puntero preciso.
 - Sin imágenes externas: toda la iconografía es SVG integrado.
-- Verificado con axe-core (WCAG 2.2 AA): 0 violaciones en portada, perfil, software, costos y servicios (nov. 2026).
+- Verificado con axe-core (WCAG 2.2 AA): 0 violaciones en portada, perfil, software, costos y servicios, y en el catálogo y los 13 cursos (nov. 2026).
 
 ## Aviso
 
