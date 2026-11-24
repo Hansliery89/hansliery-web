@@ -1,6 +1,6 @@
 # Hansliery Sánchez · Compliance & Risk Advisory
 
-Sitio web profesional de una sola página: consultoría PLAFT, compliance, gestión de riesgos, debida diligencia, capacitación y automatización.
+Sitio web profesional (portada + páginas interiores): consultoría PLAFT, compliance, gestión de riesgos, debida diligencia, capacitación y automatización.
 
 **Estrategia. Prevención. Confianza.**
 
@@ -8,38 +8,55 @@ Sitio web profesional de una sola página: consultoría PLAFT, compliance, gesti
 
 ## Contenido del proyecto
 
+El sitio ya no es una sola página: la portada resume y las páginas interiores detallan.
+
 ```
 hansliery-web/
-├── index.html          ← Sitio completo (HTML + CSS + JavaScript integrados)
-├── favicon.svg         ← Icono del sitio (marca HS)
-├── robots.txt          ← Indicaciones para buscadores
-├── README.md           ← Este archivo
+├── index.html               ← Portada (resumen: servicios, perfil, software, cursos, costos, preguntas, contacto)
+├── sobre-mi.html            ← Trayectoria, credenciales y diferenciadores
+├── servicio-consultoria.html│
+├── servicio-riesgos.html    │ Una página por servicio (incluye la matriz de riesgo interactiva en «riesgos»)
+├── servicio-controles.html  │
+├── servicio-capacitacion.html
+├── software.html            ← Compliance Guard Pro, LEXIUM y MEDINOVAQ
+├── costos.html              ← Planes, proyectos, calculadora de factura y facturación electrónica
+├── 404.html                 ← Página de error (GitHub Pages la usa automáticamente)
+├── diagnostico-riesgos.html ← Evaluador preliminar de riesgos LA/FT
 ├── assets/
-│   ├── og-image.png    ← Imagen 1200×630 para vista previa en redes sociales
-│   ├── entregables/    ← 16 PDF modelo de los entregables de cada servicio
-│   │   └── _fuente/    ← Generador (python3 build.py; requiere Playwright, Chrome y las fuentes Sora/Manrope)
-│   ├── lexium-dashboard.(jpg|webp) ← Captura de LEXIUM (datos de demostración)
-│   ├── medinovaq-agenda.(jpg|webp) ← Captura de MEDINOVAQ (datos ficticios; demo en https://medinovaq.pages.dev)
-│   └── hansliery-sanchez.(jpg|webp) ← Foto de perfil
-├── lexium-demo/        ← Demo pública de LEXIUM Legal Suite (solo lectura, datos ficticios; generada, no editar a mano)
-├── diagnostico-riesgos.html ← Evaluador preliminar de riesgos LA/FT (generado con assets/diagnostico/build.py)
-├── legal/              ← Términos, privacidad, cookies, aviso legal y accesibilidad (generadas con legal/_fuente/build.py)
-└── cursos/             ← Capacitaciones gratuitas (13 cursos + catálogo)
-    ├── index.html      ← Catálogo
-    ├── <curso>.html    ← Una página por curso (generada)
-    ├── cursos.css / cursos.js
-    └── _fuente/        ← Contenido editable y generador
+│   ├── css/site.css         ← Estilos comunes a todas las páginas generadas
+│   ├── js/site.js           ← Comportamiento común (menú, formulario, calculadora, matriz…)
+│   ├── sitio/               ← GENERADOR de las páginas anteriores
+│   │   ├── build.py         ← Configuración (bloque SITE) + encabezado, menú y pie comunes
+│   │   ├── paginas/*.html   ← Contenido editable de cada página
+│   │   └── partes/          ← Iconos SVG y datos estructurados
+│   ├── og-image.jpg         ← Vista previa en redes (69 KB; og-image.png se conserva para cursos y legales)
+│   ├── entregables/         ← 16 PDF modelo de los entregables
+│   └── …                    ← Fotos y capturas
+├── legal/  cursos/  lexium-demo/
 ```
 
-## Demo pública de LEXIUM
+## Cómo editar las páginas principales
 
-`lexium-demo/` es la interfaz real de LEXIUM Legal Suite compilada en modo demostración. No tiene servidor: un *service worker* (`demo-sw.js`) responde con datos ficticios grabados del sistema, así que todo se puede recorrer con cinco perfiles (socia, administrador, abogado, asistente y cliente) y nada se guarda. El botón «Explorar la demo» de la tarjeta de LEXIUM abre `lexium-demo/login`; «Solicitar una demostración guiada» dentro de la demo vuelve a `index.html?servicio=lexium#contacto` con el formulario prellenado.
-
-Para actualizarla, desde el repositorio privado de LEXIUM:
+**No edite** `index.html`, `sobre-mi.html`, `costos.html`, `software.html`, `servicio-*.html` ni `404.html` directamente: se regeneran. Edite el archivo equivalente en `assets/sitio/paginas/` y ejecute:
 
 ```
-python scripts/build_public_demo.py --out ../hansliery-web/lexium-demo --base /hansliery-web/lexium-demo/
+python3 assets/sitio/build.py
 ```
+
+El menú (5 opciones: Servicios · Sobre mí · Software · Cursos · Costos) y el pie se definen una sola vez en `build.py`.
+
+### Configuración (bloque `SITE` de `assets/sitio/build.py`)
+
+| Clave | Para qué sirve |
+|---|---|
+| `whatsapp` | Solo dígitos con código de país. Muestra «Escribir por WhatsApp» en Contacto. |
+| `agenda` | Enlace de Calendly / Google Calendar / Bookings. Muestra «Agendar una reunión». |
+| `form_endpoint` | Dirección de Formspree (`https://formspree.io/f/…`). El formulario envía directo, sin depender del correo del visitante. **Al activarlo, actualice la Política de privacidad**, que hoy dice que el sitio no transmite datos. |
+| `plausible_domain` | Analítica sin cookies (Plausible). La política de seguridad se ajusta sola. |
+| `url`, `base_path` | Cámbielos si adquiere un dominio propio. |
+| `indexable` | `True` para aparecer en Google: cambia `robots` y genera `sitemap.xml`. |
+
+`TESTIMONIOS`: lista de testimonios **reales y autorizados**. La sección aparece en la portada solo cuando hay al menos uno.
 
 ## Cursos
 
@@ -65,7 +82,7 @@ No requiere instalación, compilación ni frameworks. Solo depende de Google Fon
 
 ## Costos
 
-La sección `#costos` muestra precios de referencia en RD$ (más ITBIS 18 %) y en US$ para clientes del exterior. Para cambiar un precio, edite los atributos `data-dop` y `data-usd` de cada `.pc-amt` (el texto visible se recalcula al cargar) y, en la calculadora, el `value` de cada opción de `#pcc-svc`. Las tasas de retención (ISR 15 % a personas físicas, Ley 30-26; ITBIS 100 % o 30 % según Norma 02-05) están en el bloque `pricing` del `<script>`. Revise los precios cada seis meses.
+La página `costos.html` (fuente: `assets/sitio/paginas/costos.html`) muestra precios de referencia en RD$ (más ITBIS 18 %) y en US$ para clientes del exterior. Para cambiar un precio, edite los atributos `data-dop` y `data-usd` de cada `.pc-amt` (el texto visible se recalcula al cargar) y, en la calculadora, el `value` de cada opción de `#pcc-svc`. Las tasas de retención (ISR 15 % a personas físicas, Ley 30-26; ITBIS 100 % o 30 % según Norma 02-05) están en el bloque `pricing` de `assets/js/site.js`. **Si cambia un precio, actualícelo también** en el resumen de la portada (`paginas/index.html`: tarjetas «Desde RD$…» y planes) y en la tabla de la página del servicio. Revise los precios cada seis meses.
 
 ## Cómo verlo
 
@@ -92,33 +109,33 @@ El canonical, Open Graph y datos estructurados ya apuntan a esa dirección.
 
 El sitio está oculto para los buscadores: todas las páginas llevan `<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">` y no hay `sitemap.xml`. Solo lo encuentra quien tenga el enlace. **No es una protección de acceso**: cualquiera que reciba el enlace puede abrirlo y reenviarlo.
 
-Para volver a hacerlo visible en Google: cambie la etiqueta a `index, follow` en `index.html`, `cursos/_fuente/build.py` (y regenere cursos y páginas legales), vuelva a crear `sitemap.xml` y añada la línea `Sitemap:` en `robots.txt`.
+Para volver a hacerlo visible en Google: ponga `indexable: True` en `assets/sitio/build.py` (genera `sitemap.xml`), cambie la etiqueta a `index, follow` en `cursos/_fuente/build.py` y `legal/_fuente` (y regenere), y añada la línea `Sitemap:` en `robots.txt`.
 
 ### Si adquiere un dominio propio
 
 1. Configure el dominio en *Settings → Pages → Custom domain* del repositorio.
-2. Reemplace `https://hansliery89.github.io/hansliery-web/` por el nuevo dominio en `index.html` (canonical, og:url, og:image, twitter:image y JSON-LD) y en los generadores de `cursos/_fuente` y `legal/_fuente`.
+2. Cambie `url` y `base_path` en `assets/sitio/build.py`, reemplace la dirección en `assets/sitio/partes/jsonld.html` y en los generadores de `cursos/_fuente` y `legal/_fuente`, y regenere.
 3. Si decide hacerlo público, siga los pasos de «Visibilidad» y registre el sitio en Google Search Console.
 
 ## Personalización rápida
 
-Todo está en `index.html`, organizado por secciones comentadas.
+Contenido en `assets/sitio/paginas/`, estilos en `assets/css/site.css`.
 
-- **Colores:** variables en `:root` al inicio del `<style>` (`--night`, `--petrol`, `--teal`, `--electric`, `--gold`, `--ice`).
-- **Textos:** cada sección está marcada con un comentario (`A. HEADER`, `B. HERO`, `C. PERFIL`…).
+- **Colores:** variables en `:root` al inicio de `assets/css/site.css` (`--night`, `--petrol`, `--teal`, `--electric`, `--gold`, `--ice`).
+- **Textos:** cada sección de `assets/sitio/paginas/index.html` está marcada con un comentario.
 - **Indicadores de capacitación:** atributos `data-count` en la sección Perfil (el texto dentro de la etiqueta es el valor que se muestra sin JavaScript; mantenga ambos iguales).
-- **Nuevos canales de contacto:** en el `<script>`, objeto `CONTACT_CONFIG`. Complete `phone`, `whatsapp` (solo dígitos con código de país) o `linkedin` (URL completa) y aparecerán automáticamente en Contacto. Si están vacíos, no se muestra nada.
+- **Canales de contacto:** bloque `SITE` de `assets/sitio/build.py` (ver tabla arriba).
 
 ## Cómo funciona el formulario
 
-El sitio **no tiene servidor** y no almacena ni transmite datos. Al pulsar «Preparar correo»:
+Por defecto el sitio **no tiene servidor** y no almacena ni transmite datos. Al pulsar «Preparar correo»:
 
 1. Se validan los campos (nombre, correo, servicio y una descripción de al menos 20 caracteres).
 2. Se limpia el contenido (caracteres de control, etiquetas HTML, longitudes máximas).
 3. Se abre la aplicación de correo del visitante con asunto y mensaje ya redactados.
 4. Si el visitante no tiene una aplicación de correo configurada, puede usar «Copiar mensaje» y enviarlo manualmente.
 
-Para recibir los mensajes directamente sin depender del cliente de correo, puede integrarse más adelante un servicio como Formspree, Netlify Forms o una función propia. En ese caso, actualice también la directiva `connect-src` / `form-action` de la política de seguridad (`<meta http-equiv="Content-Security-Policy">`).
+Para recibir los mensajes directamente, complete `form_endpoint` en `assets/sitio/build.py` con su dirección de Formspree y regenere: el botón pasa a «Enviar mensaje» y la política de seguridad se ajusta sola. Actualice entonces la Política de privacidad.
 
 ## Accesibilidad y rendimiento
 
@@ -128,6 +145,7 @@ Para recibir los mensajes directamente sin depender del cliente de correo, puede
 - La red de partículas se pausa cuando el hero no está visible o la pestaña está oculta.
 - Efectos de cursor e inclinación 3D solo en dispositivos con puntero preciso.
 - Sin imágenes externas: toda la iconografía es SVG integrado.
+- Verificado con axe-core (WCAG 2.2 AA): 0 violaciones en portada, perfil, software, costos y servicios (nov. 2026).
 
 ## Aviso
 
