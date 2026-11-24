@@ -15,7 +15,7 @@ UAF_VAL = {"text": "Unidad de Análisis Financiero (2024). Subguía de Calidad d
 UAF_CAS = {"text": "Unidad de Análisis Financiero (2024). Subguía de Calidad de los ROS para Casinos, Juegos de Azar, Bancas de Lotería o Apuestas y Concesionarios de Lotería. Enero 2024.", "url": "https://www.uaf.gob.do"}
 UAF_DGII = {"text": "Unidad de Análisis Financiero (2024). Subguía de Calidad de los ROS para los Sujetos Obligados Supervisados por la DGII. Enero 2024.", "url": "https://www.uaf.gob.do"}
 GOAML = {"text": "Unidad de Análisis Financiero (2021). Manual de Usuario web goAML.", "url": "https://goaml.uaf.gob.do/Home"}
-TIGA03 = {"text": "Unidad de Análisis Financiero, Dirección de TIC. Guía TI-GA-03 «Registro en goAML para usuarios», versión 00 (elaborada por Hansliery Sánchez Figuereo).", "url": "https://www.uaf.gob.do"}
+TIGA03 = {"text": "Unidad de Análisis Financiero, Dirección de TIC. Guía TI-GA-03 «Registro en goAML para usuarios», versión 00.", "url": "https://www.uaf.gob.do"}
 DGII_BRO = {"text": "Dirección General de Impuestos Internos (DGII). Prevención y detección del lavado de activos y financiamiento del terrorismo (material informativo).",
             "url": "https://dgii.gov.do/legislacion/prevencionLavado/informacionEspecializada/Documents/BrochureLavadoDeActivos.pdf"}
 DGII_GLO = {"text": "Dirección General de Impuestos Internos (DGII). Glosario PLAFT.",

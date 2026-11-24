@@ -124,7 +124,7 @@
      4. Aparición progresiva al desplazarse
      --------------------------------------------------------------- */
   safe('reveal', function () {
-    var items = $$('[data-reveal], #method-track, #matrix');
+    var items = $$('[data-reveal], #method-track, #matrix, .cred-strip');
     if (!('IntersectionObserver' in window) || reduceMotion.matches) {
       items.forEach(function (el) { el.classList.add('is-visible'); });
       return;
