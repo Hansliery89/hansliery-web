@@ -1,9 +1,10 @@
-"""Curso 08: Reportería (ROS, RAS y RTE). Curso insignia, con ejemplos propios por sector."""
+"""Curso 08 · Reportería: ROS, RAS y RTE. Curso insignia, con ejemplos propios por sector."""
 from fuentes import *  # noqa: F401,F403
+from capas import ess, deep
 
-# Índices de fuentes en este curso:
 # 1 LEY · 2 REG · 3 GAFI40 · 4 UAF_ROS · 5 GOAML · 6 TIGA03 · 7 UAF_SEG · 8 UAF_COOP · 9 UAF_CAMB
 # 10 UAF_VAL · 11 UAF_CAS · 12 UAF_DGII · 13 LEY_7425 · 14 ESTAFA_7425 · 15 CONCLAFIT_2025_01
+# 16 SIS_NORMA · 17 LEY_4426 · 18 LEY_7425_TXT · 19 DGII_N01
 
 SECTORES = """
 <div class="tabs">
@@ -92,23 +93,40 @@ SECTORES = """
 </div>
 """
 
-COURSES = [
-{
-"num": 8, "slug": "reporteria-ros-ras-rte", "tag": "Reportería", "level": "Avanzado", "minutes": 50, "featured": True,
+NOTA_RAW = """
+<div class="callout warn" id="nota-codigo-penal"><b>Nota aclaratoria para los participantes · Nuevo Código Penal</b>
+<p>Desde agosto de 2026 está vigente el nuevo Código Penal de la República Dominicana (Ley Orgánica 74-25, con las modificaciones de la Ley 44-26). Este curso aplica el código vigente.[[13,16]]</p>
+<ul>
+<li>La <strong>estafa simple</strong> (art. 237) se sanciona con <strong>tres a cinco años</strong> de prisión; la estafa agravada, la colectiva y la piramidal (arts. 238 a 242), con cinco a diez años.[[14]]</li>
+<li>Como la Ley 155-17 considera infracción precedente toda infracción grave con pena no menor de tres años (art. 2, num. 11), <strong>toda estafa es hoy delito precedente del lavado de activos</strong>.[[1]]</li>
+<li>Por tanto, una operación realizada o intentada que genere sospecha de estar vinculada a una estafa <strong>debe reportarse mediante ROS</strong>, además de orientar a las víctimas a denunciar.</li>
+</ul>
+<p><strong>Falsificación de documentos privados:</strong> la falsedad simple del art. 348 se castiga con 1 a 2 años, por lo que, aislada, sigue sin ser delito precedente. Pero si una carta laboral o un estado de cuenta falsos se usan para obtener un préstamo o un pago, la conducta puede constituir una estafa, y esta sí lo es. Analiza siempre para qué se usó el documento.[[17]]</p>
+<p>La Guía de Calidad de la UAF (enero 2024) indicaba lo contrario para la estafa simple porque se basaba en el Código Penal de 1884, que la castigaba con menos de tres años. Ese criterio quedó superado por el nuevo código. Si encuentras material anterior con esa indicación, aplica la norma vigente.[[4]]</p>
+</div>
+"""
+
+NOTA = NOTA_RAW.replace("Este curso aplica el código vigente.[[13,16]]", "Este curso aplica el código vigente.[[13,17]]").replace("Analiza siempre para qué se usó el documento.[[17]]", "Analiza siempre para qué se usó el documento.[[18]]")
+
+COURSE = {
+"num": 8, "slug": "reporteria-ros-ras-rte", "tag": "Reportería", "level": "Intermedio → Profesional", "minutes": 60, "featured": True,
 "title": "Reportería: ROS, RAS y RTE",
 "card": "Cuándo y cómo reportar a la UAF, con ejemplos por sector y uso de goAML.",
-"summary": "Aprende a decidir qué reportar a la UAF y cómo hacerlo bien: el Reporte de Transacciones en Efectivo, el Reporte de Operación Sospechosa y el Reporte de Actividad Sospechosa, con ejemplos propios para seis sectores y buenas prácticas en goAML.",
+"summary": "Aprende a decidir qué reportar a la UAF y cómo hacerlo bien: el Reporte de Transacciones en Efectivo, el Reporte de Operación Sospechosa y el Reporte de Actividad Sospechosa, el análisis previo, la redacción con el método de las 5W, la confidencialidad, el registro en goAML y ejemplos propios para seis sectores, aplicando el Código Penal vigente.",
 "objectives": [
   "Diferenciar con precisión el RTE, el ROS y el RAS: disparador, plazo y obligatoriedad.",
-  "Realizar el análisis previo y redactar un ROS claro con el método de las 5W.",
-  "Reconocer situaciones que, por sí solas, no justifican un ROS.",
-  "Aplicar lo aprendido a casos de seis sectores de sujetos obligados.",
-  "Evitar los errores de llenado más frecuentes en goAML.",
+  "Aplicar la definición legal de operación sospechosa y realizar el análisis previo.",
+  "Redactar un ROS claro con el método de las 5W y los soportes adecuados.",
+  "Reconocer situaciones que, por sí solas, no justifican un ROS, con el criterio actualizado sobre la estafa.",
+  "Cumplir la confidencialidad y conocer la protección y las consecuencias.",
+  "Evitar los errores de llenado más frecuentes en goAML y aplicar lo aprendido a seis sectores.",
 ],
-"sources": [LEY, REG, GAFI40, UAF_ROS, GOAML, TIGA03, UAF_SEG, UAF_COOP, UAF_CAMB, UAF_VAL, UAF_CAS, UAF_DGII, LEY_7425, ESTAFA_7425, CONCLAFIT_2025_01, SIS_NORMA, LEY_4426, LEY_7425_TXT],
+"sources": [LEY, REG, GAFI40, UAF_ROS, GOAML, TIGA03, UAF_SEG, UAF_COOP, UAF_CAMB, UAF_VAL, UAF_CAS, UAF_DGII, LEY_7425, ESTAFA_7425, CONCLAFIT_2025_01, SIS_NORMA, LEY_4426, LEY_7425_TXT, DGII_N01],
 "notice": "Este curso aplica el nuevo Código Penal (Ley 74-25), vigente desde agosto de 2026: la estafa es ahora delito precedente del lavado de activos.",
 "modules": [
-{"title": "Tres reportes, tres lógicas", "html": """
+# 1 ------------------------------------------------------------------------------------------
+{"title": "Tres reportes, tres lógicas", "html": ess(
+"A la UAF se le envían tres tipos de reportes. El RTE se manda cuando hay mucho efectivo (un hecho que se mide). El ROS, cuando después de analizar una operación queda una sospecha. El RAS, opcional, cuando se sabe algo grave de un cliente aunque no haya hecho ninguna operación.") + """
 <p>La reportería es el punto donde el trabajo del sujeto obligado se convierte en inteligencia financiera. Cada reporte responde a una lógica distinta:</p>
 <div class="tbl-wrap"><table class="tbl">
 <thead><tr><th></th><th>RTE</th><th>ROS</th><th>RAS</th></tr></thead>
@@ -121,34 +139,52 @@ COURSES = [
 </tbody></table></div>
 <p class="note-small">Elaborado a partir de la Ley 155-17, las Recomendaciones del GAFI, la Guía de Calidad ROS y el Manual de goAML.[[1,3,4,5]]</p>
 <div class="callout key"><b>Idea clave</b>El RTE se envía porque ocurrió algo medible; el ROS, porque alguien analizó y sospecha; el RAS, porque se conoce algo relevante de un cliente aunque no haya transacción.</div>
-"""},
-{"title": "El Reporte de Transacciones en Efectivo (RTE)", "html": """
+""" + deep("""
+<p><strong>Formato y canal.</strong> La UAF define el formato, la vía y el contenido de los ROS y RTE mediante instructivo publicado en su página web (Decreto 408-17, art. 26).[[2]] La norma de seguros obliga a usar el formulario o los mecanismos digitales que la UAF implemente, hoy la plataforma goAML.[[5,16]]</p>
+<p><strong>Reportes al supervisor.</strong> Algunos supervisores piden información <em>estadística</em> sobre los ROS, nunca su contenido. Por ejemplo, la DGII solicita cada mes la cantidad, montos, oficinas y fechas de los ROS remitidos, sin información sobre lo reportado, y no hay que enviarlo si en el mes no hubo ROS.[[19]] La ley, además, excluye del acceso de los supervisores los detalles de inteligencia contenidos en los ROS (art. 56, párrafo).[[1]]</p>
+""")},
+# 2 ------------------------------------------------------------------------------------------
+{"title": "El Reporte de Transacciones en Efectivo (RTE)", "html": ess(
+"Si un cliente mueve en efectivo 15,000 dólares o más (o su equivalente), se reporta, aunque no haya nada raro. Si lo hace en varias partes el mismo día, se suman. En casinos el monto es 3,000 dólares. Se envía en los primeros diez días del mes siguiente.") + """
 <ul>
-<li><strong>Umbral general:</strong> transacciones en efectivo que igualen o superen <strong>US$15,000</strong> o su equivalente.[[1]]</li>
-<li><strong>Casinos:</strong> el umbral es de <strong>US$3,000</strong> e incluye transacciones en efectivo, múltiples en efectivo y financieras.[[1]]</li>
-<li><strong>Transacciones múltiples:</strong> las realizadas en una misma entidad, en beneficio de una misma persona y dentro de <strong>24 horas</strong>, se suman y se consideran una sola si alcanzan el umbral.[[1]]</li>
-<li><strong>Remisión:</strong> las del mes anterior se envían a la UAF dentro de los <strong>primeros diez días calendario</strong>, y se conserva copia al menos diez años.[[1]]</li>
+<li><strong>Umbral general:</strong> transacciones en efectivo que igualen o superen <strong>US$15,000</strong> o su equivalente en moneda nacional (art. 52).[[1]]</li>
+<li><strong>Casinos:</strong> el umbral es de <strong>US$3,000</strong> e incluye transacciones en efectivo, múltiples en efectivo y financieras (art. 52, párrafo).[[1]]</li>
+<li><strong>Transacciones múltiples:</strong> las realizadas en una misma entidad, en beneficio de una misma persona y dentro de <strong>24 horas</strong>, se suman y se consideran una sola si alcanzan el umbral (art. 54).[[1]]</li>
+<li><strong>Remisión:</strong> las del mes anterior se envían a la UAF dentro de los <strong>primeros diez días calendario</strong>, y se conserva copia al menos diez años (art. 53).[[1]]</li>
 <li><strong>Canal:</strong> la plataforma goAML.[[5]]</li>
 </ul>
 <div class="callout warn"><b>El fraccionamiento es otra cosa</b>Si un cliente divide operaciones para quedar por debajo del umbral, el RTE puede no activarse, pero la conducta en sí puede ser motivo de un ROS. Un reporte no sustituye al otro.</div>
-"""},
-{"title": "El Reporte de Operación Sospechosa (ROS)", "html": """
-<p>La ley describe las operaciones sospechosas como transacciones, efectuadas o no, complejas, insólitas o significativas, así como patrones no habituales o periódicos, que no tienen un fundamento económico o legal evidente o que generan sospecha de vinculación con el lavado, un delito precedente o el financiamiento del terrorismo.[[1]]</p>
+""" + deep("""
+<p><strong>Exención en seguros.</strong> La norma de seguros prevé que, cuando la aseguradora instruye a sus clientes a depositar en efectivo, en las cuentas que ella mantiene en entidades de intermediación financiera, pagos iguales o superiores a US$15,000, queda exenta de realizar ese RTE (porque lo reporta la entidad que recibe el efectivo).[[16]]</p>
+<p><strong>Equivalencia.</strong> En seguros, el equivalente en otra moneda se calcula con la tasa oficial de cambio del Banco Central.[[16]]</p>
+""")},
+# 3 ------------------------------------------------------------------------------------------
+{"title": "El Reporte de Operación Sospechosa (ROS)", "html": ess(
+"Una operación es sospechosa cuando es rara, compleja o grande sin una explicación económica o legal, o cuando hace pensar que tiene que ver con un delito. No hace falta estar seguro ni que haya un monto mínimo, pero sí analizarla antes de reportar.") + """
+<p>La ley define las <strong>operaciones sospechosas</strong> como las transacciones, efectuadas o no, complejas, insólitas o significativas, así como los patrones no habituales o las transacciones no significativas pero periódicas, que no tengan un fundamento económico o legal evidente o que generen sospecha de estar involucradas en el lavado de activos, algún delito precedente o el financiamiento del terrorismo (art. 2, num. 16).[[1]]</p>
 <h3>Lo que no hace falta</h3>
 <ul>
 <li><strong>Certeza:</strong> no se exige probar el delito ni identificar el tipo penal, aunque, si se tienen elementos, conviene indicarlo.[[4]]</li>
 <li><strong>Un monto mínimo:</strong> el deber existe con independencia de la cuantía.[[4]]</li>
-<li><strong>Que la operación se concrete:</strong> también se reportan las operaciones intentadas.[[1]]</li>
+<li><strong>Que la operación se concrete:</strong> también se reportan las operaciones intentadas (art. 55).[[1]]</li>
 </ul>
 <h3>Lo que sí hace falta: el análisis previo</h3>
 <ol class="steps">
 <li>Contrastar la operación con el perfil y la debida diligencia del cliente, y actualizarla si hace falta.</li>
 <li>Revisar con el área de negocio cómo ha operado el cliente.</li>
-<li>Pedir al cliente la documentación que podría justificar la operación.</li>
+<li>Pedir al cliente la documentación que podría justificar la operación, cuidando no alertarlo.</li>
 <li>Decidir y documentar: archivar con justificación, monitorear o reportar.</li>
 </ol>
 <p>Este análisis evita reportes que no aportan y fortalece los que sí.[[4]]</p>
-<h3>Redactar con el método de las 5W</h3>
+""" + deep("""
+<p><strong>Cuándo pedir documentos puede alertar.</strong> La norma de seguros prevé que, si la entidad tiene sospechas y considera que hacer la debida diligencia alertaría al cliente, debe reportar la operación como sospechosa sin realizarla.[[16]]</p>
+<p><strong>Desde cuándo cuenta el plazo.</strong> La ley cuenta los 5 días hábiles desde que la operación fue realizada o intentada (art. 55); la norma de seguros lo expresa como desde «detectado el hecho».[[1,16]] Para no incumplir, detecta y analiza rápido: el análisis no suspende el plazo legal.</p>
+<p><strong>Señales de alerta.</strong> La norma de seguros pide valorar las circunstancias, los procedimientos internos y las señales de alerta de su anexo, que no son limitativas, y mantenerse actualizado en tipologías.[[16]] El curso 9 profundiza en el análisis de casos.</p>
+<p><strong>Solicitudes posteriores de la UAF.</strong> En seguros, el oficial de cumplimiento debe responder las solicitudes de información adicional de la UAF dentro de 5 días laborables; con carácter general, el reglamento fija un plazo no mayor de 10 días laborables, salvo que la UAF disponga uno menor.[[2,16]]</p>
+""")},
+# 4 ------------------------------------------------------------------------------------------
+{"title": "Redactar con el método de las 5W", "html": ess(
+"Un buen reporte cuenta la historia completa: quién participó, qué hizo, cuándo, dónde y, sobre todo, por qué resulta sospechoso. Y adjunta los documentos que lo respaldan.") + """
 <div class="tbl-wrap"><table class="tbl">
 <thead><tr><th>Pregunta</th><th>Qué debe quedar claro</th></tr></thead>
 <tbody>
@@ -159,8 +195,17 @@ COURSES = [
 <tr><td>¿Por qué?</td><td>Las razones concretas de la sospecha: qué no encaja con el perfil, qué explicación faltó, con qué posible delito precedente se relaciona.</td></tr>
 </tbody></table></div>
 <p>Además, conviene describir el origen y destino de los fondos, la razonabilidad de los hechos frente a la realidad económica del cliente y adjuntar soportes: identificación, documentos de debida diligencia, estados de cuenta, contratos o comprobantes de pago.[[4]]</p>
-"""},
-{"title": "Lo que, por sí solo, no justifica un ROS", "html": """
+<div class="case"><b>Antes y después</b>
+<p><strong>Débil:</strong> «Cliente realiza depósitos inusuales. Se reporta por precaución.»</p>
+<p><strong>Mejor:</strong> «Entre el 3 y el 21 de marzo, la Sra. X (cédula …), empleada con ingresos declarados de RD$35,000 mensuales, recibió en su cuenta 42 transferencias de 17 personas sin vínculo declarado, por RD$1,860,000 en total, y retiró el 90 % en efectivo en la sucursal Y dentro de las 24 horas siguientes. Al solicitarle soportes, indicó que eran “ventas por internet”, sin aportar facturas ni evidencia de entregas. El volumen es 53 veces su ingreso mensual y el patrón es coherente con el uso de la cuenta para canalizar fondos de terceros.»</p>
+<p class="note-small">Ejemplo de elaboración propia, con datos ficticios.</p>
+</div>
+""" + deep("""
+<p><strong>El delito precedente posible.</strong> Indicar el posible delito precedente no es obligatorio, pero ayuda al análisis. Recuerda que la ley considera precedente, además de los delitos que enumera, toda infracción grave con pena no menor de tres años (art. 2, num. 11).[[1]]</p>
+""")},
+# 5 ------------------------------------------------------------------------------------------
+{"title": "Lo que, por sí solo, no justifica un ROS", "html": ess(
+"Muchos reportes no ayudan porque describen cosas que, solas, no apuntan a un delito: un cliente que no aparece, que es PEP o que no llenó un formulario interno. Ojo: con el nuevo Código Penal, la estafa sí es ahora delito precedente.") + """
 <p>Una parte importante de los reportes que recibe la UAF no aporta inteligencia porque describe situaciones que, aisladas, no indican un delito precedente. Algunos ejemplos, a partir de los criterios de la UAF:[[4]]</p>
 <div class="tbl-wrap"><table class="tbl">
 <thead><tr><th>Situación</th><th>Criterio</th></tr></thead>
@@ -170,20 +215,12 @@ COURSES = [
 <tr><td>El cliente es PEP</td><td>Se aplica debida diligencia ampliada; no se reporta por la condición.</td></tr>
 <tr><td>Noticia negativa antigua, sin operación actual</td><td>No es un ROS. Si se confirma el vínculo con actividad ilícita, puede enviarse un RAS.</td></tr>
 <tr><td>Estafa (simple o agravada)</td><td><strong>Criterio actualizado:</strong> desde agosto de 2026 es delito precedente. Si hay una operación sospechosa vinculada, procede ROS (ver la nota aclaratoria).</td></tr>
-<tr><td>Falsificación de un documento privado (por ejemplo, una carta laboral)</td><td><strong>Criterio actualizado:</strong> con el Código Penal vigente, la falsedad se sanciona con 1 a 2 años (art. 348) y no figura en la lista del art. 2, num. 11 de la Ley 155-17; por sí sola no es delito precedente y se denuncia por la vía penal. Excepciones: la falsedad documental agravada (art. 351: habitual o para facilitar una infracción grave o muy grave, 10 a 20 años) y los casos en que el documento falso se usa para cometer otro delito precedente, como una estafa. La falsificación de documentos <strong>públicos</strong> (cédula, pasaporte, actas) sí es delito precedente, porque la ley la menciona expresamente.[[1,17]]</td></tr>
+<tr><td>Falsificación de un documento privado (por ejemplo, una carta laboral)</td><td><strong>Criterio actualizado:</strong> con el Código Penal vigente, la falsedad se sanciona con 1 a 2 años (art. 348) y no figura en la lista del art. 2, num. 11 de la Ley 155-17; por sí sola no es delito precedente y se denuncia por la vía penal. Excepciones: la falsedad documental agravada (art. 351: habitual o para facilitar una infracción grave o muy grave, 10 a 20 años) y los casos en que el documento falso se usa para cometer otro delito precedente, como una estafa. La falsificación de documentos <strong>públicos</strong> (cédula, pasaporte, actas) sí es delito precedente, porque la ley la menciona expresamente.[[1,18]]</td></tr>
 </tbody></table></div>
-<div class="callout warn" id="nota-codigo-penal"><b>Nota aclaratoria para los participantes · Nuevo Código Penal</b>
-<p>Desde agosto de 2026 está vigente el nuevo Código Penal de la República Dominicana (Ley Orgánica 74-25, con las modificaciones de la Ley 44-26). Este curso aplica el código vigente.[[13,16]]</p>
-<ul>
-<li>La <strong>estafa simple</strong> (art. 237) se sanciona con <strong>tres a cinco años</strong> de prisión; la estafa agravada, la colectiva y la piramidal (arts. 238 a 242), con cinco a diez años.[[14]]</li>
-<li>Como la Ley 155-17 considera infracción precedente toda infracción grave con pena no menor de tres años (art. 2, num. 11), <strong>toda estafa es hoy delito precedente del lavado de activos</strong>.[[1]]</li>
-<li>Por tanto, una operación realizada o intentada que genere sospecha de estar vinculada a una estafa <strong>debe reportarse mediante ROS</strong>, además de orientar a las víctimas a denunciar.</li>
-</ul>
-<p><strong>Falsificación de documentos privados:</strong> la falsedad simple del art. 348 se castiga con 1 a 2 años, por lo que, aislada, sigue sin ser delito precedente. Pero si una carta laboral o un estado de cuenta falsos se usan para obtener un préstamo o un pago, la conducta puede constituir una estafa, y esta sí lo es. Analiza siempre para qué se usó el documento.[[17]]</p>
-<p>La Guía de Calidad de la UAF (enero 2024) indicaba lo contrario para la estafa simple porque se basaba en el Código Penal de 1884, que la castigaba con menos de tres años. Ese criterio quedó superado por el nuevo código. Si encuentras material anterior con esa indicación, aplica la norma vigente.[[4]]</p>
-</div>
-"""},
-{"title": "El Reporte de Actividad Sospechosa (RAS)", "html": """
+""" + NOTA},
+# 6 ------------------------------------------------------------------------------------------
+{"title": "El Reporte de Actividad Sospechosa (RAS)", "html": ess(
+"El RAS es un reporte voluntario para avisar a la UAF de algo grave sobre un cliente —por ejemplo, una noticia reciente o una coincidencia en una lista— aunque no haya hecho ninguna operación.") + """
 <p>El RAS permite comunicar a la UAF situaciones en las que <strong>no hubo transacción ni intento</strong>, pero se identificó un posible vínculo de un cliente con lavado, delitos precedentes, financiamiento del terrorismo o de la proliferación. Sus rasgos:[[4,5]]</p>
 <ul>
 <li>No está contemplado en la Ley 155-17; es <strong>opcional</strong>.</li>
@@ -194,17 +231,26 @@ COURSES = [
 <div class="callout warn"><b>Excepción que no es RAS</b>Si un cliente o potencial cliente <strong>se niega</strong> a entregar información de debida diligencia, la ley exige un <strong>ROS</strong> (art. 62), no un RAS.[[1,5]]</div>
 <div class="case"><b>Caso</b><p>Durante la revisión periódica, se encuentra que un cliente aparece en la prensa reciente como investigado por contrabando. No ha realizado transacciones inusuales.</p>
 <p class="verdict no"><b>Decisión:</b> RAS opcional (y revisión de su calificación de riesgo). Si luego realiza operaciones incoherentes con su perfil, el análisis puede derivar en un ROS.</p></div>
-"""},
-{"title": "Confidencialidad, protección y consecuencias", "html": """
+""" + deep("""
+<p><strong>Coincidencia en listas de la ONU.</strong> No confundas un RAS con la obligación de congelar: si la coincidencia es con las listas del Consejo de Seguridad, el sujeto obligado debe congelar sin demora y notificar al Ministerio Público y a la UAF (art. 83). El congelamiento no puede levantarse sin notificación judicial.[[1]]</p>
+""")},
+# 7 ------------------------------------------------------------------------------------------
+{"title": "Confidencialidad, protección y consecuencias", "html": ess(
+"Nunca se le dice al cliente ni a otras personas que se envió un reporte, ni siquiera a los auditores. Quien reporta de buena fe está protegido por la ley. No reportar es una falta muy grave.") + """
 <ul>
 <li><strong>Reserva absoluta:</strong> ni la entidad ni sus directores o empleados pueden revelar a terceros que se remitió información a la UAF o que se examina una operación (art. 63; Recomendación 21 del GAFI). La UAF incluye en «terceros» a los auditores internos y externos.[[1,3,4]]</li>
 <li><strong>Protección:</strong> reportar de buena fe no genera responsabilidad civil, administrativa ni penal (art. 58).[[1]]</li>
+<li><strong>Secreto bancario o profesional:</strong> no impide cumplir el deber de reportar (art. 57).[[1]]</li>
 <li><strong>Consecuencias de no reportar:</strong> es una infracción administrativa muy grave (art. 69); el retraso en remitir información es una infracción leve (art. 71).[[1]]</li>
 <li><strong>Naturaleza del ROS:</strong> no es una denuncia penal ni una prueba. La UAF analiza y, si corresponde, comparte inteligencia con las autoridades; no ejerce la acción penal.[[4]]</li>
 <li><strong>Revelar la identidad</strong> de quien elaboró el reporte también está sancionado.[[4]]</li>
 </ul>
-"""},
-{"title": "goAML en la práctica", "html": """
+""" + deep("""
+<p><strong>Gestión interna.</strong> Limita el acceso a los expedientes de ROS al oficial de cumplimiento y su equipo; registra quién consulta; y cuida que las comunicaciones internas con el área de negocio pidan información sin revelar que se evalúa un reporte. La norma de seguros reitera la confidencialidad del ROS frente al cliente y a terceros.[[16]]</p>
+""")},
+# 8 ------------------------------------------------------------------------------------------
+{"title": "goAML en la práctica", "html": ess(
+"goAML es la plataforma donde se registran los sujetos obligados y envían sus reportes. Hay que registrarse aunque todavía no se haya reportado nada, escribir los números sin guiones y llenar bien cada campo para que no rechacen el reporte.") + """
 <p>goAML es la plataforma de la UAF para recibir los reportes de los sujetos obligados.[[5]]</p>
 <h3>Registro</h3>
 <ol class="steps">
@@ -225,9 +271,22 @@ COURSES = [
 </ul>
 <p>Si un reporte es rechazado, el usuario puede ver el motivo, revertirlo, corregirlo desde «Reportes redactados» y reenviarlo.[[4,5]]</p>
 """},
-{"title": "Ejemplos por sector", "html": """
+# 9 ------------------------------------------------------------------------------------------
+{"title": "Ejemplos por sector", "html": ess(
+"Para cerrar, casos inventados de seis sectores. Cada uno muestra qué señales abren el análisis y qué decisión tomar. Una señal de alerta no es una conclusión: es el inicio del análisis.") + """
 <p>Los siguientes casos son <strong>hipotéticos y de elaboración propia</strong>, construidos a partir de las señales de alerta que la UAF ha identificado para cada sector. Recuerda: una señal de alerta abre el análisis, no lo cierra.</p>
 """ + SECTORES},
+],
+"glossary": [
+("RTE", "Reporte de Transacciones en Efectivo: efectivo igual o superior a US$15,000 (US$3,000 en casinos) (arts. 52 a 54) [[1]]."),
+("ROS", "Reporte de Operación Sospechosa: dentro de 5 días hábiles de realizada o intentada la operación (art. 55) [[1]]."),
+("RAS", "Reporte de Actividad Sospechosa: opcional, sin operación, por un vínculo identificado con actividad ilícita [[4,5]]."),
+("Operación sospechosa", "Transacción, efectuada o no, compleja, insólita o significativa, sin fundamento económico o legal evidente o que genera sospecha (art. 2, num. 16) [[1]]."),
+("Transacciones múltiples", "Operaciones en efectivo de una misma persona en 24 horas que se suman a efectos del umbral (art. 54) [[1]]."),
+("Fraccionamiento", "División de operaciones para quedar por debajo de los umbrales de reporte."),
+("Infracción precedente", "Delito que genera los bienes que se lavan; incluye toda infracción grave con pena no menor de 3 años (art. 2, num. 11) [[1]]."),
+("goAML", "Plataforma de la UAF para registrar a los sujetos obligados y recibir sus reportes [[5]]."),
+("Método de las 5W", "Estructura de redacción: quién, qué, cuándo, dónde y por qué [[4]]."),
 ],
 "quiz": [
 {"q": "Un cliente deposita en efectivo US$9,000 por la mañana y US$7,000 por la tarde en la misma entidad, a su favor. ¿Qué corresponde según la ley?", "options": ["Nada, ninguna supera el umbral", "Agruparlas como una sola transacción y reportarla en el RTE", "Solo un RAS", "Esperar al día siguiente"], "answer": 1, "explain": "El art. 54 agrupa las transacciones múltiples en efectivo de una misma persona en 24 horas que, sumadas, alcanzan US$15,000 [[1]]."},
@@ -235,11 +294,12 @@ COURSES = [
 {"q": "¿Cuándo deben remitirse los RTE a la UAF?", "options": ["Dentro de 5 días hábiles", "Los del mes anterior, dentro de los primeros 10 días calendario", "Una vez al año", "Solo cuando hay sospecha"], "answer": 1, "explain": "El art. 53 establece la remisión dentro de los primeros diez días calendario del mes siguiente [[1]]."},
 {"q": "Un cliente intentó una operación sospechosa, pero desistió al pedírsele documentos. ¿Procede ROS?", "options": ["No, porque no se concretó", "Sí, el ROS abarca operaciones realizadas o intentadas", "Solo si superó US$15,000", "Solo un RAS"], "answer": 1, "explain": "El art. 55 cuenta el plazo desde que la operación fue realizada o intentada [[1]]."},
 {"q": "¿Cuál afirmación sobre el ROS es correcta?", "options": ["Hay que probar el delito antes de reportar", "No se requiere certeza del delito, pero sí un análisis previo que sustente la sospecha", "Solo se reportan montos altos", "Es una denuncia penal"], "answer": 1, "explain": "La UAF aclara que no se requiere certeza ni identificar el tipo penal, pero sí analizar antes de reportar [[4]]."},
+{"q": "¿Qué pregunta de las 5W suele faltar en los reportes débiles?", "options": ["¿Dónde?", "¿Por qué? (las razones concretas de la sospecha)", "¿Cuándo?", "Ninguna"], "answer": 1, "explain": "Sin el «por qué» el reporte no explica la sospecha; es uno de los errores que señala la UAF [[4]]."},
 {"q": "Un cliente aparece en una noticia de hace diez años por un delito ya juzgado y no tiene operaciones inusuales. ¿Qué reporte corresponde?", "options": ["ROS obligatorio", "No es un ROS; si se confirma un vínculo relevante, un RAS opcional", "RTE", "Ninguno nunca"], "answer": 1, "explain": "Sin operación ni intento, una noticia negativa no genera ROS; puede valorarse un RAS [[4]]."},
 {"q": "Un potencial cliente se niega a entregar información para su identificación. ¿Qué exige la ley?", "options": ["Un RAS", "Un ROS", "Nada si no abrió cuenta", "Un RTE"], "answer": 1, "explain": "El art. 62 ordena realizar un ROS cuando el potencial cliente se niega a aportar información para su identificación [[1,5]]."},
-{"q": "El auditor externo pide la lista de ROS enviados para su revisión. Según la UAF y el art. 63:", "options": ["Se le entrega sin restricción", "La prohibición de revelar alcanza también a auditores internos y externos", "Solo si firma un acuerdo", "Se le entrega una copia parcial"], "answer": 1, "explain": "La UAF incluye a los auditores internos y externos dentro de «terceros» a quienes no se debe revelar la existencia de un ROS [[1,4]]."},
+{"q": "El auditor externo pide la lista de ROS enviados para su revisión. Según la UAF y el art. 63:", "options": ["Se le entrega sin restricción", "La prohibición de revelar alcanza también a auditores internos y externos", "Solo si firma un acuerdo", "Se le entrega una copia parcial"], "answer": 1, "explain": "La UAF incluye a los auditores internos y externos dentro de «terceros» [[1,4]]."},
 {"q": "En una remesa internacional, ¿qué error de goAML provoca rechazos con frecuencia?", "options": ["Incluir el monto en moneda extranjera", "Dejar vacíos los países de origen y destino o poner ambos como República Dominicana", "Adjuntar documentos", "Detallar la razón de la sospecha"], "answer": 1, "explain": "Es uno de los errores identificados por la UAF en reportes de transacciones internacionales [[4,9]]."},
-{"q": "Una cliente recibe decenas de pagos por ventas en redes sociales que nunca entrega, y el análisis confirma el patrón. Con el Código Penal vigente, ¿qué corresponde?", "options": ["Nada: la estafa simple no es delito precedente", "Remitir un ROS, porque la estafa (art. 237, 3 a 5 años) es hoy delito precedente, y orientar a las víctimas a denunciar", "Enviar solo un RTE", "Esperar una sentencia condenatoria"], "answer": 1, "explain": "Con la Ley 74-25 la estafa simple se sanciona con 3 a 5 años, por lo que alcanza el umbral de infracción precedente del art. 2, num. 11 de la Ley 155-17; el criterio contrario de la guía de 2024 se basaba en el código de 1884 [[1,4,13,14]]."},
+{"q": "Una cliente recibe decenas de pagos por ventas en redes sociales que nunca entrega, y el análisis confirma el patrón. Con el Código Penal vigente, ¿qué corresponde?", "options": ["Nada: la estafa simple no es delito precedente", "Remitir un ROS, porque la estafa (art. 237, 3 a 5 años) es hoy delito precedente, y orientar a las víctimas a denunciar", "Enviar solo un RTE", "Esperar una sentencia condenatoria"], "answer": 1, "explain": "Con la Ley 74-25 la estafa simple se sanciona con 3 a 5 años, por lo que alcanza el umbral de infracción precedente del art. 2, num. 11 de la Ley 155-17 [[1,13,14]]."},
+{"q": "La DGII pide un reporte estadístico mensual de ROS. ¿Qué debe contener?", "options": ["El relato completo de cada ROS", "Cantidad, montos, oficinas y fechas, sin información sobre el contenido", "Los nombres de los clientes reportados", "Copia de goAML"], "answer": 1, "explain": "La Norma 01-2018 exige solo información estadística y cuantitativa, sin el contenido de los ROS [[19]]."},
 ],
-},
-]
+}

@@ -53,11 +53,36 @@ CONCLAFIT_2024 = {"text": "CONCLAFIT. Resolución núm. CONCLAFIT-2024-01, del 3
 CONCLAFIT_2025_01 = {"text": "CONCLAFIT. Resolución núm. CONCLAFIT-2025-01, que aumenta los umbrales del art. 64 de la Ley 155-17, y su Nota aclaratoria del 10 de diciembre de 2025."}
 CONCLAFIT_2025_02 = {"text": "CONCLAFIT. Resolución núm. CONCLAFIT-2025-02, del 26 de noviembre de 2025, sobre el alcance de la condición de sujeto obligado no financiero de las empresas constructoras."}
 CONCLAFIT_2021_02 = {"text": "CONCLAFIT. Resolución núm. 02-2021, que ratifica la condición de persona expuesta políticamente de los Cónsules Generales Honorarios."}
-SIS_NORMA = {"text": "Superintendencia de Seguros de la República Dominicana. Norma sobre prevención del lavado de activos, financiamiento del terrorismo y de la proliferación de armas de destrucción masiva (versión actualizada)."}
+SIS_NORMA = {"text": "Superintendencia de Seguros de la República Dominicana. Norma que regula la prevención del lavado de activos y financiamiento del terrorismo para el sector seguros (2 de noviembre de 2017)."}
 IDECOOP_NORMA = {"text": "Instituto de Desarrollo y Crédito Cooperativo (IDECOOP). Norma 001-17 sobre prevención de lavado de activos para las cooperativas."}
-SIB_DD = {"text": "Superintendencia de Bancos. Circular SIB núm. 012-17, Segunda versión del Instructivo sobre Debida Diligencia."}
+SIB_DD = {"text": "Superintendencia de Bancos. Circular SIB núm. 012/17, del 12 de diciembre de 2017, Segunda versión del Instructivo sobre Debida Diligencia. Nota: la SB puso en vigencia una tercera versión mediante la Circular SB núm. 005/22, del 2 de marzo de 2022 (citada en la Circular CSB-REG-2026000013)."}
 DEC_407 = {"text": "Poder Ejecutivo. Decreto núm. 407-17, reglamento sobre congelamiento preventivo de bienes vinculados al terrorismo, su financiamiento y la proliferación de armas de destrucción masiva."}
 LEY_4426 = {"text": "Ley núm. 44-26 que modifica 27 artículos de la Ley Orgánica 74-25 (Código Penal), promulgada el 27 de julio de 2026. Análisis de Pellerano & Herrera.",
             "url": "https://phlaw.com/es/ley-44-26-principales-modificaciones-al-nuevo-codigo-penal-de-la-republica-dominicana/"}
 LEY_7425_TXT = {"text": "Ley Orgánica núm. 74-25 que instituye el Código Penal de la República Dominicana, texto íntegro (arts. 237 a 242 sobre la estafa; arts. 348 a 351 sobre las falsedades).",
                 "url": "https://www.sclawyer.com.do/base-de-datos/ley-74-25-nuevo-codigo-penal-"}
+
+# --- Fuentes añadidas en la ampliación de los cursos (noviembre 2026) ---
+DGII_N02 = {"text": "Dirección General de Impuestos Internos (DGII). Norma General núm. 02-2018 sobre prevención de lavado de activos para quienes se dedican habitualmente a la compra y venta de vehículos de motor, barcos y aviones."}
+CNV_NORMA = {"text": "Consejo Nacional de Valores. Primera Resolución del 2 de agosto de 2017 (R-CNV-2017-24-MV), Norma que regula la prevención del lavado de activos, financiamiento del terrorismo y de la proliferación de armas de destrucción masiva en el mercado de valores dominicano."}
+SIV_DD = {"text": "Superintendencia de Valores. Circular C-SIV-2017-12-MV, Instructivo para la aplicación de la debida diligencia en el mercado de valores."}
+CASINOS_104 = {"text": "Ministerio de Hacienda. Resolución núm. 104-2017 que aprueba la Norma sobre las medidas de prevención contra el lavado de activos y la financiación del terrorismo en el sector de los casinos, bancas deportivas, loterías y demás juegos de azar."}
+SB_ONBOARD = {"text": "Superintendencia de Bancos. Circular CSB-REG-2026000013, que actualiza los lineamientos sobre onboarding digital de personas físicas y jurídicas."}
+SB_VERIF = {"text": "Superintendencia de Bancos. Circular CSB-REG-202400010, mecanismo de verificación digital de documentos emitidos por las entidades de intermediación financiera."}
+CONCLAFIT_2025_NOTA = {"text": "CONCLAFIT. Nota aclaratoria de la Resolución núm. CONCLAFIT-2025-01, del 10 de diciembre de 2025 (umbral de RD$400,000 para los literales d, e, f y g del art. 64 de la Ley 155-17)."}
+GAFI_PEP_M = {"text": "GAFI (2013). Guía del GAFI: Personas Expuestas Políticamente (Recomendaciones 12 y 22), junio de 2013 (copia publicada por el Banco Central de Sudán).",
+              "url": "https://cbos.gov.sd/sites/default/files/guidance-pep-rec12-22.pdf"}
+GAFI_BF_M = {"text": "GAFI (2023). Guidance on Beneficial Ownership of Legal Persons (Recomendación 24), marzo de 2023 (copia publicada por el Banco de Rusia).",
+             "url": "https://cbr.ru/Content/Document/File/146037/GRec24.pdf"}
+GAFI_VA_RF_M = {"text": "GAFI (2020). Virtual Assets: Red Flag Indicators of Money Laundering and Terrorist Financing, septiembre de 2020 (copia publicada por la Unidad de Inteligencia Financiera de Arabia Saudita).",
+                "url": "https://www.aml.gov.sa/en-us/GuidanceReports/Virtual%20Assets%20Red%20Flag%20Indicators.pdf"}
+GAFI_VA_M = {"text": "GAFI (2021). Guía actualizada para un enfoque basado en el riesgo a los activos virtuales y proveedores de servicios de activos virtuales (traducción publicada por el SAT de México).",
+             "url": "https://www.sat.gob.mx/minisitio/ActividadesVulnerables/documentos/Normateca/Internacional/EnfoqueBasadoenRiesgo_activosvirtuales.pdf"}
+GAFI_CEF_M = {"text": "GAFI, INTERPOL y Grupo Egmont (2023). Illicit Financial Flows from Cyber-Enabled Fraud, noviembre de 2023 (copia publicada por el Banco de Rusia).",
+              "url": "https://www.cbr.ru/Content/Document/File/156253/IFF.PDF"}
+GAFI_TECH_M = {"text": "GAFI (2021). Opportunities and Challenges of New Technologies for AML/CFT, julio de 2021 (copia publicada por el Banco de Rusia).",
+               "url": "https://www.cbr.ru/Content/Document/File/126302/OCNT.pdf"}
+NIST_AI_DOC = {"text": "National Institute of Standards and Technology (2023). Artificial Intelligence Risk Management Framework (AI RMF 1.0), NIST AI 100-1.",
+               "url": "https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf"}
+GAFI40_DGII = {"text": "GAFI. Estándares internacionales sobre la lucha contra el lavado de activos, el financiamiento del terrorismo y de la proliferación: Las Recomendaciones del GAFI y su Metodología (traducción del GAFILAT, actualización a diciembre de 2023, publicada por la DGII).",
+               "url": "https://ws945695e.dgii.gov.do/legislacion/prevencionLavado/informacionEspecializada/Documents/Recomendaciones+Metodologia-(actDIC2023).pdf"}

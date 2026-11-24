@@ -21,12 +21,10 @@ SITE = "https://hansliery89.github.io/hansliery-web/"
 REVISION = "Noviembre 2026"
 sys.path.insert(0, str(HERE))
 
-from cursos_1 import COURSES as C1  # noqa: E402
-from cursos_2 import COURSES as C2  # noqa: E402
-from cursos_3 import COURSES as C3  # noqa: E402
-from cursos_4 import COURSES as C4  # noqa: E402
+import importlib  # noqa: E402
 
-COURSES = C1 + C2 + C3 + C4
+# Un archivo por curso: c01.py, c02.py, ... c13.py (cada uno define COURSE).
+COURSES = [importlib.import_module(f.stem).COURSE for f in sorted(HERE.glob("c[0-9][0-9].py"))]
 COURSES.sort(key=lambda c: c["num"])
 
 
@@ -77,7 +75,7 @@ HEAD = """<!DOCTYPE html>
   <meta property="og:title" content="{title}">
   <meta property="og:description" content="{desc}">
   <meta property="og:url" content="{canonical}">
-  <meta property="og:image" content="{site}assets/og-image.png">
+  <meta property="og:image" content="{site}assets/og-image.jpg">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="../favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -92,7 +90,7 @@ HEAD = """<!DOCTYPE html>
   <div class="progress" aria-hidden="true"></div>
   <header class="topbar">
     <div class="wrap topbar-inner">
-      <a class="brand" href="../index.html" aria-label="HANSLIERY SÁNCHEZ — volver al sitio principal">
+      <a class="brand" href="../index.html">
         <svg class="brand-mark" viewBox="0 0 48 48" aria-hidden="true">
           <defs><linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#38BDF8"/></linearGradient></defs>
           <path d="M24 3.5l17.8 10.25v20.5L24 44.5 6.2 34.25v-20.5L24 3.5z" fill="rgba(37,99,235,.08)" stroke="url(#gm)" stroke-width="2"/>
@@ -181,6 +179,7 @@ def course_page(c, prev_c, next_c):
         <div class="ring" aria-hidden="true"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="19" class="ring-track"/><circle cx="22" cy="22" r="19" class="ring-val"/></svg><span data-pct>0%</span></div>
         <p class="side-label">Tu avance de lectura</p>
         <ol class="toc">{toc}
+          {'<li><a href="#glosario" data-toc><span>Aa</span>Glosario</a></li>' if c.get("glossary") else ''}
           <li><a href="#evaluacion" data-toc><span>✓</span>Evaluación</a></li>
           <li><a href="#fuentes" data-toc><span>§</span>Fuentes</a></li>
         </ol>
@@ -192,12 +191,29 @@ def course_page(c, prev_c, next_c):
         <h2 id="obj-title">Al finalizar podrás</h2>
         <ul>{''.join(f'<li>{esc(o)}</li>' for o in c['objectives'])}</ul>
       </section>
+      <section class="howto" aria-label="Cómo leer este curso">
+        <p class="howto-title">Cómo leer este curso</p>
+        <ul class="howto-list">
+          <li><span class="lv lv-1">Lo esencial</span>Abre cada módulo en lenguaje sencillo. Si es tu primer contacto con el tema, con esto basta para seguir.</li>
+          <li><span class="lv lv-2">Desarrollo</span>Explica el tema con ejemplos, tablas y casos. Pensado para estudiantes y personal que atiende clientes.</li>
+          <li><span class="lv lv-3">Para profundizar</span>Bloque desplegable con artículos, matices y criterios técnicos para oficiales de cumplimiento y profesionales.</li>
+        </ul>
+      </section>
 """)
     for i, m in enumerate(c["modules"]):
         out.append(f"""
       <section class="module" id="modulo-{i+1}" data-section>
         <header class="module-head"><span class="module-n">{i+1:02d}</span><h2>{esc(m['title'])}</h2></header>
         <div class="prose">{refs(m['html'])}</div>
+      </section>
+""")
+    # GLOSARIO
+    if c.get("glossary"):
+        items = "".join(f'<div class="gl-item"><dt>{esc(t)}</dt><dd>{refs(esc(d))}</dd></div>' for t, d in c["glossary"])
+        out.append(f"""
+      <section class="glossary" id="glosario" data-section aria-labelledby="gl-title">
+        <header class="module-head"><span class="module-n">Aa</span><h2 id="gl-title">Glosario del curso</h2></header>
+        <dl class="gl-list">{items}</dl>
       </section>
 """)
     # QUIZ
@@ -282,7 +298,7 @@ def catalog_page():
       <nav class="crumbs" aria-label="Ruta"><a href="../index.html">Inicio</a><span>/</span><span aria-current="page">Capacitaciones</span></nav>
       <p class="eyebrow"><span class="tag">Catálogo</span> {len(COURSES)} cursos</p>
       <h1>Conocimiento que se transforma en <span class="grad-gold">criterio</span>.</h1>
-      <p class="summary">Cursos breves y gratuitos sobre prevención de lavado de activos y cumplimiento, con evaluación interactiva y fuentes oficiales al final de cada uno. Tu avance se guarda en este navegador.</p>
+      <p class="summary">Cursos gratuitos sobre prevención de lavado de activos y cumplimiento, con evaluación interactiva y fuentes oficiales al final de cada uno. Tu avance se guarda en este navegador.</p>
     </div>
   </section>
   <div class="wrap">
@@ -300,6 +316,7 @@ def main():
             assert 0 <= item["answer"] < len(item["options"]), (c["slug"], item["q"])
         used = {int(x) for m in c["modules"] for grp in re.findall(r"\[\[([\d,\s]+)\]\]", m["html"]) for x in grp.split(",")}
         used |= {int(x) for it in c["quiz"] for grp in re.findall(r"\[\[([\d,\s]+)\]\]", it["explain"]) for x in grp.split(",")}
+        used |= {int(x) for _, dd in c.get("glossary", []) for grp in re.findall(r"\[\[([\d,\s]+)\]\]", dd) for x in grp.split(",")}
         assert max(used, default=0) <= len(c["sources"]), (c["slug"], "referencia a fuente inexistente", max(used))
     for i, c in enumerate(COURSES):
         prev_c = COURSES[i - 1] if i > 0 else None
