@@ -23,7 +23,8 @@ Backend de **HANSLIERY SÁNCHEZ | COMPLIANCE & RISK ADVISORY · Academy**. Este 
 | `0500_storage` | 6 buckets privados con límites de tamaño y tipo, y sus políticas. |
 | `0600_inactivity` | Política de 100 días y tarea diaria `pg_cron` (06:15 UTC). |
 | `0650_storage_cleanup_queue` | Cola de limpieza de archivos (Supabase no permite borrar Storage desde SQL). |
-| `0700_seed` | Configuración, 15 categorías de ingresos, 13 cursos (en **borrador**) y sus 93 módulos. |
+| `0700_seed` | Configuración, 15 categorías de ingresos, 13 cursos y sus 93 módulos. |
+| `0800_mfa_recovery_codes` | Códigos de recuperación del 2FA (solo hash SHA-256, máx. 5 fallos / 15 min) y publicación de los 13 cursos como **gratuitos**. |
 
 ## Modelo de seguridad
 
@@ -48,6 +49,9 @@ Backend de **HANSLIERY SÁNCHEZ | COMPLIANCE & RISK ADVISORY · Academy**. Este 
 | `mark_module_read(slug, anchor)` | autenticado | Avance por módulo desde las páginas públicas de los cursos. |
 | `my_access_history()` | autenticado | Historial de sesiones registrado por Auth. |
 | `request_account_deletion()` | autenticado | Solicitud de baja. |
+| `generate_recovery_codes()` | autenticado con aal2 | 10 códigos de recuperación nuevos (invalida los anteriores). |
+| `recovery_codes_remaining()` | autenticado | Cantidad de códigos sin usar. |
+| `consume_recovery_code(user, code)` | solo `service_role` | Lo usa la función `mfa-recover`. |
 | `verify_certificate(code)` | público | Verificación con datos mínimos. |
 | `public_recognitions()` | público | Premios aprobados de estudiantes que autorizaron publicar su nombre. |
 
@@ -56,6 +60,12 @@ El asesor de seguridad de Supabase advierte que estas funciones `SECURITY DEFINE
 ### Política de inactividad
 
 Avisos a los 70, 85 y 95 días → suspensión a los 100 → solicitud de baja con 30 días de gracia → anonimización **solo si no hay** pagos pendientes, entregas o exámenes por calificar, becas vigentes ni conversaciones abiertas. Certificados, pagos y registros académicos se conservan vinculados al perfil anonimizado. Si el estudiante vuelve a iniciar sesión antes de la anonimización, la cuenta se reactiva. Todos los plazos están en `academy_settings` y deben validarse con criterio legal.
+
+## Funciones del servidor (Edge Functions)
+
+| Función | Uso |
+|---|---|
+| `mfa-recover` | Recibe un código de recuperación de un usuario con sesión (aal1), lo valida y elimina sus factores TOTP con la API de administración. CORS limitado a `https://hansliery89.github.io` (añada su dominio propio cuando lo tenga). |
 
 ## Pruebas
 
@@ -89,4 +99,4 @@ select id, 'superadmin' from public.profiles where email = 'su-correo@ejemplo.co
 ## Siguientes fases que dependen de este backend
 
 - **Edge Functions:** motor de exámenes y certificados (Fase 5), notificaciones por correo (Fase 8), procesamiento de `private.storage_cleanup_queue` y eliminación de la cuenta de Auth tras la anonimización (Fase 9).
-- Los 13 cursos están en **borrador**: el administrador fija horas académicas, precio y los publica.
+- Los 13 cursos están publicados como gratuitos; el administrador fija las horas académicas antes de emitir certificados.

@@ -1536,3 +1536,7 @@ details.pc-group[open] > summary h4::after { transform: rotate(45deg); }
 @keyframes csLine { from { transform: scaleY(0); opacity: 0; } to { transform: scaleY(1); opacity: .5; } }
 @media (max-width: 760px) { .cred-strip.is-visible .cs-list li:nth-child(3)::before { display: none; } }
 .cs-list b [data-count] { font: inherit; color: inherit; letter-spacing: inherit; line-height: inherit; font-variant-numeric: tabular-nums; }
+
+/* Acceso a la Academy (portada y servicio de capacitación) */
+.btn-academy { background: linear-gradient(100deg, var(--petrol), var(--teal)); color: #fff; }
+.btn-academy:hover { box-shadow: 0 20px 44px -14px rgba(37, 99, 235, .7); }

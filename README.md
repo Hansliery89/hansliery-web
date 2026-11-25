@@ -77,6 +77,22 @@ Dentro del texto, `[[3]]` crea una cita a la fuente número 3 del curso. El gene
 
 No requiere instalación, compilación ni frameworks. Solo depende de Google Fonts (Sora + Manrope). Si las fuentes no cargan, el sitio usa tipografías del sistema y sigue funcionando.
 
+## Academy (aula virtual)
+
+Sección independiente en `academy/` con su propia navegación y autenticación, y la misma identidad del portal. Se accede con el botón «Acceder al aula virtual» de la sección Capacitaciones de la portada y de la página del servicio de capacitación.
+
+| Página | Fuente | Función |
+|---|---|---|
+| `academy/index.html` | `assets/sitio/paginas/academy-index.html` | Iniciar sesión, registro (correo o Google), verificación en dos pasos, códigos de recuperación y restablecimiento de contraseña. |
+| `academy/panel.html` | `academy-panel.html` | Panel del estudiante: resumen, capacitaciones, evaluaciones, asignaciones, certificados, comunicaciones, perfil y seguridad. |
+| `academy/verificar.html` | `academy-verificar.html` | Verificador público de certificados. |
+| `academy/ayuda.html` | `academy-ayuda.html` | Centro de ayuda. |
+
+- Las páginas se generan con `python3 assets/sitio/build.py` (metadatos `csp: academy` y `scripts:`). Tienen una política de seguridad propia que solo permite conectarse al proyecto Supabase y a la comprobación de contraseñas filtradas; el resto del portal conserva la suya.
+- JavaScript: `academy/js/core.js` (cliente y utilidades), `acceso.js`, `panel.js`, `verificar.js`. La librería `supabase-js` 2.119.2 está copiada en `academy/js/vendor/` (sin CDN).
+- La URL y la clave **pública** de Supabase están en el bloque `ACADEMY` de `assets/sitio/build.py`. Nunca coloque ahí claves secretas.
+- Backend, migraciones, pruebas y configuración de Auth: ver `supabase/README.md`.
+
 ## Diagnóstico preliminar de riesgos
 
 `diagnostico-riesgos.html` es un cuestionario de 26 preguntas en 6 pasos que calcula, solo en el navegador, el riesgo inherente y residual por factor con la metodología de la matriz (pesos 30/20/15/25/10, controles hasta 30 %). Muestra un mapa de calor, las brechas prioritarias y un informe imprimible como PDF. Se accede desde la tarjeta del Servicio 02. Preguntas, puntajes y recomendaciones están en `assets/diagnostico/diagnostico.js`; estilos en `diagnostico.css`; el marco de la página en `body.html` (ejecute `python3 assets/diagnostico/build.py` tras editarlo). El botón «Solicitar asesoría profesional» abre `index.html?servicio=riesgos&dx=…&pts=…#contacto`, que preselecciona el servicio y redacta el mensaje.

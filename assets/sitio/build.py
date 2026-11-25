@@ -10,6 +10,8 @@ Uso:   python3 assets/sitio/build.py      (desde la raíz del repositorio)
 - Estilos: assets/css/site.css · Comportamiento: assets/js/site.js
 - No requiere dependencias externas (solo Python 3.8+).
 """
+import base64
+import hashlib
 import html
 import json
 import pathlib
@@ -64,6 +66,23 @@ def esc(v):
     return html.escape(v, quote=True)
 
 
+# Backend de la Academy (Supabase). Solo la URL y la clave PÚBLICA: nunca secretos.
+ACADEMY = {
+    "supabase_url": "https://vbodazonicfzfovlighm.supabase.co",
+    "supabase_key": "sb_publishable_C5Gi-NlDKhEpb3AnaH0QGg_gtae0P4W",
+    "terms_version": "2026-11",
+}
+
+
+def csp_academy(inline_hash):
+    sb = ACADEMY["supabase_url"]
+    ws = sb.replace("https://", "wss://")
+    return ("default-src 'self'; script-src 'self' 'sha256-" + inline_hash + "'; "
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; "
+            f"img-src 'self' data: blob: {sb}; connect-src {sb} {ws} https://api.pwnedpasswords.com; "
+            "object-src 'none'; base-uri 'self'; form-action 'none'")
+
+
 def csp():
     script = ["'self'", "'unsafe-inline'"]
     connect = []
@@ -87,8 +106,15 @@ def head(p):
     base = f'\n  <base href="{esc(SITE["base_path"])}">' if p.get("base") else ""
     cfg = {"email": SITE["email"], "linkedin": SITE["linkedin"], "whatsapp": SITE["whatsapp"],
            "phone": SITE["phone"], "agenda": SITE["agenda"], "formEndpoint": SITE["form_endpoint"]}
+    academy = p.get("csp") == "academy"
+    if academy:
+        cfg["academy"] = ACADEMY
+    inline = "document.documentElement.classList.add('js');window.SITE_CONFIG=" + json.dumps(cfg, ensure_ascii=False) + ";"
+    policy = (csp_academy(base64.b64encode(hashlib.sha256(inline.encode("utf-8")).digest()).decode())
+              if academy else csp())
+    academy_css = '<link rel="stylesheet" href="academy/css/academy.css">\n  ' if academy else ""
     analytics = ""
-    if SITE["plausible_domain"]:
+    if SITE["plausible_domain"] and not academy:
         analytics = f'\n  <script defer data-domain="{esc(SITE["plausible_domain"])}" src="https://plausible.io/js/script.js"></script>'
     jsonld = ""
     if p["out"] == "index.html":
@@ -107,7 +133,7 @@ def head(p):
   <meta name="theme-color" content="#FFFFFF">
   <meta name="color-scheme" content="light">
   <meta name="referrer" content="strict-origin-when-cross-origin">
-  <meta http-equiv="Content-Security-Policy" content="{csp()}">
+  <meta http-equiv="Content-Security-Policy" content="{policy}">
   <link rel="canonical" href="{esc(url)}">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="es_DO">
@@ -128,7 +154,7 @@ def head(p):
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/site.css">
-  <script>document.documentElement.classList.add('js');window.SITE_CONFIG={json.dumps(cfg, ensure_ascii=False)};</script>{analytics}{jsonld}
+  {academy_css}<script>{inline}</script>{analytics}{jsonld}
 </head>"""
 
 
@@ -147,7 +173,7 @@ def header(active):
 {sprite}
   <header class="header" id="header">
     <div class="container header-inner">
-      <a class="brand" href="index.html" aria-label="HANSLIERY SÁNCHEZ · Compliance & Risk Advisory — ir al inicio">
+      <a class="brand" href="index.html">
         <svg class="brand-mark" aria-hidden="true"><use href="#logo-mark"/></svg>
         <span class="brand-text">
           <span class="brand-name">HANSLIERY <b>SÁNCHEZ</b></span>
@@ -181,14 +207,15 @@ def header(active):
 """
 
 
-def footer():
+def footer(scripts=()):
+    extra = "".join('\n  <script src="' + esc(x) + '"></script>' for x in scripts)
     nav = "\n".join(f'            <li><a href="{h}">{t}</a></li>' for _, t, h in NAV)
     return f"""
   <footer class="footer">
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a class="brand" href="index.html" aria-label="Hansliery Sánchez — volver al inicio">
+          <a class="brand" href="index.html">
             <svg class="brand-mark" aria-hidden="true"><use href="#logo-mark"/></svg>
             <span class="brand-text">
               <span class="brand-name">HANSLIERY <b>SÁNCHEZ</b></span>
@@ -233,7 +260,7 @@ def footer():
 
   <button class="to-top" type="button" aria-label="Volver arriba"><svg aria-hidden="true"><use href="#i-up"/></svg></button>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="assets/js/site.js"></script>
+  <script src="assets/js/site.js"></script>{extra}
 </body>
 </html>
 """
@@ -302,9 +329,11 @@ def main():
         cuerpo = cuerpo.replace("{{FORM_HELP}}", f'<p id="form-help"><svg aria-hidden="true"><use href="#i-info"/></svg>{helptext} <a href="legal/politica-de-privacidad.html">Política de privacidad</a>.</p>')
         cuerpo = cuerpo.replace("{{FORM_BTN}}", btn)
         cuerpo = cuerpo.replace("{{EMAIL}}", esc(SITE["email"]))
-        out = head(meta) + header(meta["active"]) + '\n  <main id="main">\n' + cuerpo.rstrip() + "\n  </main>\n" + footer()
+        scripts = [x.strip() for x in meta.get("scripts", "").split(",") if x.strip()]
+        out = head(meta) + header(meta["active"]) + '\n  <main id="main">\n' + cuerpo.rstrip() + "\n  </main>\n" + footer(scripts)
         if "{{" in out:
             sys.exit(f"{src}: marcador sin reemplazar")
+        (RAIZ / meta["out"]).parent.mkdir(parents=True, exist_ok=True)
         (RAIZ / meta["out"]).write_text(out, encoding="utf-8")
         salidas.append(meta["out"])
 

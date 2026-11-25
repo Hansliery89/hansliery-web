@@ -1,0 +1,32 @@
+<!--
+title: Verificar un certificado | ACADEMY · Hansliery Sánchez · Compliance & Risk Advisory
+desc: Verificación pública de la autenticidad de los certificados emitidos por la Academy.
+active: cursos
+out: academy/verificar.html
+base: si
+csp: academy
+scripts: academy/js/vendor/supabase-2.119.2.js, academy/js/core.js, academy/js/verificar.js
+-->
+    <section class="ac-hero" aria-labelledby="vf-title">
+      <div class="container">
+        <p class="ac-badge">ACADEMY <b>|</b> Verificación</p>
+        <h1 id="vf-title">Verificar un <span class="grad">certificado</span></h1>
+        <p class="lead">Escribe el código impreso en el certificado (formato HS-XXXX-XXXX-XXXX). Solo se muestran los datos necesarios para comprobar su autenticidad.</p>
+      </div>
+    </section>
+    <section class="ac-wrap">
+      <div class="container" style="max-width:760px">
+        <div class="ac-card">
+          <form class="ac-form ac-stack" id="f-verify" novalidate>
+            <div class="field">
+              <label for="vf-code">Código de verificación</label>
+              <input class="control ac-code" id="vf-code" autocomplete="off" autocapitalize="characters" maxlength="17" placeholder="HS-XXXX-XXXX-XXXX" required>
+              <span class="error" aria-live="polite"></span>
+            </div>
+            <div class="ac-actions"><button class="btn btn-primary" type="submit">Verificar <svg aria-hidden="true"><use href="#i-arrow"/></svg></button></div>
+          </form>
+          <div class="ac-status" id="vf-status" role="status" aria-live="polite"></div>
+          <div id="vf-result"></div>
+        </div>
+      </div>
+    </section>
