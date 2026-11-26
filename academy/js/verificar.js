@@ -22,7 +22,8 @@
       (c.academic_hours ? '<tr><th>Horas académicas</th><td>' + Number(c.academic_hours) + '</td></tr>' : '') +
       '<tr><th>Finalización</th><td>' + H.fmtDate(c.completed_on) + '</td></tr>' +
       '<tr><th>Emisión</th><td>' + H.fmtDate(c.issued_at) + '</td></tr>' +
-      '<tr><th>Código</th><td>' + H.esc(code) + '</td></tr></tbody></table>';
+      '<tr><th>Código</th><td>' + H.esc(code) + '</td></tr></tbody></table>' +
+      (valid ? '<div class="ac-actions"><a class="btn btn-ghost btn-sm" href="' + H.base + 'certificado.html?codigo=' + encodeURIComponent(code) + '">Ver el certificado</a></div>' : '');
   }
 
   $('#f-verify').addEventListener('submit', function (e) { e.preventDefault(); verify(input.value); });

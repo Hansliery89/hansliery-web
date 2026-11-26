@@ -178,5 +178,5 @@ begin
   perform pg_temp.t('suspensión aplicada', (select status = 'suspended' from public.profiles where id = p_b));
 
   raise exception 'TEST_RESULT passed=% failed=% %', (select count(*) from res where ok), (select count(*) from res where not ok),
-    coalesce((select string_agg(n || ' ' || name || coalesce(' [' || info || ']', ''), ' | ') from res where not ok), 'sin fallos');
+    coalesce((select string_agg(r.n || ' ' || r.name || coalesce(' [' || r.info || ']', ''), ' | ') from res r where not r.ok), 'sin fallos');
 end $$;

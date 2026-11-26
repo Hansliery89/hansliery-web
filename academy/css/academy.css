@@ -171,3 +171,55 @@
 
 /* El atributo hidden siempre gana sobre display */
 .ac-loading[hidden], .ac-layout[hidden], .ac-tabs[hidden], .ac-info[hidden], .ac-code-pill[hidden] { display: none !important; }
+
+/* ---------- Fases 4–9: examen, entregas, consultas, centro de control y certificado ---------- */
+.ac-dialog-wide { width: min(980px, calc(100% - 2rem)); max-height: calc(100vh - 2rem); }
+.ac-dialog-wide .ac-card { max-height: calc(100vh - 2rem); overflow-y: auto; }
+.ac-timer { font-family: var(--font-head); font-weight: 700; color: var(--petrol); font-variant-numeric: tabular-nums; }
+.ac-q { border: 1px solid var(--line); border-radius: 14px; padding: 1rem 1.1rem; margin: 0 0 .8rem; display: grid; gap: .55rem; }
+.ac-q legend { padding: 0 .3rem; font-weight: 600; line-height: 1.5; }
+.ac-q.is-off { opacity: .55; }
+.ac-opts { list-style: none; padding: 0; margin: .4rem 0 0; display: grid; gap: .3rem; font-size: .88rem; }
+.ac-opts li { padding: .35rem .6rem; border-radius: 8px; background: var(--night-2); }
+.ac-opts li.is-correct { background: rgba(22, 163, 74, .1); }
+.ac-opts li.is-chosen:not(.is-correct) { background: rgba(220, 38, 38, .08); }
+.ac-answer { background: var(--night-2); border-radius: 10px; padding: .7rem .9rem; font-size: .9rem; margin-top: .5rem; }
+.ac-thread { display: grid; gap: .7rem; margin-top: 1rem; }
+.ac-msg { padding: .8rem 1rem; border-radius: 14px; background: var(--night-2); max-width: 85%; }
+.ac-msg.is-me { justify-self: end; background: rgba(37, 99, 235, .08); }
+.ac-inline { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin-top: .8rem; }
+.ac-inline .control { width: auto; flex: 1 1 180px; min-width: 0; }
+.ac-inline label { font-size: .8rem; font-weight: 700; color: var(--muted); }
+.ac-label { display: block; font-size: .85rem; font-weight: 700; margin-bottom: .3rem; }
+.ac-kpis-6 { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+.ac-kpi-btn { text-align: left; cursor: pointer; font: inherit; }
+.ac-kpi-btn:disabled { cursor: default; }
+.ac-kpi-btn:not(:disabled):hover { border-color: var(--electric-ink); }
+.ac-grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.ac-dl { display: grid; grid-template-columns: 1fr auto; gap: .35rem 1rem; margin-top: .6rem; font-size: .88rem; }
+.ac-dl dt { color: var(--muted); }
+.ac-dl dd { margin: 0; text-align: right; font-weight: 700; font-variant-numeric: tabular-nums; }
+.ac-setting { border-top: 1px solid var(--line); padding-top: 1rem; margin-top: 1rem; }
+.ac-panel > .ac-card + .ac-card, .ac-panel > .ac-info + .ac-card, .ac-panel > div + .ac-card { margin-top: 1.2rem; }
+
+/* Certificado imprimible */
+.ac-cert { background: #fff; border-radius: 6px; box-shadow: 0 30px 80px -40px rgba(10, 25, 47, .45); padding: 18px; aspect-ratio: 1.414 / 1; }
+.ac-cert-in { height: 100%; border: 3px double var(--petrol); border-radius: 4px; padding: clamp(1.2rem, 4vw, 3rem); display: flex; flex-direction: column; align-items: center; text-align: center; justify-content: center; gap: .5rem; }
+.ac-cert-brand { font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+.ac-cert-kicker { font-family: var(--font-head); font-weight: 800; letter-spacing: .3em; color: var(--electric-ink); }
+.ac-cert-title { font-size: clamp(1.4rem, 3.6vw, 2.4rem); color: var(--night); margin: .3rem 0 .6rem; }
+.ac-cert-text { color: var(--muted); }
+.ac-cert-name { font-family: var(--font-head); font-size: clamp(1.4rem, 3.4vw, 2.2rem); font-weight: 700; color: var(--petrol); border-bottom: 1px solid var(--line-strong); padding: 0 1.5rem .3rem; }
+.ac-cert-course { font-size: clamp(1.05rem, 2.4vw, 1.4rem); font-weight: 700; color: var(--night); max-width: 40ch; }
+.ac-cert-foot { display: flex; justify-content: space-between; align-items: flex-end; width: 100%; margin-top: auto; gap: 1.5rem; text-align: left; }
+.ac-cert-line { border-top: 1px solid var(--night); padding-top: .4rem; font-weight: 700; min-width: 220px; }
+.ac-cert-qr { display: flex; gap: .8rem; align-items: center; }
+.ac-cert-qr svg { display: block; }
+@media print {
+  @page { size: A4 landscape; margin: 0; }
+  .header, .footer, .skip-link, .ac-noprint, #ct-status, .wa-float, .back-top { display: none !important; }
+  body, .ac-wrap { background: #fff !important; padding: 0 !important; margin: 0 !important; }
+  .ac-cert-wrap .container { max-width: none !important; padding: 0 !important; }
+  .ac-cert { box-shadow: none; width: 297mm; height: 210mm; aspect-ratio: auto; padding: 10mm; }
+}
+@media (max-width: 640px) { .ac-cert { aspect-ratio: auto; } .ac-cert-foot { flex-direction: column; align-items: center; text-align: center; } }

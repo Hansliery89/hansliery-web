@@ -102,6 +102,11 @@ scripts: academy/js/vendor/supabase-2.119.2.js, academy/js/core.js, academy/js/p
                 <p class="ac-muted" style="margin-top:.5rem">Cada certificado tiene un código único que cualquier persona puede verificar sin ver tus datos personales.</p>
                 <div id="pn-certs"></div>
               </div>
+              <div class="ac-card">
+                <h2>Reconocimientos y becas</h2>
+                <p class="ac-muted" style="margin-top:.5rem">Los reconocimientos Academy Excellence Awards y las medias becas se otorgan por período, después de una revisión de la dirección académica.</p>
+                <div id="pn-awards"></div>
+              </div>
             </section>
 
             <!-- COMUNICACIONES -->
@@ -111,8 +116,9 @@ scripts: academy/js/vendor/supabase-2.119.2.js, academy/js/core.js, academy/js/p
                 <div id="pn-notifs"></div>
               </div>
               <div class="ac-card">
-                <h2>Consultas</h2>
-                <p class="ac-muted" style="margin-top:.5rem">Para cualquier inquietud académica o administrativa escribe a <a class="ac-link" data-mail href="#"></a>. Muy pronto podrás enviar tus consultas desde aquí.</p>
+                <div class="ac-section-title"><h2>Consultas</h2><button class="btn btn-primary btn-sm" type="button" id="pn-newthread">Nueva consulta</button></div>
+                <p class="ac-muted" style="margin-top:.5rem">Escribe al equipo académico o administrativo. Te avisaremos aquí cuando respondamos. También puedes escribir a <a class="ac-link" data-mail href="#"></a>.</p>
+                <div id="pn-threads"></div>
               </div>
             </section>
 
@@ -144,6 +150,11 @@ scripts: academy/js/vendor/supabase-2.119.2.js, academy/js/core.js, academy/js/p
                   <label class="ac-check" style="margin-top:1.2rem"><input type="checkbox" id="pf-public"> <span>Autorizo que mi nombre aparezca en la sección pública de reconocimientos si recibo un premio Academy Excellence Awards.</span></label>
                   <div class="ac-actions"><button class="btn btn-primary" type="submit">Guardar cambios</button></div>
                 </form>
+              </div>
+              <div class="ac-card">
+                <h2>Mis pagos registrados</h2>
+                <p class="ac-muted" style="margin-top:.5rem">Pagos que el equipo administrativo registró a tu nombre. Las capacitaciones actuales son gratuitas.</p>
+                <div id="pn-payments"></div>
               </div>
             </section>
 
@@ -214,5 +225,47 @@ scripts: academy/js/vendor/supabase-2.119.2.js, academy/js/core.js, academy/js/p
           <button class="btn btn-primary" type="button" id="dt-next">Siguiente</button>
           <button class="ac-link" type="button" id="dt-skip">Omitir</button>
         </div>
+      </div>
+    </dialog>
+
+    <!-- Examen en línea -->
+    <dialog class="ac-dialog ac-dialog-wide" id="dlg-exam" aria-labelledby="ex-title">
+      <div class="ac-card">
+        <div class="ac-section-title"><h2 id="ex-title">Evaluación</h2><span class="ac-timer" id="ex-timer" role="timer" aria-live="off"></span></div>
+        <p class="ac-small" id="ex-meta"></p>
+        <form id="f-exam" novalidate><div id="ex-body" class="ac-stack" style="margin-top:1rem"></div>
+          <div class="ac-status" id="ex-status" aria-live="polite"></div>
+          <div class="ac-actions"><button class="btn btn-primary" type="submit" id="ex-submit">Entregar evaluación</button>
+            <button class="ac-link" type="button" id="ex-close">Guardar y salir</button></div>
+        </form>
+      </div>
+    </dialog>
+
+    <!-- Entrega de asignación -->
+    <dialog class="ac-dialog" id="dlg-submit" aria-labelledby="sb-title">
+      <form class="ac-card" id="f-submit" novalidate>
+        <h2 id="sb-title">Entregar asignación</h2>
+        <p class="ac-small" id="sb-meta" style="margin-top:.4rem"></p>
+        <div class="field" style="margin-top:1rem"><label for="sb-file">Archivo (PDF, Word, Excel, PowerPoint, imagen o ZIP · máx. 10 MB)</label>
+          <input class="control" id="sb-file" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.png,.jpg,.jpeg,.zip"><span class="error"></span></div>
+        <div class="field" style="margin-top:.8rem"><label for="sb-comment">Comentario (opcional)</label>
+          <textarea class="control" id="sb-comment" rows="3" maxlength="2000"></textarea><span class="error"></span></div>
+        <div class="ac-status" id="sb-status" aria-live="polite"></div>
+        <div class="ac-actions"><button class="btn btn-primary" type="submit">Enviar entrega</button><button class="ac-link" type="button" id="sb-cancel">Cancelar</button></div>
+      </form>
+    </dialog>
+
+    <!-- Consulta -->
+    <dialog class="ac-dialog ac-dialog-wide" id="dlg-thread" aria-labelledby="th-title">
+      <div class="ac-card">
+        <div class="ac-section-title"><h2 id="th-title">Consulta</h2><button class="ac-link" type="button" id="th-close">Cerrar</button></div>
+        <div id="th-body"></div>
+        <form id="f-thread" class="ac-stack" novalidate style="margin-top:1rem">
+          <div class="field" id="th-subject-f"><label for="th-subject">Asunto</label><input class="control" id="th-subject" maxlength="140"><span class="error"></span></div>
+          <div class="field" id="th-course-f"><label for="th-course">Capacitación relacionada (opcional)</label><select class="control" id="th-course"><option value="">Ninguna</option></select></div>
+          <div class="field"><label for="th-msg">Mensaje</label><textarea class="control" id="th-msg" rows="4" maxlength="4000"></textarea><span class="error"></span></div>
+          <div class="ac-status" id="th-status" aria-live="polite"></div>
+          <div class="ac-actions"><button class="btn btn-primary" type="submit" id="th-send">Enviar</button></div>
+        </form>
       </div>
     </dialog>

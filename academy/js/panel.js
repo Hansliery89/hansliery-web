@@ -66,9 +66,12 @@
     var staff = (ME.roles || []).filter(function (x) { return x !== 'student'; });
     if (staff.length) {
       var b = $('#pn-staff-banner'); b.hidden = false;
-      b.textContent = lv.currentLevel === 'aal2'
-        ? 'Tu cuenta tiene el rol de ' + staff.map(function (x) { return ROLE_NAMES[x]; }).join(', ') + '. El Centro de control (ACADEMY ADMIN) aún no está publicado.'
-        : 'Tu cuenta tiene un rol administrativo. Activa la verificación en dos pasos en «Seguridad»: sin ella, el sistema no te mostrará datos administrativos.';
+      if (lv.currentLevel === 'aal2') {
+        b.innerHTML = 'Tu cuenta tiene el rol de ' + esc(staff.map(function (x) { return ROLE_NAMES[x]; }).join(', ')) +
+          '. <a class="btn btn-primary btn-sm" href="' + H.base + 'admin.html" style="margin-left:.6rem">Abrir el centro de control</a>';
+      } else {
+        b.textContent = 'Tu cuenta tiene un rol administrativo. Activa la verificación en dos pasos en «Seguridad»: sin ella, el sistema no te mostrará datos administrativos.';
+      }
     }
 
     $('#pn-loading').hidden = true; $('#pn-app').hidden = false;
@@ -78,7 +81,7 @@
     await Promise.all([loadProfile(), loadCourses(), loadCerts(), loadNotifs()]);
     await syncLocal(true);
     renderCourses(); renderSummary();
-    loadExams(); loadAssignments(); loadMaterials();
+    loadExams(); loadAssignments(); loadMaterials(); loadAwards(); loadPayments(); loadThreads();
 
     if (ME.consent_pending) openConsent();
     else maybeTour();
@@ -271,67 +274,289 @@
   }
 
   // ---------------- Evaluaciones ----------------
+  var EXAM_MSG = {
+    exam_not_available: 'La evaluación no está disponible.', exam_out_of_window: 'La evaluación está fuera del período habilitado.',
+    course_not_completed: 'Completa todos los módulos del curso antes de presentar la evaluación final.',
+    exam_already_passed: 'Ya aprobaste esta evaluación.', exam_pending_grading: 'Tu intento anterior está en revisión.',
+    no_attempts_left: 'Ya usaste todos los intentos disponibles.', attempt_closed: 'El tiempo de la evaluación terminó.'
+  };
+  function examFail(e, box) {
+    var m = String((e && e.message) || ''), k = Object.keys(EXAM_MSG).find(function (x) { return m.indexOf(x) > -1; });
+    H.status(box || st, k ? EXAM_MSG[k] : H.message(e), 'error');
+  }
+
   async function loadExams() {
-    var ex = await sb.from('exams').select('id,title,course_id,max_attempts,pass_percentage,time_limit_minutes,available_until').eq('status', 'published');
-    var at = await sb.from('exam_attempts').select('exam_id,attempt_number,status,score_pct,passed,submitted_at,feedback,exams(title)').eq('profile_id', ME.profile_id).order('started_at', { ascending: false });
+    var ex = await sb.from('exams').select('id,title,course_id,is_certification,max_attempts,pass_percentage,time_limit_minutes,available_until,courses(title)').eq('status', 'published');
+    var at = await sb.from('exam_attempts').select('id,exam_id,attempt_number,status,score_pct,passed,submitted_at,feedback,exams(title)').eq('profile_id', ME.profile_id).order('started_at', { ascending: false });
     var attempts = at.data || [];
-    var mine = Object.keys(ENROLL);
-    var exams = (ex.data || []).filter(function (x) {
-      if (x.course_id && mine.indexOf(x.course_id) < 0) return false;
-      var used = attempts.filter(function (a) { return a.exam_id === x.id; });
-      return !used.some(function (a) { return a.passed; }) && used.length < x.max_attempts;
-    });
+    var exams = (ex.data || []).filter(function (x) { return !x.course_id || ENROLL[x.course_id]; });
     $('#pn-exams').innerHTML = exams.length ? '<div class="ac-list">' + exams.map(function (x) {
-      var used = attempts.filter(function (a) { return a.exam_id === x.id; }).length;
-      return '<article class="ac-item"><div><h3>' + esc(x.title) + '</h3><p class="ac-meta">Intentos: ' + used + ' de ' + x.max_attempts +
+      var mine = attempts.filter(function (a) { return a.exam_id === x.id; });
+      var passed = mine.some(function (a) { return a.passed; });
+      var open = mine.some(function (a) { return a.status === 'in_progress'; });
+      var review = mine.some(function (a) { return a.status === 'submitted'; });
+      var left = x.max_attempts - mine.length;
+      var en = ENROLL[x.course_id];
+      var locked = x.is_certification && en && Number(en.progress_pct) < 100;
+      var action = passed ? '<span class="ac-tag is-ok">Aprobada</span>'
+        : review ? '<span class="ac-tag">En revisión</span>'
+        : open ? '<button class="btn btn-primary btn-sm" type="button" data-exam="' + esc(x.id) + '">Continuar</button>'
+        : left <= 0 ? '<span class="ac-tag">Sin intentos</span>'
+        : locked ? '<span class="ac-tag" title="Completa los módulos del curso">Bloqueada</span>'
+        : '<button class="btn btn-primary btn-sm" type="button" data-exam="' + esc(x.id) + '">Presentar</button>';
+      return '<article class="ac-item"><div><h3>' + esc(x.title) + '</h3><p class="ac-meta">Intentos: ' + mine.length + ' de ' + x.max_attempts +
         ' · Aprobación: ' + Number(x.pass_percentage) + ' %' + (x.time_limit_minutes ? ' · ' + x.time_limit_minutes + ' min' : '') +
-        (x.available_until ? ' · Hasta ' + H.fmtDate(x.available_until) : '') + '</p></div><div><span class="ac-tag is-run">Pendiente</span></div></article>';
-    }).join('') + '</div>' : empty('No tienes exámenes pendientes.');
-    $('#pn-attempts').innerHTML = attempts.length ? '<div class="ac-table-wrap"><table class="ac-table"><thead><tr><th>Examen</th><th>Intento</th><th>Fecha</th><th>Calificación</th><th>Resultado</th><th>Retroalimentación</th></tr></thead><tbody>' +
-      attempts.map(function (a) {
+        (x.available_until ? ' · Hasta ' + H.fmtDate(x.available_until) : '') +
+        (locked ? ' · Se habilita al completar el 100 % de los módulos (llevas ' + Math.round(Number(en.progress_pct)) + ' %)' : '') + '</p></div><div>' + action + '</div></article>';
+    }).join('') + '</div>' : empty('No tienes evaluaciones disponibles. Matricúlate en un curso para ver su evaluación final.');
+    $$('[data-exam]', $('#pn-exams')).forEach(function (b) { b.addEventListener('click', function () { openExam(b.dataset.exam, b); }); });
+    var done = attempts.filter(function (a) { return a.status !== 'in_progress'; });
+    $('#pn-attempts').innerHTML = done.length ? '<div class="ac-table-wrap"><table class="ac-table"><thead><tr><th>Evaluación</th><th>Intento</th><th>Fecha</th><th>Calificación</th><th>Resultado</th><th>Retroalimentación</th></tr></thead><tbody>' +
+      done.map(function (a) {
         return '<tr><td>' + esc(a.exams ? a.exams.title : '') + '</td><td>' + a.attempt_number + '</td><td>' + H.fmtDate(a.submitted_at) + '</td><td>' +
           (a.score_pct == null ? '—' : Number(a.score_pct).toFixed(1) + ' %') + '</td><td>' +
           (a.status === 'submitted' ? 'En revisión' : a.passed ? 'Aprobado' : a.passed === false ? 'No aprobado' : '—') + '</td><td>' + esc(a.feedback || '—') + '</td></tr>';
-      }).join('') + '</tbody></table></div>' : empty('Aún no has presentado exámenes.');
+      }).join('') + '</tbody></table></div>' : empty('Aún no has presentado evaluaciones.');
   }
 
+  // Examen: preguntas sin respuestas correctas (las entrega el servidor), autoguardado y temporizador
+  var EXAM = null, examTimer = null, saveTimer = null;
+  var dExam = $('#dlg-exam'), exSt = $('#ex-status');
+  function collect() {
+    var out = {};
+    (EXAM.questions || []).forEach(function (q) {
+      if (q.type === 'open' || q.type === 'case') { var t = $('#q-' + q.id); if (t && t.value.trim()) out[q.id] = t.value.trim().slice(0, 4000); return; }
+      var sel = $$('input[name="q-' + q.id + '"]:checked', dExam).map(function (i) { return i.value; });
+      if (sel.length) out[q.id] = sel;
+    });
+    return out;
+  }
+  async function saveExam(quiet) {
+    if (!EXAM) return;
+    var r = await sb.rpc('save_exam_progress', { p_attempt: EXAM.attempt_id, p_responses: collect() });
+    if (r.error) { if (!quiet) examFail(r.error, exSt); return false; }
+    if (!quiet) H.status(exSt, 'Respuestas guardadas.', 'ok');
+    return true;
+  }
+  function tick() {
+    if (!EXAM || !EXAM.expires_at) { $('#ex-timer').textContent = ''; return; }
+    var s = Math.max(0, Math.floor((new Date(EXAM.expires_at) - Date.now()) / 1000));
+    $('#ex-timer').textContent = 'Tiempo restante: ' + Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2);
+    if (s === 60) H.status(exSt, 'Queda 1 minuto. Tus respuestas se entregarán automáticamente al terminar el tiempo.', 'info');
+    if (s <= 0) { clearInterval(examTimer); submitExam(true); }
+  }
+  async function openExam(id, btn) {
+    H.busy(btn, true, 'Preparando…');
+    var r = await sb.rpc('start_exam', { p_exam: id });
+    H.busy(btn, false);
+    if (r.error) { examFail(r.error); return; }
+    EXAM = r.data;
+    $('#ex-title').textContent = EXAM.title;
+    $('#ex-meta').textContent = 'Intento ' + EXAM.attempt_number + ' de ' + EXAM.max_attempts + ' · Se aprueba con ' + Number(EXAM.pass_percentage) + ' % · ' + EXAM.questions.length + ' preguntas. Tus respuestas se guardan solas.';
+    var saved = EXAM.responses || {};
+    $('#ex-body').innerHTML = EXAM.questions.map(function (q, i) {
+      var head = '<legend><b>' + (i + 1) + '.</b> ' + esc(q.prompt) + ' <span class="ac-small">(' + Number(q.points) + ' pt' + (Number(q.points) === 1 ? '' : 's') + ')</span></legend>';
+      if (q.type === 'open' || q.type === 'case') {
+        return '<fieldset class="ac-q">' + head + '<label class="sr-only" for="q-' + esc(q.id) + '">Respuesta</label><textarea class="control" id="q-' + esc(q.id) + '" rows="4" maxlength="4000">' + esc(saved[q.id] || '') + '</textarea></fieldset>';
+      }
+      var multi = q.type === 'multiple', chosen = [].concat(saved[q.id] || []);
+      return '<fieldset class="ac-q">' + head + (multi ? '<p class="ac-small">Puedes marcar varias opciones.</p>' : '') + q.answers.map(function (a) {
+        return '<label class="ac-check"><input type="' + (multi ? 'checkbox' : 'radio') + '" name="q-' + esc(q.id) + '" value="' + esc(a.id) + '"' +
+          (chosen.indexOf(a.id) > -1 ? ' checked' : '') + '> <span>' + esc(a.label) + '</span></label>';
+      }).join('') + '</fieldset>';
+    }).join('');
+    H.status(exSt, '');
+    $('#ex-submit').disabled = false;
+    dExam.showModal();
+    clearInterval(examTimer); examTimer = setInterval(tick, 1000); tick();
+  }
+  $('#f-exam').addEventListener('change', function () { clearTimeout(saveTimer); saveTimer = setTimeout(function () { saveExam(true); }, 800); });
+  $('#f-exam').addEventListener('input', function (e) { if (e.target.tagName === 'TEXTAREA') { clearTimeout(saveTimer); saveTimer = setTimeout(function () { saveExam(true); }, 2000); } });
+  async function submitExam(auto) {
+    if (!EXAM) return;
+    var answers = collect(), missing = EXAM.questions.length - Object.keys(answers).length;
+    if (!auto && missing > 0 && !confirm('Tienes ' + missing + ' pregunta(s) sin responder. ¿Entregar de todos modos?')) return;
+    var b = $('#ex-submit'); H.busy(b, true, 'Entregando…');
+    var r = await sb.rpc('submit_exam', { p_attempt: EXAM.attempt_id, p_responses: answers });
+    H.busy(b, false);
+    if (r.error) { examFail(r.error, exSt); return; }
+    clearInterval(examTimer); b.disabled = true;
+    var d = r.data || {};
+    $('#ex-body').innerHTML = d.status === 'submitted'
+      ? '<p class="ac-status is-info">Entregaste tu evaluación. Tiene preguntas que califica el equipo académico; te avisaremos cuando esté lista.</p>'
+      : '<p class="ac-status ' + (d.passed ? 'is-ok' : 'is-error') + '">Calificación: <b>' + Number(d.score_pct).toFixed(1) + ' %</b>. ' +
+        (d.passed ? '¡Aprobaste! Tu certificado se emitirá después de la revisión académica.' : 'No alcanzaste el mínimo. Repasa los módulos y vuelve a intentarlo si te quedan intentos.') + '</p>';
+    H.status(exSt, '');
+    $('#ex-close').textContent = 'Cerrar';
+    EXAM = null; loadExams();
+  }
+  $('#f-exam').addEventListener('submit', function (e) { e.preventDefault(); submitExam(false); });
+  $('#ex-close').addEventListener('click', async function () {
+    if (EXAM) await saveExam(true);
+    clearInterval(examTimer); EXAM = null; dExam.close(); $('#ex-close').textContent = 'Guardar y salir'; loadExams();
+  });
+  dExam.addEventListener('cancel', function (e) { e.preventDefault(); $('#ex-close').click(); });
+
   // ---------------- Asignaciones ----------------
+  var SUB_STATE = { submitted: 'Entregada', in_review: 'En revisión', graded: 'Calificada', returned: 'Devuelta para corrección' };
   async function loadAssignments() {
     var ids = Object.keys(ENROLL);
     if (!ids.length) { $('#pn-assignments').innerHTML = empty('Las asignaciones aparecen al matricularte en un curso.'); return; }
     var a = await sb.from('assignments').select('id,title,instructions,due_at,max_score,courses(title)').eq('is_published', true).in('course_id', ids).order('due_at', { ascending: true });
-    var s = await sb.from('assignment_submissions').select('assignment_id,status,submitted_at,score,feedback').eq('profile_id', ME.profile_id);
+    var s = await sb.from('assignment_submissions').select('id,assignment_id,status,submitted_at,score,feedback,file_path').eq('profile_id', ME.profile_id);
     var subs = {}; (s.data || []).forEach(function (x) { subs[x.assignment_id] = x; });
     var rows = a.data || [];
-    $('#pn-assignments').innerHTML = rows.length ? '<div class="ac-table-wrap"><table class="ac-table"><thead><tr><th>Asignación</th><th>Curso</th><th>Entrega</th><th>Estado</th><th>Calificación</th><th>Comentarios</th></tr></thead><tbody>' +
-      rows.map(function (x) {
-        var sub = subs[x.id];
-        var stt = !sub ? 'Pendiente' : { submitted: 'Entregada', in_review: 'En revisión', graded: 'Calificada', returned: 'Devuelta' }[sub.status];
-        return '<tr><td>' + esc(x.title) + '</td><td>' + esc(x.courses ? x.courses.title : '') + '</td><td>' + H.fmtDate(x.due_at, true) + '</td><td>' + stt +
-          '</td><td>' + (sub && sub.score != null ? Number(sub.score) + ' / ' + Number(x.max_score) : '—') + '</td><td>' + esc(sub && sub.feedback || '—') + '</td></tr>';
-      }).join('') + '</tbody></table></div>' : empty('No tienes asignaciones por ahora.');
-  }
-
-  // ---------------- Certificados ----------------
-  async function loadCerts() {
-    var r = await sb.from('certificates').select('id,verification_code,course_title,academic_hours,completed_on,grade_pct,status,pdf_path,issued_at').eq('profile_id', ME.profile_id).order('issued_at', { ascending: false });
-    CERTS = r.data || [];
-    var verify = H.base + 'verificar.html?codigo=';
-    $('#pn-certs').innerHTML = CERTS.length ? '<div class="ac-list">' + CERTS.map(function (c) {
-      return '<article class="ac-item"><div><h3>' + esc(c.course_title) + '</h3><p class="ac-meta">Emitido el ' + H.fmtDate(c.issued_at) +
-        (c.academic_hours ? ' · ' + Number(c.academic_hours) + ' horas' : '') + (c.grade_pct != null ? ' · Calificación ' + Number(c.grade_pct) + ' %' : '') +
-        ' · Código <b>' + esc(c.verification_code) + '</b>' + (c.status === 'revoked' ? ' · <b>Revocado</b>' : '') + '</p></div><div class="ac-actions" style="margin:0">' +
-        (c.pdf_path ? '<button class="btn btn-primary btn-sm" type="button" data-cert="' + esc(c.pdf_path) + '">Descargar PDF</button>' : '') +
-        '<a class="btn btn-ghost btn-sm" href="' + esc(verify + encodeURIComponent(c.verification_code)) + '">Verificar</a></div></article>';
-    }).join('') + '</div>' : empty('Aún no tienes certificados. Se emiten al cumplir los requisitos académicos de cada capacitación.');
-    $$('[data-cert]').forEach(function (b) {
+    $('#pn-assignments').innerHTML = rows.length ? '<div class="ac-list">' + rows.map(function (x) {
+      var sub = subs[x.id];
+      var late = x.due_at && new Date(x.due_at) < new Date();
+      var can = !sub || sub.status === 'submitted' || sub.status === 'returned';
+      return '<article class="ac-item"><div><h3>' + esc(x.title) + '</h3><p class="ac-meta">' + esc(x.courses ? x.courses.title : '') +
+        (x.due_at ? ' · Fecha límite: ' + H.fmtDate(x.due_at, true) + (late ? ' (vencida)' : '') : '') +
+        ' · Estado: ' + (sub ? SUB_STATE[sub.status] : 'Pendiente') +
+        (sub && sub.score != null ? ' · Calificación: ' + Number(sub.score) + ' / ' + Number(x.max_score) : '') + '</p>' +
+        (x.instructions ? '<p class="ac-small" style="margin-top:.4rem;white-space:pre-line">' + esc(x.instructions) + '</p>' : '') +
+        (sub && sub.feedback ? '<p class="ac-small" style="margin-top:.4rem"><b>Comentarios:</b> ' + esc(sub.feedback) + '</p>' : '') +
+        '</div><div class="ac-actions" style="margin:0">' +
+        (can ? '<button class="btn btn-primary btn-sm" type="button" data-submit="' + esc(x.id) + '">' + (sub ? 'Reemplazar entrega' : 'Entregar') + '</button>' : '') +
+        (sub && sub.file_path ? '<button class="btn btn-ghost btn-sm" type="button" data-myfile="' + esc(sub.file_path) + '">Ver mi archivo</button>' : '') +
+        '</div></article>';
+    }).join('') + '</div>' : empty('No tienes asignaciones por ahora.');
+    $$('[data-submit]').forEach(function (b) {
+      b.addEventListener('click', function () { var x = rows.find(function (r) { return r.id === b.dataset.submit; }); openSubmit(x, subs[x.id]); });
+    });
+    $$('[data-myfile]').forEach(function (b) {
       b.addEventListener('click', async function () {
-        var u = await sb.storage.from('certificates').createSignedUrl(b.dataset.cert, 300);
-        if (u.error) { fail(u.error); return; }
-        location.href = u.data.signedUrl;
+        var u = await sb.storage.from('submissions').createSignedUrl(b.dataset.myfile, 300);
+        if (u.error) { fail(u.error); return; } window.open(u.data.signedUrl, '_blank', 'noopener');
       });
     });
   }
+  var SUB = null, dSub = $('#dlg-submit');
+  function openSubmit(x, sub) {
+    SUB = { a: x, sub: sub };
+    $('#sb-title').textContent = 'Entregar: ' + x.title;
+    $('#sb-meta').textContent = (x.courses ? x.courses.title : '') + (x.due_at ? ' · Fecha límite: ' + H.fmtDate(x.due_at, true) : '');
+    $('#sb-file').value = ''; $('#sb-comment').value = sub && sub.comment || ''; H.status($('#sb-status'), '');
+    dSub.showModal();
+  }
+  $('#sb-cancel').addEventListener('click', function () { dSub.close(); });
+  $('#f-submit').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var f = $('#sb-file').files[0], comment = $('#sb-comment').value.trim(), box = $('#sb-status'), btn = e.submitter || $('button[type=submit]', this);
+    if (!f && !(SUB.sub && SUB.sub.file_path) && !comment) { H.fieldError($('#sb-file'), 'Adjunta un archivo o escribe un comentario.'); return; }
+    if (f && f.size > 10 * 1024 * 1024) { H.fieldError($('#sb-file'), 'El archivo supera 10 MB.'); return; }
+    H.fieldError($('#sb-file'), '');
+    H.busy(btn, true, 'Enviando…');
+    var path = SUB.sub ? SUB.sub.file_path : null;
+    if (f) {
+      var clean = f.name.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^\w.\-]+/g, '_').slice(-80);
+      path = ME.profile_id + '/' + SUB.a.id + '/' + Date.now() + '-' + clean;
+      var up = await sb.storage.from('submissions').upload(path, f, { upsert: false, contentType: f.type || 'application/octet-stream' });
+      if (up.error) { H.busy(btn, false); H.status(box, H.message(up.error), 'error'); return; }
+    }
+    var row = { file_path: path, comment: comment || null, status: 'submitted' };
+    var r = SUB.sub
+      ? await sb.from('assignment_submissions').update(row).eq('id', SUB.sub.id)
+      : await sb.from('assignment_submissions').insert(Object.assign({ assignment_id: SUB.a.id, profile_id: ME.profile_id }, row));
+    H.busy(btn, false);
+    if (r.error) { H.status(box, H.message(r.error), 'error'); return; }
+    dSub.close(); H.status(st, 'Entrega enviada.', 'ok'); loadAssignments();
+  });
+
+  // ---------------- Certificados, reconocimientos y becas ----------------
+  async function loadCerts() {
+    var r = await sb.from('certificates').select('id,verification_code,course_title,academic_hours,completed_on,grade_pct,status,issued_at').eq('profile_id', ME.profile_id).order('issued_at', { ascending: false });
+    CERTS = r.data || [];
+    $('#pn-certs').innerHTML = CERTS.length ? '<div class="ac-list">' + CERTS.map(function (c) {
+      var q = encodeURIComponent(c.verification_code);
+      return '<article class="ac-item"><div><h3>' + esc(c.course_title) + '</h3><p class="ac-meta">Emitido el ' + H.fmtDate(c.issued_at) +
+        (c.academic_hours ? ' · ' + Number(c.academic_hours) + ' horas' : '') + (c.grade_pct != null ? ' · Calificación ' + Number(c.grade_pct) + ' %' : '') +
+        ' · Código <b>' + esc(c.verification_code) + '</b>' + (c.status === 'revoked' ? ' · <b>Revocado</b>' : '') + '</p></div><div class="ac-actions" style="margin:0">' +
+        (c.status === 'valid' ? '<a class="btn btn-primary btn-sm" href="' + H.base + 'certificado.html?codigo=' + q + '" target="_blank" rel="noopener">Ver e imprimir</a>' : '') +
+        '<a class="btn btn-ghost btn-sm" href="' + H.base + 'verificar.html?codigo=' + q + '">Verificar</a></div></article>';
+    }).join('') + '</div>' : empty('Aún no tienes certificados. Se emiten al completar los módulos y aprobar la evaluación final, tras la revisión académica.');
+  }
+  var LEVELS = { excelencia_academica: 'Excelencia Académica', alto_rendimiento: 'Alto Rendimiento', merito_compromiso: 'Mérito y Compromiso' };
+  var SCH = { proposed: 'En evaluación', approved: 'Aprobada', used: 'Utilizada', expired: 'Vencida', rejected: 'No aprobada', revoked: 'Revocada' };
+  async function loadAwards() {
+    var a = await sb.from('awards').select('period_label,level,score,status,constancia_code').eq('profile_id', ME.profile_id).eq('status', 'approved');
+    var s = await sb.from('scholarships').select('period_label,percentage,status,expires_on,conditions').eq('profile_id', ME.profile_id).neq('status', 'proposed');
+    var items = (a.data || []).map(function (x) {
+      return '<article class="ac-item"><div><h3>Academy Excellence Awards · ' + esc(LEVELS[x.level] || x.level) + '</h3><p class="ac-meta">Período ' + esc(x.period_label) +
+        ' · Puntuación ' + Number(x.score).toFixed(1) + ' · Constancia <b>' + esc(x.constancia_code || '') + '</b></p></div></article>';
+    }).concat((s.data || []).map(function (x) {
+      return '<article class="ac-item"><div><h3>Media beca (' + Number(x.percentage) + ' %)</h3><p class="ac-meta">Período ' + esc(x.period_label) + ' · ' + (SCH[x.status] || x.status) +
+        (x.expires_on ? ' · Válida hasta ' + H.fmtDate(x.expires_on) : '') + '</p>' + (x.conditions ? '<p class="ac-small">' + esc(x.conditions) + '</p>' : '') + '</div></article>';
+    }));
+    $('#pn-awards').innerHTML = items.length ? '<div class="ac-list">' + items.join('') + '</div>' : empty('Aún no tienes reconocimientos ni becas.');
+  }
+  var PM = { pending: 'Pendiente', confirmed: 'Confirmado', rejected: 'Rechazado', refunded: 'Reembolsado', partially_refunded: 'Reembolso parcial' };
+  async function loadPayments() {
+    var r = await sb.from('payments').select('occurred_on,concept,amount,discount_amount,currency,status,reference').eq('profile_id', ME.profile_id).order('occurred_on', { ascending: false });
+    var rows = r.data || [];
+    $('#pn-payments').innerHTML = rows.length ? '<div class="ac-table-wrap"><table class="ac-table"><thead><tr><th>Fecha</th><th>Concepto</th><th>Monto</th><th>Descuento</th><th>Estado</th><th>Referencia</th></tr></thead><tbody>' +
+      rows.map(function (p) {
+        return '<tr><td>' + H.fmtDate(p.occurred_on) + '</td><td>' + esc(p.concept) + '</td><td>' + esc(p.currency) + ' ' + Number(p.amount).toLocaleString('es-DO', { minimumFractionDigits: 2 }) +
+          '</td><td>' + (Number(p.discount_amount) ? esc(p.currency) + ' ' + Number(p.discount_amount).toLocaleString('es-DO', { minimumFractionDigits: 2 }) : '—') + '</td><td>' + (PM[p.status] || p.status) + '</td><td>' + esc(p.reference || '—') + '</td></tr>';
+      }).join('') + '</tbody></table></div>' : empty('No hay pagos registrados a tu nombre.');
+  }
+
+  // ---------------- Consultas ----------------
+  var TH = { open: 'Abierta', pending: 'Esperando respuesta', answered: 'Respondida', archived: 'Archivada' };
+  var THREAD = null, dTh = $('#dlg-thread');
+  async function loadThreads() {
+    var r = await sb.from('message_threads').select('id,subject,status,updated_at,courses(title)').eq('profile_id', ME.profile_id).order('updated_at', { ascending: false });
+    var rows = r.data || [];
+    $('#pn-threads').innerHTML = rows.length ? '<div class="ac-list">' + rows.map(function (t) {
+      return '<article class="ac-item"><div><h3>' + esc(t.subject) + '</h3><p class="ac-meta">' + (TH[t.status] || t.status) + ' · ' + H.fmtDate(t.updated_at, true) +
+        (t.courses ? ' · ' + esc(t.courses.title) : '') + '</p></div><div><button class="btn btn-ghost btn-sm" type="button" data-thread="' + esc(t.id) + '">Abrir</button></div></article>';
+    }).join('') + '</div>' : empty('No tienes consultas.');
+    $$('[data-thread]').forEach(function (b) { b.addEventListener('click', function () { openThread(rows.find(function (t) { return t.id === b.dataset.thread; })); }); });
+  }
+  async function openThread(t) {
+    THREAD = t || null;
+    H.status($('#th-status'), ''); $('#th-msg').value = '';
+    $('#th-subject-f').hidden = !!t; $('#th-course-f').hidden = !!t;
+    $('#th-title').textContent = t ? t.subject : 'Nueva consulta';
+    $('#th-send').textContent = t ? 'Responder' : 'Enviar consulta';
+    if (!t) {
+      $('#th-subject').value = '';
+      $('#th-course').innerHTML = '<option value="">Ninguna</option>' + COURSES.filter(function (c) { return ENROLL[c.id]; })
+        .map(function (c) { return '<option value="' + esc(c.id) + '">' + esc(c.title) + '</option>'; }).join('');
+      $('#th-body').innerHTML = ''; $('#f-thread').hidden = false;
+    } else {
+      var m = await sb.from('messages').select('id,body,created_at,sender_profile_id,read_at').eq('thread_id', t.id).order('created_at');
+      var msgs = m.data || [];
+      $('#th-body').innerHTML = '<div class="ac-thread">' + msgs.map(function (x) {
+        var me = x.sender_profile_id === ME.profile_id;
+        return '<div class="ac-msg' + (me ? ' is-me' : '') + '"><p class="ac-small"><b>' + (me ? 'Tú' : 'Equipo Academy') + '</b> · ' + H.fmtDate(x.created_at, true) + '</p><p style="white-space:pre-line">' + esc(x.body) + '</p></div>';
+      }).join('') + '</div>';
+      $('#f-thread').hidden = t.status === 'archived';
+      var unread = msgs.filter(function (x) { return x.sender_profile_id !== ME.profile_id && !x.read_at; }).map(function (x) { return x.id; });
+      if (unread.length) await sb.from('messages').update({ read_at: new Date().toISOString() }).in('id', unread);
+    }
+    if (!dTh.open) dTh.showModal();
+  }
+  $('#pn-newthread').addEventListener('click', function () { openThread(null); });
+  $('#th-close').addEventListener('click', function () { dTh.close(); loadThreads(); });
+  $('#f-thread').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    var body = $('#th-msg').value.trim(), box = $('#th-status'), btn = $('#th-send');
+    if (!H.fieldError($('#th-msg'), body.length < 5 ? 'Escribe tu mensaje (mínimo 5 caracteres).' : '')) return;
+    var t = THREAD;
+    H.busy(btn, true, 'Enviando…');
+    if (!t) {
+      var subj = $('#th-subject').value.trim();
+      if (!H.fieldError($('#th-subject'), subj.length < 3 ? 'Escribe un asunto.' : '')) { H.busy(btn, false); return; }
+      var nt = await sb.from('message_threads').insert({ profile_id: ME.profile_id, subject: subj, course_id: $('#th-course').value || null, status: 'open' }).select('id,subject,status,updated_at').single();
+      if (nt.error) { H.busy(btn, false); H.status(box, H.message(nt.error), 'error'); return; }
+      t = nt.data;
+    }
+    var r = await sb.from('messages').insert({ thread_id: t.id, sender_profile_id: ME.profile_id, body: body.slice(0, 4000) });
+    H.busy(btn, false);
+    if (r.error) { H.status(box, H.message(r.error), 'error'); return; }
+    t.status = 'pending'; openThread(t); loadThreads();
+  });
 
   // ---------------- Notificaciones ----------------
   async function loadNotifs() {
