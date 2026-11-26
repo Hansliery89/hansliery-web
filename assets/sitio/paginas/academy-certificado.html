@@ -1,0 +1,40 @@
+<!--
+title: Certificado | ACADEMY · Hansliery Sánchez · Compliance & Risk Advisory
+desc: Certificado de finalización emitido por la Academy, con código y QR de verificación.
+active: cursos
+out: academy/certificado.html
+base: si
+csp: academy
+scripts: academy/js/vendor/supabase-2.119.2.js, academy/js/vendor/qrcode-generator-1.4.4.js, academy/js/core.js, academy/js/certificado.js
+-->
+    <section class="ac-wrap ac-cert-wrap">
+      <div class="container" style="max-width:1040px">
+        <div class="ac-actions ac-noprint" style="margin:0 0 1rem">
+          <button class="btn btn-primary" type="button" id="ct-print">Imprimir o guardar como PDF</button>
+          <a class="btn btn-ghost" href="academy/panel.html#certificados">Volver a mi panel</a>
+        </div>
+        <div class="ac-status" id="ct-status" role="status" aria-live="polite"></div>
+        <article class="ac-cert" id="ct-cert" hidden aria-labelledby="ct-h">
+          <div class="ac-cert-in">
+            <p class="ac-cert-brand">Hansliery Sánchez · Compliance &amp; Risk Advisory</p>
+            <p class="ac-cert-kicker">ACADEMY</p>
+            <h1 id="ct-h" class="ac-cert-title">Certificado de finalización</h1>
+            <p class="ac-cert-text">Se certifica que</p>
+            <p class="ac-cert-name" id="ct-name"></p>
+            <p class="ac-cert-text">completó satisfactoriamente la capacitación</p>
+            <p class="ac-cert-course" id="ct-course"></p>
+            <p class="ac-cert-text" id="ct-detail"></p>
+            <div class="ac-cert-foot">
+              <div class="ac-cert-sign">
+                <p class="ac-cert-line">Hansliery Sánchez Figuereo</p>
+                <p class="ac-small">Dirección académica</p>
+              </div>
+              <div class="ac-cert-qr">
+                <div id="ct-qr" aria-hidden="true"></div>
+                <p class="ac-small">Verificación: <b id="ct-code"></b><br><span id="ct-url"></span></p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>

@@ -1,0 +1,67 @@
+<!--
+title: Centro de control | ACADEMY · Hansliery Sánchez · Compliance & Risk Advisory
+desc: Centro de control de la Academy: estudiantes, cursos, evaluaciones, certificados, comunicaciones, finanzas y reconocimientos.
+active: cursos
+out: academy/admin.html
+base: si
+csp: academy
+scripts: academy/js/vendor/supabase-2.119.2.js, academy/js/core.js, academy/js/admin.js
+-->
+    <section class="ac-hero" aria-labelledby="ad-title" style="padding-bottom:28px">
+      <div class="container ac-top">
+        <div>
+          <p class="ac-badge">ACADEMY <b>|</b> Centro de control</p>
+          <h1 id="ad-title" style="font-size:clamp(1.5rem,3.4vw,2.3rem)">Administración de la Academy</h1>
+          <p class="ac-small" id="ad-role"></p>
+        </div>
+        <div class="ac-actions" style="margin:0">
+          <a class="btn btn-ghost btn-sm" href="academy/panel.html">Mi panel</a>
+          <button class="btn btn-primary btn-sm" type="button" id="ad-signout">Cerrar sesión</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="ac-wrap">
+      <div class="container" style="max-width:1320px">
+        <div class="ac-loading" id="ad-loading">Comprobando permisos…</div>
+        <div class="ac-status" id="ad-status" role="status" aria-live="polite"></div>
+        <div class="ac-layout" id="ad-app" hidden>
+          <nav class="ac-nav" role="tablist" aria-label="Secciones del centro de control" aria-orientation="vertical">
+            <button type="button" role="tab" data-sec="resumen" aria-selected="true"><svg aria-hidden="true"><use href="#i-pulse"/></svg>Resumen</button>
+            <button type="button" role="tab" data-sec="estudiantes" data-need="academic"><svg aria-hidden="true"><use href="#i-users"/></svg>Estudiantes</button>
+            <button type="button" role="tab" data-sec="cursos"><svg aria-hidden="true"><use href="#i-grad"/></svg>Cursos</button>
+            <button type="button" role="tab" data-sec="evaluaciones"><svg aria-hidden="true"><use href="#i-target"/></svg>Evaluaciones</button>
+            <button type="button" role="tab" data-sec="asignaciones"><svg aria-hidden="true"><use href="#i-puzzle"/></svg>Asignaciones</button>
+            <button type="button" role="tab" data-sec="certificados"><svg aria-hidden="true"><use href="#i-shield"/></svg>Certificados</button>
+            <button type="button" role="tab" data-sec="mensajes"><svg aria-hidden="true"><use href="#i-mail"/></svg>Mensajes y avisos</button>
+            <button type="button" role="tab" data-sec="finanzas" data-need="super"><svg aria-hidden="true"><use href="#i-risk"/></svg>Finanzas</button>
+            <button type="button" role="tab" data-sec="reconocimientos" data-need="academic"><svg aria-hidden="true"><use href="#i-cap"/></svg>Reconocimientos y becas</button>
+            <button type="button" role="tab" data-sec="cuentas" data-need="super"><svg aria-hidden="true"><use href="#i-lock"/></svg>Cuentas y roles</button>
+            <button type="button" role="tab" data-sec="configuracion" data-need="super"><svg aria-hidden="true"><use href="#i-sliders"/></svg>Configuración</button>
+            <button type="button" role="tab" data-sec="auditoria" data-need="super"><svg aria-hidden="true"><use href="#i-search"/></svg>Auditoría</button>
+          </nav>
+          <div>
+            <section class="ac-panel" id="sec-resumen" role="tabpanel" aria-label="Resumen"></section>
+            <section class="ac-panel" id="sec-estudiantes" role="tabpanel" aria-label="Estudiantes" hidden></section>
+            <section class="ac-panel" id="sec-cursos" role="tabpanel" aria-label="Cursos" hidden></section>
+            <section class="ac-panel" id="sec-evaluaciones" role="tabpanel" aria-label="Evaluaciones" hidden></section>
+            <section class="ac-panel" id="sec-asignaciones" role="tabpanel" aria-label="Asignaciones" hidden></section>
+            <section class="ac-panel" id="sec-certificados" role="tabpanel" aria-label="Certificados" hidden></section>
+            <section class="ac-panel" id="sec-mensajes" role="tabpanel" aria-label="Mensajes y avisos" hidden></section>
+            <section class="ac-panel" id="sec-finanzas" role="tabpanel" aria-label="Finanzas" hidden></section>
+            <section class="ac-panel" id="sec-reconocimientos" role="tabpanel" aria-label="Reconocimientos y becas" hidden></section>
+            <section class="ac-panel" id="sec-cuentas" role="tabpanel" aria-label="Cuentas y roles" hidden></section>
+            <section class="ac-panel" id="sec-configuracion" role="tabpanel" aria-label="Configuración" hidden></section>
+            <section class="ac-panel" id="sec-auditoria" role="tabpanel" aria-label="Auditoría" hidden></section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <dialog class="ac-dialog ac-dialog-wide" id="dlg-admin" aria-labelledby="dl-title">
+      <div class="ac-card">
+        <div class="ac-section-title"><h2 id="dl-title"></h2><button class="ac-link" type="button" id="dl-close">Cerrar</button></div>
+        <div id="dl-body"></div>
+        <div class="ac-status" id="dl-status" aria-live="polite"></div>
+      </div>
+    </dialog>

@@ -145,7 +145,7 @@
 
   function fmtDate(v, withTime) {
     if (!v) return '—';
-    var d = new Date(v);
+    var d = new Date(/^\d{4}-\d{2}-\d{2}$/.test(String(v)) ? v + 'T12:00:00' : v);
     return d.toLocaleDateString('es-DO', { year: 'numeric', month: 'short', day: 'numeric' }) +
       (withTime ? ' · ' + d.toLocaleTimeString('es-DO', { hour: '2-digit', minute: '2-digit' }) : '');
   }

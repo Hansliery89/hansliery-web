@@ -84,12 +84,14 @@ Sección independiente en `academy/` con su propia navegación y autenticación,
 | Página | Fuente | Función |
 |---|---|---|
 | `academy/index.html` | `assets/sitio/paginas/academy-index.html` | Iniciar sesión, registro (correo o Google), verificación en dos pasos, códigos de recuperación y restablecimiento de contraseña. |
-| `academy/panel.html` | `academy-panel.html` | Panel del estudiante: resumen, capacitaciones, evaluaciones, asignaciones, certificados, comunicaciones, perfil y seguridad. |
+| `academy/panel.html` | `academy-panel.html` | Panel del estudiante: resumen, capacitaciones, evaluaciones en línea (temporizador y autoguardado), entregas de asignaciones, certificados, reconocimientos y becas, consultas, notificaciones, pagos registrados, perfil y seguridad. |
+| `academy/admin.html` | `academy-admin.html` | Centro de control (requiere rol de personal y 2FA): resumen, estudiantes, cursos y materiales, evaluaciones y calificación, asignaciones, certificados, mensajes y avisos, finanzas, reconocimientos y becas, cuentas y roles, configuración y auditoría. Cada rol ve solo lo que le corresponde. |
+| `academy/certificado.html` | `academy-certificado.html` | Certificado imprimible (A4 horizontal, «Guardar como PDF») con código y QR de verificación. |
 | `academy/verificar.html` | `academy-verificar.html` | Verificador público de certificados. |
 | `academy/ayuda.html` | `academy-ayuda.html` | Centro de ayuda. |
 
 - Las páginas se generan con `python3 assets/sitio/build.py` (metadatos `csp: academy` y `scripts:`). Tienen una política de seguridad propia que solo permite conectarse al proyecto Supabase y a la comprobación de contraseñas filtradas; el resto del portal conserva la suya.
-- JavaScript: `academy/js/core.js` (cliente y utilidades), `acceso.js`, `panel.js`, `verificar.js`. La librería `supabase-js` 2.119.2 está copiada en `academy/js/vendor/` (sin CDN).
+- JavaScript: `academy/js/core.js` (cliente y utilidades), `acceso.js`, `panel.js`, `admin.js`, `certificado.js`, `verificar.js`. Las librerías `supabase-js` 2.119.2 y `qrcode-generator` 1.4.4 (MIT) están copiadas en `academy/js/vendor/` (sin CDN).
 - La URL y la clave **pública** de Supabase están en el bloque `ACADEMY` de `assets/sitio/build.py`. Nunca coloque ahí claves secretas.
 - Backend, migraciones, pruebas y configuración de Auth: ver `supabase/README.md`.
 

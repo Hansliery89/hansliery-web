@@ -25,6 +25,20 @@ Backend de **HANSLIERY SÁNCHEZ | COMPLIANCE & RISK ADVISORY · Academy**. Este 
 | `0650_storage_cleanup_queue` | Cola de limpieza de archivos (Supabase no permite borrar Storage desde SQL). |
 | `0700_seed` | Configuración, 15 categorías de ingresos, 13 cursos y sus 93 módulos. |
 | `0800_mfa_recovery_codes` | Códigos de recuperación del 2FA (solo hash SHA-256, máx. 5 fallos / 15 min) y publicación de los 13 cursos como **gratuitos**. |
+| `20261126000100_examenes_certificados` | Fases 4–5: la matrícula pasa a «finalizada» al leer el 100 % de los módulos; motor de exámenes en el servidor (`start_exam`, `save_exam_progress`, `submit_exam`, `grade_exam_attempt`, `attempt_review`), cierre automático de intentos vencidos (cron cada 10 min), emisión de certificados con requisitos (`issue_certificate`, `certificate_queue`), revocación con motivo y `certificate_public` para la página imprimible. |
+| `20261126000150_examenes_cursos` | Las 13 evaluaciones finales (144 preguntas) importadas de `cursos/_fuente/c01..c13.py`: 30 min, 3 intentos, 80 %. |
+| `20261126000200_admin_finanzas_reconocimientos_mensajeria` | Fases 6–9: resumen del centro de control, listado de estudiantes y estadísticas por curso, suspensión/reactivación, atención de bajas, resumen financiero por moneda, disparadores de pagos (matrícula al confirmar, beca usada, aviso), cálculo de candidatos a reconocimientos, aprobación de reconocimientos y medias becas, mensajería con avisos, avisos masivos, cola de correo, limpieza y tareas `pg_cron` (`academy-jobs` cada 15 min, vencimiento de becas diario). |
+| `20261126000300_reentrega_devueltas` | El estudiante puede reemplazar una entrega devuelta para corrección. |
+
+> Las migraciones grandes de noviembre de 2026 se aplicaron descargando el archivo del repositorio desde la base de datos y verificando su MD5 antes de ejecutarlo; el contenido aplicado es idéntico al archivo.
+
+### Reglas de negocio que el servidor hace cumplir
+
+- **Exámenes:** las preguntas llegan al estudiante sin la respuesta correcta; la calificación ocurre en el servidor. La evaluación de certificación se habilita al completar el 100 % de los módulos. Las preguntas abiertas o de caso pasan a revisión manual.
+- **Certificados:** nunca se emiten solos. Aparecen en la cola cuando hay módulos completos y (si el curso lo exige) evaluación final aprobada; el personal los emite y el sistema impide duplicados. Solo la superadministración revoca, con motivo.
+- **Pagos:** registro manual de cobros reales (no hay pasarela). Al confirmar un pago de curso, el estudiante queda matriculado. Los importes en DOP y USD no se suman entre sí.
+- **Descuentos y becas:** una beca solo se puede usar en un pago si está **aprobada** por la superadministración, vigente y es del mismo estudiante; al confirmarse el pago queda «utilizada». El tope por período está en `scholarships_per_period`.
+- **Reconocimientos:** el cálculo solo crea candidatos; la superadministración aprueba o rechaza y se genera un código de constancia `HSR-…`.
 
 ## Modelo de seguridad
 
@@ -66,12 +80,15 @@ Avisos a los 70, 85 y 95 días → suspensión a los 100 → solicitud de baja c
 | Función | Uso |
 |---|---|
 | `mfa-recover` | Recibe un código de recuperación de un usuario con sesión (aal1), lo valida y elimina sus factores TOTP con la API de administración. CORS limitado a `https://hansliery89.github.io` (añada su dominio propio cuando lo tenga). |
+| `academy-jobs` | Mantenimiento: borra archivos de cuentas anonimizadas, elimina sus usuarios de Auth y envía por correo las notificaciones pendientes. La invoca `pg_cron` cada 15 minutos con un secreto guardado en Vault (`academy_job_secret`, nunca en el repositorio) o la superadministración desde el centro de control. El correo queda **desactivado** hasta definir los secretos `RESEND_API_KEY` y `MAIL_FROM` (requiere dominio verificado). |
 
 ## Pruebas
 
 `tests/001_rls_and_auth.sql` crea usuarios de cada rol, ejecuta 27 comprobaciones y **revierte todo** al terminar (el resultado llega como mensaje `TEST_RESULT`). Ejecútelo completo en el editor SQL tras cada cambio de esquema.
 
-Resultado del 24-11-2026: **27 de 27 correctas** (registro, duplicados, aislamiento entre estudiantes, columnas protegidas, escalada de privilegios, 2FA del personal y del estudiante, instructor por curso, separación financiera, catálogo público, verificación de certificados, inactividad completa, protección del último superadministrador y bitácora).
+`tests/002_fases_4_a_9.sql` cubre exámenes, certificados, centro de control, finanzas, becas, reconocimientos, mensajería, avisos y entregas: **44 de 44 correctas** (25-11-2026).
+
+Resultado de `001` (revisado el 25-11-2026 para no depender de los datos reales): **27 de 27 correctas** (registro, duplicados, aislamiento entre estudiantes, columnas protegidas, escalada de privilegios, 2FA del personal y del estudiante, instructor por curso, separación financiera, catálogo público, verificación de certificados, inactividad completa, protección del último superadministrador y bitácora).
 
 ## Configuración pendiente en el panel de Supabase
 
@@ -96,7 +113,9 @@ select id, 'superadmin' from public.profiles where email = 'su-correo@ejemplo.co
 
 3. Inicie sesión y active el doble factor en su perfil: sin `aal2`, el panel administrativo no mostrará datos.
 
-## Siguientes fases que dependen de este backend
+## Pendiente para cuando se instale el dominio (requiere pagos o dominio)
 
-- **Edge Functions:** motor de exámenes y certificados (Fase 5), notificaciones por correo (Fase 8), procesamiento de `private.storage_cleanup_queue` y eliminación de la cuenta de Auth tras la anonimización (Fase 9).
-- Los 13 cursos están publicados como gratuitos; el administrador fija las horas académicas antes de emitir certificados.
+- **Plan Pro de Supabase:** copias de seguridad diarias y protección contra contraseñas filtradas en el servidor (hoy se comprueba en el navegador).
+- **Correo:** SMTP propio para Auth y secretos `RESEND_API_KEY` y `MAIL_FROM` en la función `academy-jobs` (necesitan un dominio verificado).
+- **Pasarela de pago** (tarjeta o PayPal) para cobrar en línea los cursos o exámenes de pago. Hasta entonces, los pagos se registran a mano en el centro de control.
+- **Dominio propio:** actualizar Site URL, Redirect URLs, el CORS de las funciones Edge, la URL de `academy-jobs` en `pg_cron` y la dirección del sitio en `build.py`.
