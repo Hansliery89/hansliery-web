@@ -145,9 +145,8 @@ begin
           select currency, method, count(*) as payments, sum(net_amount) as net from ok group by 1, 2 order by 1, 4 desc) t), '[]'),
       'by_product', coalesce((select jsonb_agg(t) from (
           select currency, product_type, coalesce(product_name, concept) as product, count(*) as payments, sum(net_amount) as net
-            from ok group by 1, 2, 3 order by 1, 5 desc limit 30) t), '[]'));
-  end;
-$$;
+            from ok group by 1, 2, 3 order by 1, 5 desc limit 30) t), '[]')));
+end $$;
 
 -- Validación de becas usadas en un pago (antes de guardar)
 create or replace function private.payment_validate()
