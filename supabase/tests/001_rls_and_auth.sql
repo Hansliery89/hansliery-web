@@ -63,8 +63,11 @@ begin
   select id into c_pub from public.courses where slug = 'fundamentos-prevencion-lavado-de-activos';
   select id into c_draft from public.courses where slug = 'beneficiario-final';
   update public.courses set status = 'published', published_at = now() where id = c_pub;
+  -- Escenario controlado (se revierte al final): solo c_pub publicado y solo el superadmin de prueba
+  update public.courses set status = 'draft' where id <> c_pub;
   insert into public.user_roles (profile_id, role, course_id) values (p_i, 'instructor', c_pub);
   insert into public.user_roles (profile_id, role) values (p_aa, 'academic_admin'), (p_sa, 'superadmin');
+  delete from public.user_roles where role = 'superadmin' and profile_id <> p_sa;
   insert into auth.mfa_factors (id, user_id, friendly_name, factor_type, status, created_at, updated_at, secret)
     values (gen_random_uuid(), u_m, 'app', 'totp', 'verified', now(), now(), 'JBSWY3DPEHPK3PXP');
   select id into v_cat from public.revenue_categories where code = 'cap_curso_pago';

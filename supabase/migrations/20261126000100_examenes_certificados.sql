@@ -250,14 +250,14 @@ begin
   select * into e from public.enrollments where id = p_enrollment;
   if not found then return jsonb_build_object('ok', false, 'missing', array['not_found']); end if;
   select * into c from public.courses where id = e.course_id;
-  if e.status = 'cancelled' then v_miss := v_miss || 'enrollment_cancelled'; end if;
-  if e.progress_pct < 100 then v_miss := v_miss || 'modules_incomplete'; end if;
+  if e.status = 'cancelled' then v_miss := v_miss || 'enrollment_cancelled'::text; end if;
+  if e.progress_pct < 100 then v_miss := v_miss || 'modules_incomplete'::text; end if;
   select a.score_pct, a.id into v_best, v_attempt from public.exam_attempts a join public.exams x on x.id = a.exam_id
    where a.profile_id = e.profile_id and x.course_id = c.id and x.is_certification and a.passed
    order by a.score_pct desc limit 1;
-  if c.requires_exam and v_attempt is null then v_miss := v_miss || 'exam_not_passed'; end if;
+  if c.requires_exam and v_attempt is null then v_miss := v_miss || 'exam_not_passed'::text; end if;
   if exists (select 1 from public.certificates where profile_id = e.profile_id and course_id = c.id and status = 'valid') then
-    v_miss := v_miss || 'already_issued';
+    v_miss := v_miss || 'already_issued'::text;
   end if;
   return jsonb_build_object('ok', cardinality(v_miss) = 0, 'missing', v_miss, 'best_score', v_best, 'attempt_id', v_attempt);
 end $$;
