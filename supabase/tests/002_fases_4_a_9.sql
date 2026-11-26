@@ -168,8 +168,8 @@ begin
   perform pg_temp.act(u_i, 'aal2'); update public.assignment_submissions set status = 'returned', feedback = 'Corrige', graded_by = p_i, graded_at = now() where id = v_sub; perform pg_temp.root();
   perform pg_temp.act(u_a, 'aal1'); update public.assignment_submissions set status = 'submitted', comment = 'Corregida' where id = v_sub; get diagnostics n = row_count; perform pg_temp.root();
   perform pg_temp.t('el estudiante reentrega una tarea devuelta', n = 1 and exists (select 1 from public.notifications where profile_id = p_a and kind = 'submission_returned'));
-  perform pg_temp.act(u_a, 'aal1'); update public.assignment_submissions set score = 10 where id = v_sub; get diagnostics n = row_count; perform pg_temp.root();
-  perform pg_temp.t('el estudiante no se califica', n = 0);
+  begin perform pg_temp.act(u_a, 'aal1'); update public.assignment_submissions set score = 10 where id = v_sub; v_txt := 'ok'; exception when others then v_txt := sqlstate; end; perform pg_temp.root();
+  perform pg_temp.t('el estudiante no se califica', v_txt = '42501' and (select score is null from public.assignment_submissions where id = v_sub), v_txt);
 
   -- ---------- Cuentas ----------
   begin perform pg_temp.act(u_aa, 'aal2'); perform public.admin_set_account_status(p_b, 'suspended', 'x'); v_txt := 'ok'; exception when others then v_txt := sqlerrm; end; perform pg_temp.root();
